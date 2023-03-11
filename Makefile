@@ -1,7 +1,7 @@
 install:
-	pip install --upgrade pip && pip install -r requirements.txt
+	pip install --upgrade pip && pip install -r requirements/base.txt
 install-dev:
-	pip install --upgrade pip && pip install -r requirements-dev.txt
+	pip install --upgrade pip && pip install -r requirements/dev.txt
 format:
 	black *.py
 lint:
