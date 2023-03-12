@@ -1,4 +1,4 @@
-from utils import extract_name_from_unicode
+from .utils import extract_name_from_unicode
 
 
 class Tile:
