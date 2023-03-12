@@ -37,15 +37,15 @@ seven_circle = "🀟"
 eight_circle = "🀠"
 nine_circle = "🀡"
 
-plum = "🀢"
-orchid = "🀣"
-bamboo = "🀤"
-chrysanthemum = "🀥"
+plum_flower = "🀢"
+orchid_flower = "🀣"
+bamboo_flower = "🀤"
+chrysanthemum_flower = "🀥"
 
-spring = "🀦"
-summer = "🀧"
-autumn = "🀨"
-winter = "🀩"
+spring_season = "🀦"
+summer_season = "🀧"
+autumn_season = "🀨"
+winter_season = "🀩"
 
 winds = (east_wind, south_wind, west_wind, north_wind)
 
@@ -87,6 +87,6 @@ circles = (
     nine_circle,
 )
 
-flowers = (plum, orchid, bamboo, chrysanthemum)
+flowers = (plum_flower, orchid_flower, bamboo_flower, chrysanthemum_flower)
 
-seasons = (spring, summer, autumn, winter)
+seasons = (spring_season, summer_season, autumn_season, winter_season)
