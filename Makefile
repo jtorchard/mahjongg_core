@@ -3,7 +3,7 @@ install:
 install-dev:
 	pip install --upgrade pip && pip install -r requirements/dev.txt
 format:
-	black *.py
+	black core/*.py tests/*.py
 lint:
 	pylint --disable=R,C core/*.py tests/*.py
 test:
