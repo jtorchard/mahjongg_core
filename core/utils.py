@@ -13,9 +13,11 @@ def extract_name_from_unicode(unicode_tile):
     elif tile_type in ("SPRING", "SUMMER", "AUTUMN", "WINTER"):
         rank = tile_type
         suit = "season"
-    else:
+    elif tile_type in ("PLUM", "ORCHID", "BAMBOO", "CHRYSANTHEMUM"):
         rank = tile_type
         suit = "flower"
+    else:
+        raise ValueError
 
     suit = suit.lower()
     rank = rank.lower()
