@@ -19,6 +19,4 @@ def extract_name_from_unicode(unicode_tile):
     else:
         raise ValueError
 
-    suit = suit.lower()
-    rank = rank.lower()
-    return f"{rank}_{suit}"
+    return f"{rank.lower()}_{suit.lower()}"
