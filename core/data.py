@@ -1,12 +1,3 @@
-east_wind = "🀀"
-south_wind = "🀁"
-west_wind = "🀂"
-north_wind = "🀃"
-
-red_dragon = "🀄"
-green_dragon = "🀅"
-white_dragon = "🀆"
-
 one_character = "🀇"
 two_character = "🀈"
 three_character = "🀉"
@@ -36,6 +27,15 @@ six_circle = "🀞"
 seven_circle = "🀟"
 eight_circle = "🀠"
 nine_circle = "🀡"
+
+east_wind = "🀀"
+south_wind = "🀁"
+west_wind = "🀂"
+north_wind = "🀃"
+
+red_dragon = "🀄"
+green_dragon = "🀅"
+white_dragon = "🀆"
 
 plum_flower = "🀢"
 orchid_flower = "🀣"
