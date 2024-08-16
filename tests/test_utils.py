@@ -1,3 +1,5 @@
+import pytest
+
 from core.utils import extract_name_from_unicode
 from core.data import (
     red_dragon,
@@ -61,3 +63,8 @@ def test_extract_name_from_unicode_plum_flower_is_correct(utf8_symbol=plum_flowe
 def test_extract_name_from_unicode_autumn_season_is_correct(utf8_symbol=autumn_season):
     name = extract_name_from_unicode(utf8_symbol)
     assert name == "autumn_season"
+
+
+def test_extract_name_from_unicode_letter_d_raises_value_error(utf8_symbol="d"):
+    with pytest.raises(ValueError):
+        extract_name_from_unicode(utf8_symbol)
