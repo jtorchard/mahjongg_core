@@ -29,5 +29,14 @@ class Wall:
     def _shuffle_wall(self):
         shuffle(self.alive_tiles)
 
+    def take_live_wall(self):
+        pass
+
+    def take_dead_wall(self):
+        pass
+
+    def break_wall(self):
+        pass
+
     def __str__(self):
         return "".join([tile.utf8 for tile in chain(self.alive_tiles, self.dead_tiles)])
