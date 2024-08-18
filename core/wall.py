@@ -30,4 +30,4 @@ class Wall:
         shuffle(self.alive_tiles)
 
     def __str__(self):
-        return "".join([tile.utf8 for tile in self.tiles])
+        return "".join([tile.utf8 for tile in chain(self.alive_tiles, self.dead_tiles)])
