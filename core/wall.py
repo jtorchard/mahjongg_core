@@ -21,6 +21,7 @@ class Wall:
         self.initialise_wall()
         if shuffle_wall:
             self.shuffle_wall()
+        self.break_wall()
 
     @property
     def is_shuffled(self):
@@ -45,7 +46,8 @@ class Wall:
         return self.dead_tiles.pop()
 
     def break_wall(self):
-        pass
+        self.dead_tiles = self.alive_tiles[:16]
+        self.alive_tiles = self.alive_tiles[16:]
 
     def __str__(self):
         return "".join([tile.utf8 for tile in chain(self.alive_tiles, self.dead_tiles)])
