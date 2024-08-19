@@ -19,3 +19,13 @@ def test_dead_wall_is_16_tiles(wall=Wall()):
 
 def test_alive_wall_is_152_tiles_after_break(wall=Wall()):
     assert len(wall.alive_tiles) == (168 - 16)
+
+
+def test_alive_wall_is_151_tiles_after_taking(wall=Wall()):
+    wall.take_live_wall()
+    assert len(wall.alive_tiles) == 151
+
+
+def test_dead_wall_is_15_tiles_after_taking(wall=Wall()):
+    wall.take_dead_wall()
+    assert len(wall.dead_tiles) == 15
