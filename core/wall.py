@@ -17,10 +17,14 @@ class Wall:
     def __init__(self, shuffle_wall=True):
         self.alive_tiles = []
         self.dead_tiles = []
-        self.is_shuffled = False
+        self.shuffled = False
         self.initialise_wall()
         if shuffle_wall:
             self.shuffle_wall()
+
+    @property
+    def is_shuffled(self):
+        return self.shuffled
 
     def initialise_wall(self):
         self.alive_tiles = [
@@ -28,11 +32,11 @@ class Wall:
                 characters, bamboos, circles, dragons, winds, flowers, seasons)
         ] * 4
         self.dead_tiles = []
-        self.is_shuffled = False
+        self.shuffled = False
 
     def shuffle_wall(self):
         shuffle(self.alive_tiles)
-        self.is_shuffled = True
+        self.shuffled = True
 
     def take_live_wall(self):
         return self.alive_tiles.pop()
