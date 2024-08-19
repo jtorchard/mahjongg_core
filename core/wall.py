@@ -30,10 +30,10 @@ class Wall:
         shuffle(self.alive_tiles)
 
     def take_live_wall(self):
-        pass
+        return self.alive_tiles.pop()
 
     def take_dead_wall(self):
-        pass
+        return self.dead_tiles.pop()
 
     def break_wall(self):
         pass
