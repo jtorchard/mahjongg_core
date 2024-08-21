@@ -17,6 +17,7 @@ class Wall:
     def __init__(self, shuffle_wall=True):
         self.alive_tiles = []
         self.dead_tiles = []
+        self.discards = []
         self.shuffled = False
         self.initialise_wall()
         if shuffle_wall:
