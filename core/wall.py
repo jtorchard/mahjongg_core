@@ -31,8 +31,8 @@ class Wall:
     def initialise_wall(self):
         self.alive_tiles = [
             Tile(tile) for tile in chain(
-                characters, bamboos, circles, dragons, winds, flowers, seasons)
-        ] * 4
+                characters * 4, bamboos * 4, circles * 4, dragons * 4, winds * 4, flowers, seasons)
+        ]
         self.dead_tiles = []
         self.shuffled = False
 
