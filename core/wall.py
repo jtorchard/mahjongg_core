@@ -50,7 +50,7 @@ class Wall:
         self.alive_tiles = self.alive_tiles[16:]
 
     def __str__(self):
-        return "".join([tile.utf8 for tile in chain(self.alive_tiles, self.dead_tiles)])
+        return " ".join([tile.utf8 for tile in chain(self.alive_tiles, self.dead_tiles)])
 
     def __len__(self):
         return len(self.alive_tiles + self.dead_tiles)
