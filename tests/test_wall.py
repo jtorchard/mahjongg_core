@@ -14,7 +14,7 @@ def test_wall_is_not_shuffled(wall=Wall(shuffle_wall=False)):
 
 
 def test_dead_wall_is_16_tiles(wall=Wall()):
-    assert len(wall.dead_tiles) == 16
+    assert len(wall.dead_tiles) == 14
 
 
 def test_alive_wall_is_152_tiles_after_break(wall=Wall()):
@@ -28,4 +28,4 @@ def test_alive_wall_is_151_tiles_after_taking(wall=Wall()):
 
 def test_dead_wall_is_15_tiles_after_taking(wall=Wall()):
     wall.take_dead_wall()
-    assert len(wall.dead_tiles) == 15
+    assert len(wall.dead_tiles) == 13
