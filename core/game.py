@@ -34,12 +34,24 @@ class Game:
         self.in_progress = True
 
     def deal(self):
-        pass
+        # Take twelve tiles each
+        for _ in range(3):
+            for wind in self.seat_change.keys():
+                player = self.seats[wind]
+                for _ in range(4):
+                    player.add_tile(self.wall.take_live_wall())
+
+        # Each player takes a thirteenth tile
+        for wind in self.seat_change.keys():
+            player = self.seats[wind]
+            player.add_tile(self.wall.take_live_wall())
+
+        # East takes a fourteenth tile
+        self.seats["East"].add_tile(self.wall.take_live_wall())
 
     def change_seats(self):
         self.seats = {new_seat: self.seats[current_seat]
                       for current_seat, new_seat in self.seat_change.items()}
 
-    def print_seats(self):
-        for k, v in self.seats.items():
-            print(f"{k} - {v}")
+    def get_seats(self):
+        return self.seats
