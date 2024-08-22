@@ -29,3 +29,7 @@ def test_alive_wall_is_151_tiles_after_taking(wall=Wall()):
 def test_dead_wall_is_15_tiles_after_taking(wall=Wall()):
     wall.take_dead_wall()
     assert len(wall.dead_tiles) == 13
+
+
+def test_2_loose_tiles(wall=Wall()):
+    assert len(wall.loose_tiles) == 2
