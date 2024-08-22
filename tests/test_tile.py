@@ -48,6 +48,10 @@ from core.data import (
 )
 
 
+def test_two_identical_tiles_compare_equal():
+    assert Tile(east_wind) == Tile(east_wind)
+
+
 def test_extract_name_from_unicode_dragon_is_correct(utf8_symbol=red_dragon):
     name = extract_name_from_unicode(utf8_symbol)
     assert name == "red_dragon"

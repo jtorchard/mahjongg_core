@@ -34,5 +34,8 @@ class Tile:
 
         return f"{rank.lower()}_{suit.lower()}"
 
+    def __eq__(self, other):
+        return self.utf8 == other.utf8
+
     def __str__(self):
         return f"{self.name} -- {self.utf8}"
