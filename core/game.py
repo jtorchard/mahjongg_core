@@ -12,7 +12,7 @@ class Game:
         "North": "East",
     }
 
-    def __init__(self, shuffle_wall=True):
+    def __init__(self, shuffle_wall=True, randomise_seats=True):
         self.players = [Player(number) for number in range(1, 5)]
         self.hand = 1
         self.round = "East"
@@ -20,11 +20,11 @@ class Game:
         self.turn = "East"
         self.wall = Wall(shuffle_wall=shuffle_wall)
         self.in_progress = False
-        self.assign_seats()
+        self.assign_seats(randomise_seats=randomise_seats)
 
-    def assign_seats(self, shuffle_seats=True):
+    def assign_seats(self, randomise_seats=True):
         seats = ["East", "South", "West", "North"]
-        if shuffle_seats:
+        if randomise_seats:
             shuffle(seats)
         self.seats = {
             seat: player for seat, player in zip(seats, self.players)
