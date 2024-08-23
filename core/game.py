@@ -30,8 +30,23 @@ class Game:
             seat: player for seat, player in zip(seats, self.players)
         }
 
+    def ai_take_turn(self):
+        pass
+
+    def ai_assess_discards(self):
+        pass
+
+    def advance_turn(self):
+        if not self.in_progress:
+            return
+        self.turn = self.seat_change[self.turn]
+
     def start(self):
+        if self.in_progress:
+            return
         self.in_progress = True
+        if self.seats["east"].is_ai:
+            self.ai_take_turn()
 
     def deal(self):
         # Take twelve tiles each
