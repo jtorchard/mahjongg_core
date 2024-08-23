@@ -11,6 +11,10 @@ class Player:
     def __str__(self):
         return f"player_{self.player_id}"
 
+    @property
+    def is_ai(self):
+        return self.ai
+
     def add_tile(self, tile):
         self.hand.append(tile)
 
