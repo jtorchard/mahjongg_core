@@ -64,7 +64,7 @@ class Game:
 
     def claim_discard(self, player):
         if player.lower() == self.turn:
-            raise ValueError
+            return
 
     def claim_mahjong(self):
         pass
