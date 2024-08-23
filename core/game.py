@@ -50,6 +50,8 @@ class Game:
         self.seats["east"].add_tile(self.wall.take_live_wall())
 
     def change_seats(self):
+        if not self.in_progress:
+            return
         self.seats = {new_seat: self.seats[current_seat]
                       for current_seat, new_seat in self.seat_change.items()}
 
@@ -57,14 +59,17 @@ class Game:
         return self.seats
 
     def draw_tile(self):
-        pass
+        if not self.in_progress:
+            return
 
     def discard_tile(self):
-        pass
+        if not self.in_progress:
+            return
 
     def claim_discard(self, player):
-        if player.lower() == self.turn:
+        if not self.in_progress or player.lower() == self.turn:
             return
 
     def claim_mahjong(self):
-        pass
+        if not self.in_progress:
+            return
