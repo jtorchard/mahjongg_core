@@ -6,24 +6,24 @@ from core.wall import Wall
 
 class Game:
     seat_change = {
-        "East": "South",
-        "South": "West",
-        "West": "North",
-        "North": "East",
+        "east": "south",
+        "south": "west",
+        "west": "north",
+        "north": "east",
     }
 
     def __init__(self, shuffle_wall=True, randomise_seats=True):
         self.players = [Player(number) for number in range(1, 5)]
         self.hand = 1
-        self.round = "East"
+        self.round = "east"
         self.seats = {}
-        self.turn = "East"
+        self.turn = "east"
         self.wall = Wall(shuffle_wall=shuffle_wall)
         self.in_progress = False
         self.assign_seats(randomise_seats=randomise_seats)
 
     def assign_seats(self, randomise_seats=True):
-        seats = ["East", "South", "West", "North"]
+        seats = ["east", "south", "west", "north"]
         if randomise_seats:
             shuffle(seats)
         self.seats = {
@@ -47,7 +47,7 @@ class Game:
             player.add_tile(self.wall.take_live_wall())
 
         # East takes a fourteenth tile
-        self.seats["East"].add_tile(self.wall.take_live_wall())
+        self.seats["east"].add_tile(self.wall.take_live_wall())
 
     def change_seats(self):
         self.seats = {new_seat: self.seats[current_seat]
