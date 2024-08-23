@@ -55,3 +55,16 @@ class Game:
 
     def get_seats(self):
         return self.seats
+
+    def draw_tile(self):
+        pass
+
+    def discard_tile(self):
+        pass
+
+    def claim_discard(self, player):
+        if player.lower() == self.turn:
+            raise ValueError
+
+    def claim_mahjong(self):
+        pass
