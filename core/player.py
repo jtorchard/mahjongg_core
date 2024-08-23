@@ -1,8 +1,9 @@
 class Player:
 
-    def __init__(self, player_id):
+    def __init__(self, player_id, ai=False):
         if player_id not in range(1, 5):
             raise ValueError
+        self.ai = ai
         self.player_id = player_id
         self.score = 2000
         self.hand = []
