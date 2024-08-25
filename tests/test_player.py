@@ -17,6 +17,13 @@ def test_hand_has_tile_after_adding(player=Player(1)):
     assert player.get_hand() == [Tile(east_wind)]
 
 
+def test_hand_looses_tile_after_removing(player=Player(1)):
+    player.add_tile(Tile(east_wind))
+    assert player.get_hand() == [Tile(east_wind)]
+    player.remove_tile(0)
+    assert player.get_hand() == []
+
+
 def test_player_with_invalid_id_raises_error():
     with pytest.raises(ValueError):
         Player(42)

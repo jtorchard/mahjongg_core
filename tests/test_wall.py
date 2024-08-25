@@ -1,3 +1,5 @@
+from core.data import east_wind
+from core.tile import Tile
 from core.wall import Wall
 
 
@@ -33,3 +35,8 @@ def test_dead_wall_is_15_tiles_after_taking(wall=Wall()):
 
 def test_2_loose_tiles(wall=Wall()):
     assert len(wall.loose_tiles) == 2
+
+
+def test_wall_has_tile_after_adding_discard(wall=Wall()):
+    wall.add_discard(Tile(east_wind))
+    assert wall.discards == [Tile(east_wind)]

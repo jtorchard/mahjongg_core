@@ -52,7 +52,16 @@ def test_seats_are_correct_when_not_randomised(game=Game(randomise_seats=False))
     assert str(game.seats["north"]) == "player_4"
 
 
+def test_change_seats_does_nothing_if_game_not_atarted(game=Game(randomise_seats=False)):
+    game.change_seats()
+    assert str(game.seats["east"]) == "player_1"
+    assert str(game.seats["south"]) == "player_2"
+    assert str(game.seats["west"]) == "player_3"
+    assert str(game.seats["north"]) == "player_4"
+
+
 def test_change_seats_moves_to_correct_seats(game=Game(randomise_seats=False)):
+    game.start()
     game.change_seats()
     assert str(game.seats["east"]) == "player_4"
     assert str(game.seats["south"]) == "player_1"
