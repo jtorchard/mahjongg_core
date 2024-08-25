@@ -47,6 +47,9 @@ class Wall:
     def take_dead_wall(self):
         return self.dead_tiles.pop()
 
+    def add_discard(self, tile):
+        self.discards.append(tile)
+
     def break_wall(self):
         self.dead_tiles = self.alive_tiles[:16]
         self.alive_tiles = self.alive_tiles[16:]
