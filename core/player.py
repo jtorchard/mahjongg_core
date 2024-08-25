@@ -18,6 +18,9 @@ class Player:
     def add_tile(self, tile):
         self.hand.append(tile)
 
+    def remove_tile(self, tile):
+        self.hand.pop(tile)
+
     def get_hand(self):
         return self.hand
 
