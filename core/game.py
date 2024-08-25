@@ -1,4 +1,4 @@
-from random import shuffle
+from random import shuffle, randint
 
 from core.player import Player
 from core.wall import Wall
@@ -31,7 +31,10 @@ class Game:
         }
 
     def ai_take_turn(self):
-        pass
+        player = self.seats[self.turn]
+        player.add_tile(self.wall.take_live_wall())
+        tile = player.remove_tile(randint(0, 13))
+        self.wall.add_discard(tile)
 
     def ai_assess_discards(self):
         pass
