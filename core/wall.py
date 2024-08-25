@@ -56,7 +56,7 @@ class Wall:
         self.loose_tiles = [self.dead_tiles.pop(), self.dead_tiles.pop()]
 
     def __str__(self):
-        return " ".join([tile.utf8 for tile in chain(self.alive_tiles, self.dead_tiles, self.loose_tiles)])
+        return " ".join([tile.utf8 for tile in chain(self.alive_tiles)])
 
     def __len__(self):
-        return len(self.alive_tiles + self.dead_tiles + self.loose_tiles)
+        return len(self.alive_tiles)

@@ -4,7 +4,7 @@ from core.wall import Wall
 
 
 def test_wall_has_correct_number_of_tiles(wall=Wall()):
-    assert len(wall) == 144
+    assert len(wall.alive_tiles + wall.dead_tiles + wall.loose_tiles) == 144
 
 
 def test_wall_is_shuffled(wall=Wall()):

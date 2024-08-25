@@ -22,7 +22,7 @@ def test_players_list_has_four_entries(game=Game()):
 
 
 def test_wall_is_initialised(game=Game()):
-    assert len(game.wall) == 144
+    assert len(game.wall.alive_tiles + game.wall.dead_tiles + game.wall.loose_tiles) == 144
 
 
 def test_assign_seats_creates_seat_assignments(game=Game()):
