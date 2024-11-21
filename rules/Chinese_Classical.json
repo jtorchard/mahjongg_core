@@ -1,0 +1,12 @@
+{
+  "setup": {
+    "tiles": {
+      "total": 144,
+      "use_flowers": true,
+      "use_seasons": true
+    }
+  },
+  "play": {},
+  "scoring": {},
+  "settling": {}
+}
