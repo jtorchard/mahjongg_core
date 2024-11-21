@@ -20,7 +20,14 @@ class Game:
         self.turn = "east"
         self.wall = Wall(shuffle_wall=shuffle_wall)
         self.in_progress = False
+        self.shuffle_wall = shuffle_wall
+        self.randomise_seats = randomise_seats
+        self.seat_change_count = 0
         self.assign_seats(randomise_seats=randomise_seats)
+
+    @property
+    def last_hand_played(self):
+        return self.seat_change_count == 4
 
     def assign_seats(self, randomise_seats=True):
         seats = ["east", "south", "west", "north"]
@@ -39,10 +46,43 @@ class Game:
     def ai_assess_discards(self):
         pass
 
+    def score(self, east_out):
+        pass
+
+    def settle(self, east_out):
+        pass
+
     def advance_turn(self):
         if not self.in_progress:
             return
+        self.seat_change_count += 1
         self.turn = self.seat_change[self.turn]
+
+    def change_wind_of_round(self):
+        self.round = self.seat_change[self.round]
+        self.seat_change_count = 0
+
+    def end_hand_mahjong(self):
+        east_out = self.turn == "east"
+        self.score(east_out=east_out)
+        self.settle(east_out=east_out)
+
+        if not east_out:
+            self.advance_turn()
+
+        if self.last_hand_played:
+            self.change_wind_of_round()
+
+        self.new_hand()
+
+    def end_hand_draw(self):
+        self.new_hand()
+
+    def new_hand(self):
+        self.hand += 1
+        self.turn = "east"
+        self.wall = Wall(shuffle_wall=self.shuffle_wall)
+        self.deal()
 
     def start(self):
         if self.in_progress:
@@ -79,6 +119,9 @@ class Game:
     def draw_tile(self):
         if not self.in_progress:
             return
+
+        if not len(self.wall):
+            self.end_hand_draw()
 
     def discard_tile(self):
         if not self.in_progress:
