@@ -4,3 +4,5 @@ Can also be used for testing, and generating random games, etc.
 
 
 Four phases: setup, play, scoring, settling.
+
+Use saved seed for randomness
