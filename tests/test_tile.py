@@ -59,11 +59,15 @@ def test_extract_name_from_unicode_wind_is_correct(tile=Tile(east_wind)):
     assert tile.name == "east_wind"
 
 
-def test_extract_name_from_unicode_character_terminal_is_correct(tile=Tile(nine_character)):
+def test_extract_name_from_unicode_character_terminal_is_correct(
+    tile=Tile(nine_character),
+):
     assert tile.name == "nine_character"
 
 
-def test_extract_name_from_unicode_character_simple_is_correct(tile=Tile(six_character)):
+def test_extract_name_from_unicode_character_simple_is_correct(
+    tile=Tile(six_character),
+):
     assert tile.name == "six_character"
 
 

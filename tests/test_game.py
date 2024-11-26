@@ -22,7 +22,9 @@ def test_players_list_has_four_entries(game=Game()):
 
 
 def test_wall_is_initialised(game=Game()):
-    assert len(game.wall.alive_tiles + game.wall.dead_tiles + game.wall.loose_tiles) == 144
+    assert (
+        len(game.wall.alive_tiles + game.wall.dead_tiles + game.wall.loose_tiles) == 144
+    )
 
 
 def test_assign_seats_creates_seat_assignments(game=Game()):
@@ -52,7 +54,9 @@ def test_seats_are_correct_when_not_randomised(game=Game(randomise_seats=False))
     assert str(game.seats["north"]) == "player_4"
 
 
-def test_change_seats_does_nothing_if_game_not_atarted(game=Game(randomise_seats=False)):
+def test_change_seats_does_nothing_if_game_not_atarted(
+    game=Game(randomise_seats=False),
+):
     game.change_seats()
     assert str(game.seats["east"]) == "player_1"
     assert str(game.seats["south"]) == "player_2"

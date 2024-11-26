@@ -1,5 +1,4 @@
 class Player:
-
     def __init__(self, player_id, ai=False):
         if player_id not in range(1, 5):
             raise ValueError

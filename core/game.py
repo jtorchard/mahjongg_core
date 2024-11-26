@@ -33,9 +33,7 @@ class Game:
         seats = ["east", "south", "west", "north"]
         if randomise_seats:
             shuffle(seats)
-        self.seats = {
-            seat: player for seat, player in zip(seats, self.players)
-        }
+        self.seats = {seat: player for seat, player in zip(seats, self.players)}
 
     def ai_take_turn(self):
         player = self.seats[self.turn]
@@ -110,8 +108,10 @@ class Game:
     def change_seats(self):
         if not self.in_progress:
             return
-        self.seats = {new_seat: self.seats[current_seat]
-                      for current_seat, new_seat in self.seat_change.items()}
+        self.seats = {
+            new_seat: self.seats[current_seat]
+            for current_seat, new_seat in self.seat_change.items()
+        }
 
     def get_seats(self):
         return self.seats
