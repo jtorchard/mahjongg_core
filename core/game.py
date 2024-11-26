@@ -1,8 +1,8 @@
-from random import shuffle, randint
+import random
 
 from core.player import Player
 from core.wall import Wall
-from config import shuffle_wall, randomise_seats, ruleset
+from config import shuffle_wall, randomise_seats, ruleset, use_seed, seed, players
 
 
 class Game:
@@ -15,8 +15,10 @@ class Game:
 
     def __init__(self):
         self.ruleset = ruleset
-        self.random_seed = 0  # TODO allow random seed
-        self.players = [Player(number) for number in range(1, 5)]
+        self.random_seed = seed
+        if use_seed:
+            random.seed(self.random_seed)
+        self.players = [Player(number) for number in range(1, players + 1)]
         self.hand = 1
         self.round = "east"
         self.seats = {}
@@ -30,18 +32,18 @@ class Game:
 
     @property
     def last_hand_played(self):
-        return self.seat_change_count == 4
+        return self.seat_change_count == players
 
     def assign_seats(self):
         seats = ["east", "south", "west", "north"]
         if self.randomise_seats:
-            shuffle(seats)
+            random.shuffle(seats)
         self.seats = {seat: player for seat, player in zip(seats, self.players)}
 
     def ai_take_turn(self):
         player = self.seats[self.turn]
         player.add_tile(self.wall.take_live_wall())
-        tile = player.remove_tile(randint(0, 13))
+        tile = player.remove_tile(random.randint(0, 13))
         self.wall.add_discard(tile)
 
     def ai_assess_discards(self):
