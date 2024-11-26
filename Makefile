@@ -5,7 +5,7 @@ install-dev:
 format:
 	black core/*.py tests/*.py
 lint:
-	pylint --disable=R,C core/*.py tests/*.py
+	ruff check -v
 test:
 	 python -m pytest -vv --cov=lib --cov=core tests/test_*.py
 all: install format lint test
