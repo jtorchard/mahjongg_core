@@ -12,7 +12,8 @@ class Game:
         "north": "east",
     }
 
-    def __init__(self, shuffle_wall=True, randomise_seats=True):
+    def __init__(self, config, *, shuffle_wall=True, randomise_seats=True):
+        self.config = config
         self.players = [Player(number) for number in range(1, 5)]
         self.hand = 1
         self.round = "east"
