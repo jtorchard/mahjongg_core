@@ -72,7 +72,7 @@ def test_seats_are_correct_when_not_randomised(game_fixed_seats):
 
 
 # noinspection DuplicatedCode
-def test_change_seats_does_nothing_if_game_not_atarted(game_fixed_seats):
+def test_change_seats_does_nothing_if_game_not_started(game_fixed_seats):
     game_fixed_seats.change_seats()
     assert str(game_fixed_seats.seats["east"]) == "player_1"
     assert str(game_fixed_seats.seats["south"]) == "player_2"
