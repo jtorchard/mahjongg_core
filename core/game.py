@@ -2,7 +2,7 @@ import random
 
 from core.player import Player
 from core.wall import Wall
-from config import config
+from config import config as default_config
 
 
 class Game:
@@ -13,7 +13,7 @@ class Game:
         "north": "east",
     }
 
-    def __init__(self):
+    def __init__(self, config=default_config):
         self.ruleset = config["ruleset"]
         self.random_seed = config["random_seed"]
         random.seed(self.random_seed)
