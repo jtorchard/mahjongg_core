@@ -3,7 +3,7 @@ install:
 install-dev:
 	pip install --upgrade pip && pip install -r requirements/dev.txt
 format:
-	black core/*.py tests/*.py
+	ruff format
 lint:
 	ruff check -v
 test:
