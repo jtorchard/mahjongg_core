@@ -2,6 +2,7 @@ from random import shuffle, randint
 
 from core.player import Player
 from core.wall import Wall
+from config import shuffle_wall, randomise_seats, ruleset
 
 
 class Game:
@@ -12,8 +13,9 @@ class Game:
         "north": "east",
     }
 
-    def __init__(self, config, *, shuffle_wall=True, randomise_seats=True):
-        self.config = config
+    def __init__(self):
+        self.ruleset = ruleset
+        self.random_seed = 0  # TODO allow random seed
         self.players = [Player(number) for number in range(1, 5)]
         self.hand = 1
         self.round = "east"
@@ -24,15 +26,15 @@ class Game:
         self.shuffle_wall = shuffle_wall
         self.randomise_seats = randomise_seats
         self.seat_change_count = 0
-        self.assign_seats(randomise_seats=randomise_seats)
+        self.assign_seats()
 
     @property
     def last_hand_played(self):
         return self.seat_change_count == 4
 
-    def assign_seats(self, randomise_seats=True):
+    def assign_seats(self):
         seats = ["east", "south", "west", "north"]
-        if randomise_seats:
+        if self.randomise_seats:
             shuffle(seats)
         self.seats = {seat: player for seat, player in zip(seats, self.players)}
 
