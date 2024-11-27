@@ -30,7 +30,7 @@ class Game:
         self.seats = self.assign_seats()
 
     def build_wall(self):
-        return Wall(seed=self.random_seed)
+        return Wall(seed=self.random_seed, use_flowers=True, use_seasons=True)
 
     def create_players(self):
         return [Player(number) for number in range(1, self.number_of_players + 1)]

@@ -2,6 +2,7 @@ import random
 from itertools import chain
 from random import shuffle
 
+from . import tile
 from .tile import Tile
 from .data import (
     characters,
@@ -15,8 +16,10 @@ from .data import (
 
 
 class Wall:
-    def __init__(self, seed=None):
+    def __init__(self, seed=None, use_flowers=True, use_seasons=True):
         self.seed = seed
+        self.use_flowers = use_flowers
+        self.use_seasons = use_seasons
         self.alive_tiles = []
         self.dead_tiles = []
         self.discards = []
@@ -42,8 +45,8 @@ class Wall:
                 circles * 4,
                 dragons * 4,
                 winds * 4,
-                flowers,
-                seasons,
+                flowers if self.use_flowers else [],
+                seasons if self.use_seasons else [],
             )
         ]
         self.dead_tiles = []
