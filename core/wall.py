@@ -1,3 +1,4 @@
+import random
 from itertools import chain
 from random import shuffle
 
@@ -14,20 +15,23 @@ from .data import (
 
 
 class Wall:
-    def __init__(self, shuffle_wall=True):
+    def __init__(self, seed=None):
+        self.seed = seed
         self.alive_tiles = []
         self.dead_tiles = []
         self.discards = []
         self.loose_tiles = []
         self.shuffled = False
         self.initialise_wall()
-        if shuffle_wall:
-            self.shuffle_wall()
+        self.shuffle_wall()
         self.break_wall()
 
     @property
     def is_shuffled(self):
         return self.shuffled
+
+    def _set_seed(self):
+        random.seed(self.seed)
 
     def initialise_wall(self):
         self.alive_tiles = [
@@ -46,8 +50,9 @@ class Wall:
         self.shuffled = False
 
     def shuffle_wall(self):
+        self._set_seed()
         shuffle(self.alive_tiles)
-        self.shuffled = True
+        self.shuffled = True if self.seed is None else False
 
     def take_live_wall(self):
         return self.alive_tiles.pop()

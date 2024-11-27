@@ -16,18 +16,24 @@ class Game:
     def __init__(self, config=default_config):
         self.ruleset = config["ruleset"]
         self.random_seed = config["random_seed"]
-        random.seed(self.random_seed)
-        self.players = [Player(number) for number in range(1, config["players"] + 1)]
+        self.shuffle_wall = config["shuffle_wall"]
+        self.randomise_seats = config["randomise_seats"]
+        self.number_of_players = config["players"]
         self.hand = 1
         self.round = "east"
         self.seats = {}
         self.turn = "east"
-        self.wall = Wall(shuffle_wall=config["shuffle_wall"])
         self.in_progress = False
-        self.shuffle_wall = config["shuffle_wall"]
-        self.randomise_seats = config["randomise_seats"]
         self.seat_change_count = 0
-        self.assign_seats()
+        self.players = self.create_players()
+        self.wall = self.build_wall()
+        self.seats = self.assign_seats()
+
+    def build_wall(self):
+        return Wall(seed=self.random_seed)
+
+    def create_players(self):
+        return [Player(number) for number in range(1, self.number_of_players + 1)]
 
     @property
     def last_hand_played(self):
@@ -37,7 +43,7 @@ class Game:
         seats = ["east", "south", "west", "north"]
         if self.randomise_seats:
             random.shuffle(seats)
-        self.seats = {seat: player for seat, player in zip(seats, self.players)}
+        return {seat: player for seat, player in zip(seats, self.players)}
 
     def ai_take_turn(self):
         player = self.seats[self.turn]
@@ -83,7 +89,7 @@ class Game:
     def new_hand(self):
         self.hand += 1
         self.turn = "east"
-        self.wall = Wall(shuffle_wall=self.shuffle_wall)
+        self.wall = self.build_wall()
         self.deal()
 
     def start(self):

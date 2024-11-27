@@ -47,7 +47,7 @@ def test_wall_is_initialised(game_default):
 def test_assign_seats_creates_seat_assignments(game_default):
     game_default.seats = []
     assert game_default.seats == []
-    game_default.assign_seats()
+    game_default.seats = game_default.assign_seats()
     assert game_default.seats
 
 
