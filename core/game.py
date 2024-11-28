@@ -23,6 +23,9 @@ class Game:
         self.number_of_players = config["players"]
         self.ruleset = self._load_ruleset()
         self.starting_score = self.ruleset.get("setup", {}).get("players", {}).get("starting_score", 1000)
+        self.total_tiles = self.ruleset.get("setup", {}).get("tiles", {}).get("total", 130)
+        self.use_flowers = self.ruleset.get("setup", {}).get("tiles", {}).get("use_flowers", True)
+        self.use_seasons = self.ruleset.get("setup", {}).get("tiles", {}).get("use_seasons", True)
         self.hand = 1
         self.round = "east"
         self.seats = {}
@@ -40,7 +43,7 @@ class Game:
             return json.load(ruleset_file)
 
     def build_wall(self):
-        return Wall(seed=self.random_seed, use_flowers=True, use_seasons=True)
+        return Wall(seed=self.random_seed, use_flowers=self.use_flowers, use_seasons=self.use_seasons)
 
     def create_players(self):
         return [

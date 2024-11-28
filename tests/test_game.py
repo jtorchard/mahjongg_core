@@ -39,9 +39,8 @@ def test_players_list_has_four_entries(game_default):
 
 
 def test_wall_is_initialised(game_default):
-    assert (
-            len(game_default.wall.alive_tiles + game_default.wall.dead_tiles + game_default.wall.loose_tiles) == 144
-    )
+    tile_count = len(game_default.wall.alive_tiles + game_default.wall.dead_tiles + game_default.wall.loose_tiles)
+    assert tile_count == game_default.total_tiles
 
 
 def test_assign_seats_creates_seat_assignments(game_default):
