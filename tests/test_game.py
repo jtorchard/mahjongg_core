@@ -103,3 +103,13 @@ def test_change_seats_moves_to_correct_seats(game_fixed_seats):
     assert str(game_fixed_seats.seats["south"]) == "player_2"
     assert str(game_fixed_seats.seats["west"]) == "player_3"
     assert str(game_fixed_seats.seats["north"]) == "player_4"
+
+
+def test_loading_ruleset(game_default):
+    game_default._load_ruleset()
+    assert game_default.ruleset
+
+
+@pytest.mark.parametrize("number", (n for n in range(0, 4)))
+def test_loading_ruleset_uses_correct_starting_score(game_default, number):
+    assert game_default.ruleset["setup"]["players"]["starting_score"] == game_default.players[number].score

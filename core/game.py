@@ -1,4 +1,4 @@
-import random
+import random, json, pathlib
 
 from core.player import Player
 from core.wall import Wall
@@ -14,12 +14,15 @@ class Game:
     }
 
     def __init__(self, config=default_config):
-        self.ruleset = config["ruleset"]
+        self.ruleset_name = config["ruleset"]
+        self.ruleset_directory = config["ruleset_directory"]
+        self.ruleset_format = config["ruleset_format"]
         self.random_seed = config["random_seed"]
         self.shuffle_wall = config["shuffle_wall"]
         self.randomise_seats = config["randomise_seats"]
         self.number_of_players = config["players"]
-        self.starting_score = 2000  # TODO Pull from rules config
+        self.ruleset = self._load_ruleset()
+        self.starting_score = self.ruleset.get("setup", {}).get("players", {}).get("starting_score", 1000)
         self.hand = 1
         self.round = "east"
         self.seats = {}
@@ -29,6 +32,12 @@ class Game:
         self.players = self.create_players()
         self.wall = self.build_wall()
         self.seats = self.assign_seats()
+
+    def _load_ruleset(self):
+        ruleset_path = (pathlib.Path(self.ruleset_directory) /
+                        pathlib.Path(self.ruleset_name).with_suffix(self.ruleset_format))
+        with open(ruleset_path) as ruleset_file:
+            return json.load(ruleset_file)
 
     def build_wall(self):
         return Wall(seed=self.random_seed, use_flowers=True, use_seasons=True)

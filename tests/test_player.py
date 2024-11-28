@@ -5,14 +5,14 @@ from core.tile import Tile
 from core.data import east_wind
 
 
-@pytest.mark.parametrize("number, name", [(1, "player_1"),
-                                          (2, "player_2"),
-                                          (3, "player_3"),
-                                          (4, "player_4")])
-def test_player_has_correct_defaults(number, name):
-    player = Player(number)
+@pytest.mark.parametrize("number, name, score", [(1, "player_1", 2000),
+                                          (2, "player_2", 2000),
+                                          (3, "player_3", 2000),
+                                          (4, "player_4", 2000)])
+def test_player_has_correct_defaults(number, name, score):
+    player = Player(number, starting_score=score)
     assert player.player_id == number
-    assert player.score == 2000  # TODO Get valye from rules
+    assert player.score == score
     assert player.hand == []
     assert str(player) == name
 
