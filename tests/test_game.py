@@ -2,7 +2,7 @@ from copy import deepcopy
 
 import pytest
 
-from core.game import Game
+from src.core.game import Game
 from config import config as default_config
 
 

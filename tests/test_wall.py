@@ -1,8 +1,8 @@
 import pytest
 
-from core.data import east_wind
-from core.tile import Tile
-from core.wall import Wall
+from src.core.data import east_wind
+from src.core.tile import Tile
+from src.core.wall import Wall
 
 
 @pytest.fixture

@@ -1,7 +1,7 @@
 import random, json, pathlib
 
-from core.player import Player
-from core.wall import Wall
+from src.core.player import Player
+from src.core.wall import Wall
 from config import config as default_config
 
 

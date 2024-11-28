@@ -1,7 +1,7 @@
 import pytest
 
-from core.tile import Tile
-from core.data import (
+from src.core.tile import Tile
+from src.core.data import (
     east_wind,
     south_wind,
     west_wind,

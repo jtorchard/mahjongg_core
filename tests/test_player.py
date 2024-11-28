@@ -1,8 +1,8 @@
 import pytest
 
-from core.player import Player
-from core.tile import Tile
-from core.data import east_wind
+from src.core.player import Player
+from src.core.tile import Tile
+from src.core.data import east_wind
 
 
 @pytest.mark.parametrize("number, name, score", [(1, "player_1", 2000),
