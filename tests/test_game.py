@@ -58,10 +58,10 @@ def test_start_marks_game_as_in_progress(game_default):
 
 def test_deal_gives_players_correct_tiles(game_default):
     game_default.deal()
-    assert len(game_default.seats["east"].get_hand()) == 14
-    assert len(game_default.seats["south"].get_hand()) == 13
-    assert len(game_default.seats["west"].get_hand()) == 13
-    assert len(game_default.seats["north"].get_hand()) == 13
+    assert len(game_default.seats["east"].hand) == 14
+    assert len(game_default.seats["south"].hand) == 13
+    assert len(game_default.seats["west"].hand) == 13
+    assert len(game_default.seats["north"].hand) == 13
 
 
 def test_seats_are_correct_when_not_randomised(game_fixed_seats):

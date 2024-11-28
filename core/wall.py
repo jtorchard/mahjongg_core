@@ -2,7 +2,6 @@ import random
 from itertools import chain
 from random import shuffle
 
-from . import tile
 from .tile import Tile
 from .data import (
     characters,
