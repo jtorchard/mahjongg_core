@@ -1,4 +1,6 @@
-import random, json, pathlib
+import random
+import json
+import pathlib
 
 from src.core.player import Player
 from src.core.wall import Wall
