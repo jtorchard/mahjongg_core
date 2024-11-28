@@ -22,10 +22,12 @@ class Game:
         self.randomise_seats = config["randomise_seats"]
         self.number_of_players = config["players"]
         self.ruleset = self._load_ruleset()
-        self.starting_score = self.ruleset.get("setup", {}).get("players", {}).get("starting_score", 1000)
-        self.total_tiles = self.ruleset.get("setup", {}).get("tiles", {}).get("total", 130)
-        self.use_flowers = self.ruleset.get("setup", {}).get("tiles", {}).get("use_flowers", True)
-        self.use_seasons = self.ruleset.get("setup", {}).get("tiles", {}).get("use_seasons", True)
+        self.rules_setup = self.ruleset.get("setup", {})
+        self.rules_tiles = self.rules_setup.get("tiles", {})
+        self.starting_score = self.rules_setup.get("players", {}).get("starting_score", 1000)
+        self.total_tiles = self.rules_tiles.get("total", 130)
+        self.use_flowers = self.rules_tiles.get("use_flowers", True)
+        self.use_seasons = self.rules_tiles.get("use_seasons", True)
         self.hand = 1
         self.round = "east"
         self.seats = {}
