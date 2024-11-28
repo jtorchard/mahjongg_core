@@ -2,16 +2,16 @@ import random
 from itertools import chain
 from random import shuffle
 
-from .tile import Tile
 from .data import (
-    characters,
     bamboos,
+    characters,
     circles,
     dragons,
-    winds,
     flowers,
     seasons,
+    winds,
 )
+from .tile import Tile
 
 
 class Wall:

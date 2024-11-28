@@ -1,10 +1,10 @@
-import random
 import json
 import pathlib
+import random
 
+from config import config as default_config
 from src.core.player import Player
 from src.core.wall import Wall
-from config import config as default_config
 
 
 class Game:

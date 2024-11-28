@@ -2,8 +2,8 @@ from copy import deepcopy
 
 import pytest
 
-from src.core.game import Game
 from config import config as default_config
+from src.core.game import Game
 
 
 @pytest.fixture
