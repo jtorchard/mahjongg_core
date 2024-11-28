@@ -19,6 +19,7 @@ class Game:
         self.shuffle_wall = config["shuffle_wall"]
         self.randomise_seats = config["randomise_seats"]
         self.number_of_players = config["players"]
+        self.starting_score = 2000  # TODO Pull from rules config
         self.hand = 1
         self.round = "east"
         self.seats = {}
@@ -33,7 +34,10 @@ class Game:
         return Wall(seed=self.random_seed, use_flowers=True, use_seasons=True)
 
     def create_players(self):
-        return [Player(number) for number in range(1, self.number_of_players + 1)]
+        return [
+            Player(number, starting_score=self.starting_score)
+            for number in range(1, self.number_of_players + 1)
+        ]
 
     @property
     def last_hand_played(self):

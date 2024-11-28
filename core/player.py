@@ -1,10 +1,10 @@
 class Player:
-    def __init__(self, player_id, ai=False):
+    def __init__(self, player_id, ai=False, starting_score=2000):
         if player_id not in range(1, 5):
             raise ValueError
         self.ai = ai
         self.player_id = player_id
-        self.score = 2000
+        self.score = starting_score
         self.hand = []
 
     def __str__(self):

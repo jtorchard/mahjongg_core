@@ -4,6 +4,9 @@
       "total": 144,
       "use_flowers": true,
       "use_seasons": true
+    },
+    "players": {
+      "starting_score": 2000
     }
   },
   "play": {},

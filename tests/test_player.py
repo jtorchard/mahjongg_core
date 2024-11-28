@@ -12,7 +12,7 @@ from core.data import east_wind
 def test_player_has_correct_defaults(number, name):
     player = Player(number)
     assert player.get_id() == number
-    assert player.get_score() == 2000
+    assert player.get_score() == 2000  # TODO Get valye from rules
     assert player.get_hand() == []
     assert str(player) == name
 
