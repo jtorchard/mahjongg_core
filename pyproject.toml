@@ -11,5 +11,8 @@ readme = "README.md"
 
 license = {text = "MIT License"}
 
+[project.optional-dependencies]
+typing = ["mypy>=1.13.0"]
+
 [tool.ruff.lint]
 extend-select = ["I"]
