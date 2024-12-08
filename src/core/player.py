@@ -6,6 +6,7 @@ class Player:
         self._player_id = player_id
         self._score = starting_score
         self._hand = []
+        self._discards = []
 
     def __str__(self):
         return f"player_{self._player_id}"
