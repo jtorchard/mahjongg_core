@@ -71,18 +71,16 @@ class Wall:
 
 @dataclass
 class Game:
-
-    def __init__(self):
-        self.starting_score: int = 2000
-        self.hand: int = 1
-        self.round: Wind = Wind.East
-        self.turn: Wind = Wind.East
-        self.wind_to_player: Mapping[Wind, Player] = {}
-        self.player_to_wind: Mapping[Player, Wind] = {}
-        self.seating_counter: int = 1
-        self.player_1: Player = Player()
-        self.player_2: Player = Player()
-        self.player_3: Player = Player()
-        self.player_4: Player = Player()
-        self.wall: Wall = Wall()
-        self.east_out_counter: int = 0
+    starting_score: int = 2000
+    hand: int = 1
+    round: Wind = Wind.East
+    turn: Wind = Wind.East
+    wind_to_player: Mapping[Wind, Player] = field(default_factory=dict)
+    player_to_wind: Mapping[Player, Wind] = field(default_factory=dict)
+    seating_counter: int = 1
+    player_1: Player = Player()
+    player_2: Player = Player()
+    player_3: Player = Player()
+    player_4: Player = Player()
+    wall: Wall = Wall()
+    east_out_counter: int = 0
