@@ -47,8 +47,9 @@ class Player:
     score: int = 2000
 
 
-def build_wall():
-    return [
+@dataclass
+class Wall:
+    tiles: List[Tile] = field(default_factory=lambda: [
         Tile(tile)
         for tile in chain(
             characters * 4,
@@ -59,12 +60,7 @@ def build_wall():
             flowers,
             seasons,
         )
-    ]
-
-
-@dataclass
-class Wall:
-    tiles: List[Tile] = field(default_factory=lambda: build_wall())
+    ])
 
     def __str__(self):
         return "".join([t.utf8 for t in self.tiles])
