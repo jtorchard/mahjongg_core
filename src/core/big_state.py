@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from enum import IntEnum
 from itertools import chain
-from typing import List
+from typing import List, Mapping
 
 from core.tile import Tile
 from data import (
@@ -73,19 +73,20 @@ class Wall:
         return len(self.tiles)
 
 
+@dataclass
 class Game:
 
     def __init__(self):
-        self.starting_score = 2000
-        self.hand = 1
-        self.round = Wind.East
-        self.turn = Wind.East
-        self.wind_to_player = {}
-        self.player_to_wind = {}
-        self.seating_counter = 1
-        self.player_1 = Player()
-        self.player_2 = Player()
-        self.player_3 = Player()
-        self.player_4 = Player()
-        self.wall = Wall()
+        self.starting_score: int = 2000
+        self.hand: int = 1
+        self.round: Wind = Wind.East
+        self.turn: Wind = Wind.East
+        self.wind_to_player: Mapping[Wind, Player] = {}
+        self.player_to_wind: Mapping[Player, Wind] = {}
+        self.seating_counter: int = 1
+        self.player_1: Player = Player()
+        self.player_2: Player = Player()
+        self.player_3: Player = Player()
+        self.player_4: Player = Player()
+        self.wall: Wall = Wall()
         self.east_out_counter: int = 0
