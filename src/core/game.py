@@ -1,10 +1,28 @@
+from __future__ import annotations
 import json
 import pathlib
 import random
+from abc import ABC, abstractmethod
 
 from config import config as default_config
 from src.core.player import Player
-from src.core.wall import Wall
+from src.core.wall import Wall, ChineseClassicalWall
+
+
+class Command(ABC):
+
+    @abstractmethod
+    def execute(self):
+        raise NotImplementedError()
+
+
+class CreateChineseClassicalWall(Command):
+    def __init__(self, game: Game):
+        super().__init__()
+        self.game = game
+
+    def execute(self):
+        self.game.wall = ChineseClassicalWall()
 
 
 class Game:
@@ -47,7 +65,7 @@ class Game:
             return json.load(ruleset_file)
 
     def build_wall(self):
-        return Wall(seed=self.random_seed, use_flowers=self.use_flowers, use_seasons=self.use_seasons)
+        return Wall(seed=self.random_seed)
 
     def create_players(self):
         return [
