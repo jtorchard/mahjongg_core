@@ -88,3 +88,4 @@ class Game:
         self.player_3 = Player()
         self.player_4 = Player()
         self.wall = Wall()
+        self.east_out_counter: int = 0
