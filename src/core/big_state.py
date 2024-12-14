@@ -20,6 +20,10 @@ from src.models.wind import Wind
 
 logger.add("mahjong.log")
 
+NUM_OF_TILES_SUIT: int = 4
+NUM_OF_TILES_HONOUR: int = 4
+SIZE_OF_DEAD_WALL: int = 16
+
 
 class Game:
     def __init__(self, seed: Optional[int] = None):
@@ -54,11 +58,11 @@ class Game:
         self.live_wall = [
             tile()
             for tile in chain(
-                characters * 4,
-                bamboos * 4,
-                circles * 4,
-                dragons * 4,
-                winds * 4,
+                characters * NUM_OF_TILES_SUIT,
+                bamboos * NUM_OF_TILES_SUIT,
+                circles * NUM_OF_TILES_SUIT,
+                dragons * NUM_OF_TILES_HONOUR,
+                winds * NUM_OF_TILES_HONOUR,
                 flowers,
                 seasons,
             )
@@ -66,8 +70,8 @@ class Game:
         logger.debug(f"Wall built with {len(self.live_wall)} tiles")
 
     def break_wall(self) -> None:
-        self.dead_wall = self.live_wall[:16]
-        self.live_wall = self.live_wall[16:]
+        self.dead_wall = self.live_wall[:SIZE_OF_DEAD_WALL]
+        self.live_wall = self.live_wall[SIZE_OF_DEAD_WALL:]
         self.loose_tiles = [self.dead_wall.pop(), self.dead_wall.pop()]
 
     def shuffle_seats(self) -> None:
