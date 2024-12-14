@@ -92,4 +92,4 @@ class Game:
             player.hand.append(self.live_wall.pop())
 
         # East takes a fourteenth tile
-        players_by_wind[0].hand.append(self.live_wall.pop())
+        self.player_by_wind(Wind.EAST).hand.append(self.live_wall.pop())
