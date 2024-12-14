@@ -18,7 +18,7 @@ from src.models.tile import (
 )
 from src.models.wind import Wind
 
-logger.add("mahjong_{time}.log")
+logger.add("mahjong.log")
 
 
 class Game:
