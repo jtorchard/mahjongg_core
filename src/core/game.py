@@ -18,7 +18,7 @@ from src.models.tile import (
 )
 from src.models.wind import Wind
 
-logger.add("mahjong.log")
+logger.add("mahjong.log", colorize=True)
 
 NUM_OF_TILES_SUIT: int = 4
 NUM_OF_TILES_HONOUR: int = 4
