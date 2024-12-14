@@ -3,6 +3,8 @@ from itertools import chain
 from random import shuffle
 from typing import List, Optional, Sequence
 
+from loguru import logger
+
 from src.models.player import Player
 from src.models.tile import (
     Tile,
@@ -16,9 +18,12 @@ from src.models.tile import (
 )
 from src.models.wind import Wind
 
+logger.add("mahjong_{time}.log")
+
 
 class Game:
     def __init__(self, seed: Optional[int] = None):
+        logger.debug(f"Initialising game with seed: {seed}")
         self.seed: Optional[int] = seed
         self.hand: int = 1
         self.seating_counter: int = 1
@@ -42,6 +47,7 @@ class Game:
         self.shuffle_seats()
 
     def build_wall(self) -> None:
+        logger.debug(f"Building wall...")
         self.live_wall = [
             tile()
             for tile in chain(
@@ -54,6 +60,7 @@ class Game:
                 seasons,
             )
         ]
+        logger.debug(f"Wall built with {len(self.live_wall)} tiles")
 
     def break_wall(self) -> None:
         self.dead_wall = self.live_wall[:16]
