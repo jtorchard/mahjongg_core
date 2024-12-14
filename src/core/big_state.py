@@ -88,26 +88,3 @@ class Game:
 
         # East takes a fourteenth tile
         players_by_wind[0].hand.append(self.live_wall.pop())
-
-
-def main() -> None:
-    game: Game = Game(seed=None)
-    random.seed(game.seed)
-    game.build_wall()
-    shuffle(game.live_wall)
-    game.break_wall()
-    game.shuffle_seats()
-
-    print(f"Game: {game}")
-    print(f"live wall: {game.live_wall}")
-    print(f"dead wall: {game.dead_wall}")
-    print(f"loose tiles: {game.loose_tiles}")
-    players: List[Player] = sorted(
-        [game.player_1, game.player_2, game.player_3, game.player_4],
-        key=lambda p: p.seat,
-    )
-    print(f"Players: {players}")
-
-
-if __name__ == "__main__":
-    main()
