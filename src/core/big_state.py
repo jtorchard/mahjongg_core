@@ -46,6 +46,9 @@ class Game:
         self.break_wall()
         self.shuffle_seats()
 
+    def player_by_wind(self, wind: Wind) -> Player:
+        return {p.seat: p for p in self.players}[wind]
+
     def build_wall(self) -> None:
         logger.debug(f"Building wall...")
         self.live_wall = [
