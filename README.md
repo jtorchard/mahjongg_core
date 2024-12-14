@@ -5,7 +5,6 @@ Can also be used for testing, and generating random games, etc.
 get coverage working
 add mypy to build/make/tooling
 Add docstrings
-Add type annotations
 
 Four phases: setup, play, scoring, settling.
 
