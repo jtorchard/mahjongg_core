@@ -70,12 +70,7 @@ class Game:
     def shuffle_seats(self) -> None:
         _winds = list(Wind)
         shuffle(_winds)
-        (
-            self.player_1.seat,
-            self.player_2.seat,
-            self.player_3.seat,
-            self.player_4.seat,
-        ) = _winds
+        self.player_1.seat, self.player_2.seat, self.player_3.seat, self.player_4.seat, = _winds
 
     def change_seats(self) -> None:
         for player in self.players:
