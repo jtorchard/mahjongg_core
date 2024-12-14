@@ -86,7 +86,7 @@ class Game:
 
     def change_seats(self) -> None:
         player_seats = {p.number: p.seat for p in self.players}
-        logger.info(f"Changing seats...")
+        logger.info("Changing seats...")
 
         for player in self.players:
             player.seat = player.seat.next()
@@ -95,7 +95,7 @@ class Game:
             logger.info(f"Seat changed for Player {p.number}: {player_seats[p.number]} -> {p.seat}")
 
     def deal(self) -> None:
-        logger.info(f"Dealing tiles...")
+        logger.info("Dealing tiles...")
         # Take twelve tiles each
         players_by_wind: List[Player] = sorted(self.players, key=lambda p: p.seat)
         for _ in range(3):
@@ -109,4 +109,4 @@ class Game:
 
         # East takes a fourteenth tile
         self.player_by_wind(Wind.EAST).hand.append(self.live_wall.pop())
-        logger.info(f"Tiles dealt")
+        logger.info("Tiles dealt")
