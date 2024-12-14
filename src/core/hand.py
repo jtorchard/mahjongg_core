@@ -1,18 +1,14 @@
 """
 Contains data for each hand played.
 """
-
 from typing import List
 
-from models.tile import Tile
+from src.models.tile import Tile
 
 
 class Hand:
-    def __init__(self):
+    def __init__(self) -> None:
         self.tiles: List[Tile] = []
-
-    def from_unicode_string(self, string: str) -> None:
-        self.tiles = [Tile(s) for s in string]
 
     def __getitem__(self, index: int) -> Tile:
         return self.tiles[index]

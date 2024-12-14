@@ -1,8 +1,8 @@
 import pytest
 
-from models.tile import EastWind
-from models.wind import Wind
 from src.core.big_state import Game
+from src.models.tile import EastWind
+from src.models.wind import Wind
 
 
 @pytest.fixture

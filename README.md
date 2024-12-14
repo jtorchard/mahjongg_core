@@ -15,7 +15,6 @@ lebowski tiles!
 Flowers: Plum (East), Orchid (South), Chrysanthemum (West) and Bamboo (North).
 Seasons: Spring (East), Summer (South), Autumn (West) and Winter (North).
 
-
 implement extra draws if drawing a bonus tile
 
 List out all primitive commands or opcodes:

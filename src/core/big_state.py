@@ -1,10 +1,10 @@
 import random
 from itertools import chain
 from random import shuffle
-from typing import List, Optional
+from typing import List, Optional, Sequence
 
-from models.player import Player
-from models.tile import (
+from src.models.player import Player
+from src.models.tile import (
     Tile,
     bamboos,
     characters,
@@ -14,7 +14,7 @@ from models.tile import (
     seasons,
     winds,
 )
-from models.wind import Wind
+from src.models.wind import Wind
 
 
 class Game:
@@ -33,7 +33,7 @@ class Game:
         self.dead_wall: List[Tile] = []
         self.discards: List[Tile] = []
         self.loose_tiles: List[Tile] = []
-        self.players = (self.player_1, self.player_2, self.player_3, self.player_4)
+        self.players: Sequence[Player] = (self.player_1, self.player_2, self.player_3, self.player_4)
 
         random.seed(self.seed)
         self.build_wall()
@@ -56,11 +56,11 @@ class Game:
         ]
 
     def break_wall(self) -> None:
-        self.dead_wall: List[Tile] = self.live_wall[:16]
-        self.live_wall: List[Tile] = self.live_wall[16:]
-        self.loose_tiles: List[Tile] = [self.dead_wall.pop(), self.dead_wall.pop()]
+        self.dead_wall = self.live_wall[:16]
+        self.live_wall = self.live_wall[16:]
+        self.loose_tiles = [self.dead_wall.pop(), self.dead_wall.pop()]
 
-    def shuffle_seats(self):
+    def shuffle_seats(self) -> None:
         _winds = list(Wind)
         shuffle(_winds)
         (
@@ -70,13 +70,13 @@ class Game:
             self.player_4.seat,
         ) = _winds
 
-    def change_seats(self):
+    def change_seats(self) -> None:
         for player in self.players:
             player.seat = player.seat.next()
 
-    def deal(self):
+    def deal(self) -> None:
         # Take twelve tiles each
-        players_by_wind = sorted(self.players, key=lambda p: p.seat)
+        players_by_wind: List[Player] = sorted(self.players, key=lambda p: p.seat)
         for _ in range(3):
             for player in players_by_wind:
                 for _ in range(4):
@@ -90,8 +90,8 @@ class Game:
         players_by_wind[0].hand.append(self.live_wall.pop())
 
 
-def main():
-    game = Game(seed=None)
+def main() -> None:
+    game: Game = Game(seed=None)
     random.seed(game.seed)
     game.build_wall()
     shuffle(game.live_wall)
@@ -102,7 +102,7 @@ def main():
     print(f"live wall: {game.live_wall}")
     print(f"dead wall: {game.dead_wall}")
     print(f"loose tiles: {game.loose_tiles}")
-    players = sorted(
+    players: List[Player] = sorted(
         [game.player_1, game.player_2, game.player_3, game.player_4],
         key=lambda p: p.seat,
     )

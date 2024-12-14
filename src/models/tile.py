@@ -8,16 +8,16 @@ class Tile(BaseModel):
     name: str = ""
     value: int = 0
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return self.utf8 == other.utf8
 
-    def __gt__(self, other):
+    def __gt__(self, other) -> int:
         return self.value > other.value
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name} -- {self.utf8}"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.__str__()
 
 
@@ -901,52 +901,3 @@ characters = [
 ]
 suits = bamboos + circles + characters
 tiles = honours + flowers + seasons + suits
-
-# class Tile():
-#     def __init__(self, unicode_tile):
-#         super().__init__()
-#         self.utf8 = unicode_tile
-#         self.name: str = ""
-#         self.suit: str = ""
-#         self.rank: str = ""
-#         self._set_data_from_unicode(self.utf8)
-#
-#         self.is_dragon = "dragon" in self.suit
-#         self.is_wind = "wind" in self.suit
-#         self.is_special = self.suit in ("flower", "season")
-#         self.is_honour = self.suit in ("dragon", "wind")
-#         self.is_suit = self.suit in ("character", "circle", "bamboo")
-#         self.is_terminal = self.rank in ("one", "nine")
-#         self.is_simple = self.rank in ("two", "three", "four", "five", "six", "seven", "eight")
-#
-#     def _set_data_from_unicode(self, unicode_tile):
-#         split_name = unicodedata.name(unicode_tile).lower().split()
-#
-#         tile_type = split_name[-1]
-#         if tile_type in ("circles", "characters", "bamboos"):
-#             _, _, self.rank, _, suit = split_name
-#             self.suit = suit[:-1]
-#         elif tile_type in ("wind", "dragon"):
-#             _, _, self.rank, self.suit = split_name
-#         elif tile_type in ("spring", "summer", "autumn", "winter"):
-#             self.rank = tile_type
-#             self.suit = "season"
-#         elif tile_type in ("plum", "orchid", "bamboo", "chrysanthemum"):
-#             self.rank = tile_type
-#             self.suit = "flower"
-#         else:
-#             raise ValueError
-#
-#         self.name = f"{self.rank.lower()}_{self.suit.lower()}"
-#
-#     def __eq__(self, other):
-#         return self.utf8 == other.utf8
-#
-#     def __gt__(self, other):
-#         return self.rank > other.rank
-#
-#     def __str__(self):
-#         return f"{self.name} -- {self.utf8}"
-#
-#     def __repr__(self):
-#         return self.__str__()

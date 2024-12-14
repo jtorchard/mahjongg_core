@@ -2,8 +2,8 @@ from typing import List
 
 from pydantic import BaseModel, Field
 
-from models.tile import Tile
-from models.wind import Wind
+from .tile import Tile
+from .wind import Wind
 
 
 # noinspection PyDataclass

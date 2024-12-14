@@ -1,9 +1,9 @@
 import pytest
 from pydantic import ValidationError
 
-from models.player import Player
-from models.tile import EastWind
-from models.wind import Wind
+from src.models.player import Player
+from src.models.tile import EastWind
+from src.models.wind import Wind
 
 
 @pytest.mark.parametrize(
