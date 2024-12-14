@@ -50,7 +50,7 @@ class Game:
         return {p.seat: p for p in self.players}[wind]
 
     def build_wall(self) -> None:
-        logger.debug(f"Building wall...")
+        logger.debug("Building wall...")
         self.live_wall = [
             tile()
             for tile in chain(
