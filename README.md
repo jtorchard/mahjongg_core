@@ -3,7 +3,8 @@ Keep full history of commands to allow undoing and also replaying games. Can als
 Can also be used for testing, and generating random games, etc.
 
 get coverage working
-Add logging
+figure out why logging happens multiple times in __init__
+add mypy to build/make/tooling
 Add docstrings
 Add type annotations
 
