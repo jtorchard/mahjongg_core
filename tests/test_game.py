@@ -1,6 +1,6 @@
 import pytest
 
-from src.core.big_state import Game
+from src.core.game import Game
 from src.models.tile import EastWind
 from src.models.wind import Wind
 
