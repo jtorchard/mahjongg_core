@@ -1,10 +1,11 @@
-from dataclasses import dataclass, field
-from enum import IntEnum
+import random
 from itertools import chain
-from typing import List, Mapping
+from random import shuffle
+from typing import List, Optional
 
-from core.tile import Tile
-from data import (
+from models.player import Player
+from models.tile import (
+    Tile,
     bamboos,
     characters,
     circles,
@@ -13,74 +14,100 @@ from data import (
     seasons,
     winds,
 )
+from models.wind import Wind
 
 
-class Wind(IntEnum):
-    East = 1
-    South = 2
-    West = 3
-    North = 4
-
-    def __str__(self):
-        return self.name
-
-    @property
-    def next(self):
-        try:
-            wind = Wind(self.value + 1)
-        except ValueError:
-            wind = Wind.East
-        return wind
-
-    @property
-    def previous(self):
-        try:
-            wind = Wind(self.value - 1)
-        except ValueError:
-            wind = Wind.North
-        return wind
-
-
-@dataclass
-class Player:
-    hand: List[Tile] = field(default_factory=list)
-    score: int = 2000
-
-
-@dataclass
-class Wall:
-    tiles: List[Tile] = field(default_factory=lambda: [
-        Tile(tile)
-        for tile in chain(
-            characters * 4,
-            bamboos * 4,
-            circles * 4,
-            dragons * 4,
-            winds * 4,
-            flowers,
-            seasons,
-        )
-    ])
-
-    def __str__(self):
-        return "".join([t.utf8 for t in self.tiles])
-
-    def __len__(self):
-        return len(self.tiles)
-
-
-@dataclass
 class Game:
-    starting_score: int = 2000
-    hand: int = 1
-    round: Wind = Wind.East
-    turn: Wind = Wind.East
-    wind_to_player: Mapping[Wind, Player] = field(default_factory=dict)
-    player_to_wind: Mapping[Player, Wind] = field(default_factory=dict)
-    seating_counter: int = 1
-    player_1: Player = Player()
-    player_2: Player = Player()
-    player_3: Player = Player()
-    player_4: Player = Player()
-    wall: Wall = Wall()
-    east_out_counter: int = 0
+    def __init__(self, seed: Optional[int] = None):
+        self.seed: Optional[int] = seed
+        self.hand: int = 1
+        self.seating_counter: int = 1
+        self.east_out_counter: int = 0
+        self.round: Wind = Wind.EAST
+        self.turn: Wind = Wind.EAST
+        self.player_1: Player = Player(seat=Wind.EAST, number=1)
+        self.player_2: Player = Player(seat=Wind.SOUTH, number=2)
+        self.player_3: Player = Player(seat=Wind.WEST, number=3)
+        self.player_4: Player = Player(seat=Wind.NORTH, number=4)
+        self.live_wall: List[Tile] = []
+        self.dead_wall: List[Tile] = []
+        self.discards: List[Tile] = []
+        self.loose_tiles: List[Tile] = []
+        self.players = (self.player_1, self.player_2, self.player_3, self.player_4)
+
+        random.seed(self.seed)
+        self.build_wall()
+        shuffle(self.live_wall)
+        self.break_wall()
+        self.shuffle_seats()
+
+    def build_wall(self) -> None:
+        self.live_wall = [
+            tile()
+            for tile in chain(
+                characters * 4,
+                bamboos * 4,
+                circles * 4,
+                dragons * 4,
+                winds * 4,
+                flowers,
+                seasons,
+            )
+        ]
+
+    def break_wall(self) -> None:
+        self.dead_wall: List[Tile] = self.live_wall[:16]
+        self.live_wall: List[Tile] = self.live_wall[16:]
+        self.loose_tiles: List[Tile] = [self.dead_wall.pop(), self.dead_wall.pop()]
+
+    def shuffle_seats(self):
+        _winds = list(Wind)
+        shuffle(_winds)
+        (
+            self.player_1.seat,
+            self.player_2.seat,
+            self.player_3.seat,
+            self.player_4.seat,
+        ) = _winds
+
+    def change_seats(self):
+        for player in self.players:
+            player.seat = player.seat.next()
+
+    def deal(self):
+        # Take twelve tiles each
+        players_by_wind = sorted(self.players, key=lambda p: p.seat)
+        for _ in range(3):
+            for player in players_by_wind:
+                for _ in range(4):
+                    player.hand.append(self.live_wall.pop())
+
+        # Each player takes a thirteenth tile
+        for player in players_by_wind:
+            player.hand.append(self.live_wall.pop())
+
+        # East takes a fourteenth tile
+        players_by_wind[0].hand.append(self.live_wall.pop())
+
+
+def main():
+    game = Game(seed=None)
+    random.seed(game.seed)
+    game.build_wall()
+    shuffle(game.live_wall)
+    game.break_wall()
+    game.shuffle_seats()
+
+    print(f"Game: {game}")
+    print(f"live wall: {game.live_wall}")
+    print(f"dead wall: {game.dead_wall}")
+    print(f"loose tiles: {game.loose_tiles}")
+    players = sorted(
+        [game.player_1, game.player_2, game.player_3, game.player_4],
+        key=lambda p: p.seat,
+    )
+    print(f"Players: {players}")
+
+
+if __name__ == "__main__":
+    main()

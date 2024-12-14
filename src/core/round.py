@@ -1,11 +1,10 @@
 """
-    Contains data for each round played.
-    Each round has its own wind and consists of at least four hands.
+Contains data for each round played.
+Each round has its own wind and consists of at least four hands.
 """
 
 
 class Round:
-
     def __init__(self, wind):
         self.wind = wind
         self.hands = []

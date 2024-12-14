@@ -1,5 +1,6 @@
 [project]
 requires-python = ">= 3.13"
+pydantic = ">=2.10.3"
 
 authors = [
   {name = "John Orchard", email = "jtorchard@protonmail.com"},
