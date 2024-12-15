@@ -17,7 +17,7 @@ logger.add("mahjong.log", colorize=True, level="INFO")
 def hand_mutated(func: Callable) -> Callable:
     @wraps(func)
     def inner(self, *args, **kwargs):
-        fumc(self, *args, **kwargs)
+        func(self, *args, **kwargs)
         self.analyse_hand(*args, **kwargs)
 
     return inner
