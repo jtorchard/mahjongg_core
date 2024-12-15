@@ -6,6 +6,8 @@ format:
 	ruff format
 lint:
 	ruff check -v
+mypy:
+	mypy .
 test:
-	 python -m pytest -vv --cov=lib --cov=core tests/test_*.py
-all: install format lint test
+	 python -m pytest -vv --cov=src --cov=tests tests/test_*.py
+all: install format lint mypy test
