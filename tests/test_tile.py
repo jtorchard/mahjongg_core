@@ -57,11 +57,11 @@ def test_eight_character_lt_nine_character():
 
 
 def test_string_representation():
-    assert str(SixBamboo()) == f"six_bamboo -- 🀕"
+    assert str(SixBamboo()) == "six_bamboo -- 🀕"
 
 
 def test_repr_representation():
-    assert repr(SixBamboo()) == f"six_bamboo -- 🀕"
+    assert repr(SixBamboo()) == "six_bamboo -- 🀕"
 
 
 def test_extract_name_from_unicode_dragon_is_correct(tile=RedDragon()):
