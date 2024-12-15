@@ -2,6 +2,7 @@
     Handles the tiles in a player's hand.
     Ordering, sorting, determining special cases etc.
 """
+from __future__ import annotations
 from collections import Counter, UserList
 from functools import wraps
 from typing import Any, Callable, Dict, List, SupportsIndex
