@@ -4,7 +4,7 @@
 
 import pytest
 
-from src.core.game import Game
+from game import Game
 
 
 @pytest.fixture

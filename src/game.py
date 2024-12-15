@@ -1,7 +1,6 @@
 import random
 from itertools import chain
 from random import shuffle
-from typing import List
 
 from loguru import logger
 
@@ -96,7 +95,7 @@ class Game:
     def deal(self):
         logger.info("Dealing tiles...")
         # Take twelve tiles each
-        players_by_wind: List[Player] = sorted(self.players, key=lambda p: p.seat)
+        players_by_wind = sorted(self.players, key=lambda p: p.seat)
         for _ in range(3):
             for player in players_by_wind:
                 for _ in range(4):
