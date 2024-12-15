@@ -1,25 +1,23 @@
-from __future__ import annotations
-
 from enum import IntEnum
 
 
 class Wind(IntEnum):
-    EAST: int = 1
-    SOUTH: int = 2
-    WEST: int = 3
-    NORTH: int = 4
+    EAST = 1
+    SOUTH = 2
+    WEST = 3
+    NORTH = 4
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
-    def next(self) -> Wind:
+    def next(self):
         try:
             wind = Wind(self.value + 1)
         except ValueError:
             wind = Wind.EAST
         return wind
 
-    def previous(self) -> Wind:
+    def previous(self):
         try:
             wind = Wind(self.value - 1)
         except ValueError:

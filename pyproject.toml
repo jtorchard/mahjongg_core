@@ -14,43 +14,5 @@ readme = "README.md"
 
 license = {text = "MIT License"}
 
-[project.optional-dependencies]
-typing = ["mypy>=1.13.0"]
-
-[tool.mypy]
-platform = "linux"
-python_version = 3.13
-strict = true
-pretty = false
-
-# Warnings
-warn_redundant_casts = true
-warn_unused_ignores = true
-warn_unused_configs = true
-warn_unreachable = true
-
-disable_error_code = [
-#    "no-untyped-call",
-    "no-untyped-def",
-#    "union-attr",
-#    "override",
-#    "index",
-#    "operator",
-#    "has-type",
-#    "name-defined",
-#    "import",
-#    "no-any-return",
-    # Turn back on for smaller increase in new errors
-#    "var-annotated",
-#    "misc",
-#    "assignment",
-#    "arg-type",
-#    "valid-type",
-#    "call-overload",
-    "type-arg",
-#    "attr-defined",
-#    "unreachable",
-]
-
 [tool.ruff.lint]
 extend-select = ["I"]
