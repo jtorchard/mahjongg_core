@@ -48,6 +48,22 @@ def test_two_identical_tiles_compare_equal():
     assert EastWind() == EastWind()
 
 
+def test_two_character_gt_one_character():
+    assert TwoCharacter() > OneCharacter()
+
+
+def test_eight_character_lt_nine_character():
+    assert EightCharacter() < NineCharacter()
+
+
+def test_string_representation():
+    assert str(SixBamboo()) == f"six_bamboo -- 🀕"
+
+
+def test_repr_representation():
+    assert repr(SixBamboo()) == f"six_bamboo -- 🀕"
+
+
 def test_extract_name_from_unicode_dragon_is_correct(tile=RedDragon()):
     assert tile.name == "red_dragon"
 
@@ -93,13 +109,19 @@ def test_east_wind_data_correct(tile=EastWind()):
     assert tile.name == "east_wind"
     assert tile.rank == "east"
     assert tile.suit == "wind"
+    assert tile.value == 1
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is True
     assert tile.is_dragon is False
     assert tile.is_wind is True
+
     assert tile.is_special is False
-    assert tile.is_honour is True
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_south_wind_data_correct(tile=SouthWind()):
@@ -107,13 +129,19 @@ def test_south_wind_data_correct(tile=SouthWind()):
     assert tile.name == "south_wind"
     assert tile.rank == "south"
     assert tile.suit == "wind"
+    assert tile.value == 2
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is True
     assert tile.is_dragon is False
     assert tile.is_wind is True
+
     assert tile.is_special is False
-    assert tile.is_honour is True
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_west_wind_data_correct(tile=WestWind()):
@@ -121,13 +149,19 @@ def test_west_wind_data_correct(tile=WestWind()):
     assert tile.name == "west_wind"
     assert tile.rank == "west"
     assert tile.suit == "wind"
-    assert tile.is_dragon is False
-    assert tile.is_wind is True
-    assert tile.is_special is False
-    assert tile.is_honour is True
+    assert tile.value == 3
+
+    assert tile.is_simple is False
     assert tile.is_suit is False
     assert tile.is_terminal is False
-    assert tile.is_simple is False
+
+    assert tile.is_honour is True
+    assert tile.is_dragon is False
+    assert tile.is_wind is True
+
+    assert tile.is_special is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_north_wind_data_correct(tile=NorthWind()):
@@ -135,13 +169,19 @@ def test_north_wind_data_correct(tile=NorthWind()):
     assert tile.name == "north_wind"
     assert tile.rank == "north"
     assert tile.suit == "wind"
+    assert tile.value == 4
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is True
     assert tile.is_dragon is False
     assert tile.is_wind is True
+
     assert tile.is_special is False
-    assert tile.is_honour is True
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_red_dragon_data_correct(tile=RedDragon()):
@@ -149,13 +189,19 @@ def test_red_dragon_data_correct(tile=RedDragon()):
     assert tile.name == "red_dragon"
     assert tile.rank == "red"
     assert tile.suit == "dragon"
+    assert tile.value == 1
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is True
     assert tile.is_dragon is True
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is True
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_green_dragon_data_correct(tile=GreenDragon()):
@@ -163,13 +209,19 @@ def test_green_dragon_data_correct(tile=GreenDragon()):
     assert tile.name == "green_dragon"
     assert tile.rank == "green"
     assert tile.suit == "dragon"
+    assert tile.value == 2
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is True
     assert tile.is_dragon is True
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is True
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_white_dragon_data_correct(tile=WhiteDragon()):
@@ -177,13 +229,19 @@ def test_white_dragon_data_correct(tile=WhiteDragon()):
     assert tile.name == "white_dragon"
     assert tile.rank == "white"
     assert tile.suit == "dragon"
+    assert tile.value == 3
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is True
     assert tile.is_dragon is True
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is True
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_one_character_data_correct(tile=OneCharacter()):
@@ -191,13 +249,19 @@ def test_one_character_data_correct(tile=OneCharacter()):
     assert tile.name == "one_character"
     assert tile.rank == "one"
     assert tile.suit == "character"
+    assert tile.value == 1
+
+    assert tile.is_suit is True
+    assert tile.is_simple is False
+    assert tile.is_terminal is True
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is True
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_two_character_data_correct(tile=TwoCharacter()):
@@ -205,13 +269,19 @@ def test_two_character_data_correct(tile=TwoCharacter()):
     assert tile.name == "two_character"
     assert tile.rank == "two"
     assert tile.suit == "character"
+    assert tile.value == 2
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_three_character_data_correct(tile=ThreeCharacter()):
@@ -219,13 +289,19 @@ def test_three_character_data_correct(tile=ThreeCharacter()):
     assert tile.name == "three_character"
     assert tile.rank == "three"
     assert tile.suit == "character"
+    assert tile.value == 3
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_four_character_data_correct(tile=FourCharacter()):
@@ -233,13 +309,19 @@ def test_four_character_data_correct(tile=FourCharacter()):
     assert tile.name == "four_character"
     assert tile.rank == "four"
     assert tile.suit == "character"
+    assert tile.value == 4
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_five_character_data_correct(tile=FiveCharacter()):
@@ -247,13 +329,19 @@ def test_five_character_data_correct(tile=FiveCharacter()):
     assert tile.name == "five_character"
     assert tile.rank == "five"
     assert tile.suit == "character"
+    assert tile.value == 5
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_six_character_data_correct(tile=SixCharacter()):
@@ -261,13 +349,19 @@ def test_six_character_data_correct(tile=SixCharacter()):
     assert tile.name == "six_character"
     assert tile.rank == "six"
     assert tile.suit == "character"
+    assert tile.value == 6
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_seven_character_data_correct(tile=SevenCharacter()):
@@ -275,13 +369,19 @@ def test_seven_character_data_correct(tile=SevenCharacter()):
     assert tile.name == "seven_character"
     assert tile.rank == "seven"
     assert tile.suit == "character"
+    assert tile.value == 7
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_eight_character_data_correct(tile=EightCharacter()):
@@ -289,13 +389,19 @@ def test_eight_character_data_correct(tile=EightCharacter()):
     assert tile.name == "eight_character"
     assert tile.rank == "eight"
     assert tile.suit == "character"
+    assert tile.value == 8
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_nine_character_data_correct(tile=NineCharacter()):
@@ -303,13 +409,19 @@ def test_nine_character_data_correct(tile=NineCharacter()):
     assert tile.name == "nine_character"
     assert tile.rank == "nine"
     assert tile.suit == "character"
+    assert tile.value == 9
+
+    assert tile.is_suit is True
+    assert tile.is_simple is False
+    assert tile.is_terminal is True
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is True
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_one_bamboo_data_correct(tile=OneBamboo()):
@@ -317,13 +429,19 @@ def test_one_bamboo_data_correct(tile=OneBamboo()):
     assert tile.name == "one_bamboo"
     assert tile.rank == "one"
     assert tile.suit == "bamboo"
+    assert tile.value == 1
+
+    assert tile.is_suit is True
+    assert tile.is_simple is False
+    assert tile.is_terminal is True
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is True
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_two_bamboo_data_correct(tile=TwoBamboo()):
@@ -331,13 +449,19 @@ def test_two_bamboo_data_correct(tile=TwoBamboo()):
     assert tile.name == "two_bamboo"
     assert tile.rank == "two"
     assert tile.suit == "bamboo"
+    assert tile.value == 2
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_three_bamboo_data_correct(tile=ThreeBamboo()):
@@ -345,13 +469,19 @@ def test_three_bamboo_data_correct(tile=ThreeBamboo()):
     assert tile.name == "three_bamboo"
     assert tile.rank == "three"
     assert tile.suit == "bamboo"
+    assert tile.value == 3
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_four_bamboo_data_correct(tile=FourBamboo()):
@@ -359,13 +489,19 @@ def test_four_bamboo_data_correct(tile=FourBamboo()):
     assert tile.name == "four_bamboo"
     assert tile.rank == "four"
     assert tile.suit == "bamboo"
+    assert tile.value == 4
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_five_bamboo_data_correct(tile=FiveBamboo()):
@@ -373,13 +509,19 @@ def test_five_bamboo_data_correct(tile=FiveBamboo()):
     assert tile.name == "five_bamboo"
     assert tile.rank == "five"
     assert tile.suit == "bamboo"
+    assert tile.value == 5
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_six_bamboo_data_correct(tile=SixBamboo()):
@@ -387,13 +529,19 @@ def test_six_bamboo_data_correct(tile=SixBamboo()):
     assert tile.name == "six_bamboo"
     assert tile.rank == "six"
     assert tile.suit == "bamboo"
+    assert tile.value == 6
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_seven_bamboo_data_correct(tile=SevenBamboo()):
@@ -401,13 +549,19 @@ def test_seven_bamboo_data_correct(tile=SevenBamboo()):
     assert tile.name == "seven_bamboo"
     assert tile.rank == "seven"
     assert tile.suit == "bamboo"
+    assert tile.value == 7
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_eight_bamboo_data_correct(tile=EightBamboo()):
@@ -415,13 +569,19 @@ def test_eight_bamboo_data_correct(tile=EightBamboo()):
     assert tile.name == "eight_bamboo"
     assert tile.rank == "eight"
     assert tile.suit == "bamboo"
+    assert tile.value == 8
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_nine_bamboo_data_correct(tile=NineBamboo()):
@@ -429,13 +589,19 @@ def test_nine_bamboo_data_correct(tile=NineBamboo()):
     assert tile.name == "nine_bamboo"
     assert tile.rank == "nine"
     assert tile.suit == "bamboo"
+    assert tile.value == 9
+
+    assert tile.is_suit is True
+    assert tile.is_simple is False
+    assert tile.is_terminal is True
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is True
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_one_circle_data_correct(tile=OneCircle()):
@@ -443,13 +609,19 @@ def test_one_circle_data_correct(tile=OneCircle()):
     assert tile.name == "one_circle"
     assert tile.rank == "one"
     assert tile.suit == "circle"
+    assert tile.value == 1
+
+    assert tile.is_suit is True
+    assert tile.is_simple is False
+    assert tile.is_terminal is True
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is True
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_two_circle_data_correct(tile=TwoCircle()):
@@ -457,13 +629,19 @@ def test_two_circle_data_correct(tile=TwoCircle()):
     assert tile.name == "two_circle"
     assert tile.rank == "two"
     assert tile.suit == "circle"
+    assert tile.value == 2
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_three_circle_data_correct(tile=ThreeCircle()):
@@ -471,13 +649,19 @@ def test_three_circle_data_correct(tile=ThreeCircle()):
     assert tile.name == "three_circle"
     assert tile.rank == "three"
     assert tile.suit == "circle"
+    assert tile.value == 3
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_four_circle_data_correct(tile=FourCircle()):
@@ -485,13 +669,19 @@ def test_four_circle_data_correct(tile=FourCircle()):
     assert tile.name == "four_circle"
     assert tile.rank == "four"
     assert tile.suit == "circle"
+    assert tile.value == 4
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_five_circle_data_correct(tile=FiveCircle()):
@@ -499,13 +689,19 @@ def test_five_circle_data_correct(tile=FiveCircle()):
     assert tile.name == "five_circle"
     assert tile.rank == "five"
     assert tile.suit == "circle"
+    assert tile.value == 5
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_six_circle_data_correct(tile=SixCircle()):
@@ -513,13 +709,19 @@ def test_six_circle_data_correct(tile=SixCircle()):
     assert tile.name == "six_circle"
     assert tile.rank == "six"
     assert tile.suit == "circle"
+    assert tile.value == 6
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_seven_circle_data_correct(tile=SevenCircle()):
@@ -527,13 +729,19 @@ def test_seven_circle_data_correct(tile=SevenCircle()):
     assert tile.name == "seven_circle"
     assert tile.rank == "seven"
     assert tile.suit == "circle"
+    assert tile.value == 7
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_eight_circle_data_correct(tile=EightCircle()):
@@ -541,13 +749,19 @@ def test_eight_circle_data_correct(tile=EightCircle()):
     assert tile.name == "eight_circle"
     assert tile.rank == "eight"
     assert tile.suit == "circle"
+    assert tile.value == 8
+
+    assert tile.is_suit is True
+    assert tile.is_simple is True
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is False
-    assert tile.is_simple is True
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_nine_circle_data_correct(tile=NineCircle()):
@@ -555,13 +769,19 @@ def test_nine_circle_data_correct(tile=NineCircle()):
     assert tile.name == "nine_circle"
     assert tile.rank == "nine"
     assert tile.suit == "circle"
+    assert tile.value == 9
+
+    assert tile.is_suit is True
+    assert tile.is_simple is False
+    assert tile.is_terminal is True
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is False
-    assert tile.is_honour is False
-    assert tile.is_suit is True
-    assert tile.is_terminal is True
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is False
 
 
 def test_plum_flower_data_correct(tile=PlumFlower()):
@@ -569,13 +789,19 @@ def test_plum_flower_data_correct(tile=PlumFlower()):
     assert tile.name == "plum_flower"
     assert tile.rank == "plum"
     assert tile.suit == "flower"
+    assert tile.value == 1
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is True
-    assert tile.is_honour is False
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is True
+    assert tile.is_season is False
 
 
 def test_orchid_flower_data_correct(tile=OrchidFlower()):
@@ -583,13 +809,19 @@ def test_orchid_flower_data_correct(tile=OrchidFlower()):
     assert tile.name == "orchid_flower"
     assert tile.rank == "orchid"
     assert tile.suit == "flower"
+    assert tile.value == 2
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is True
-    assert tile.is_honour is False
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is True
+    assert tile.is_season is False
 
 
 def test_bamboo_flower_data_correct(tile=BambooFlower()):
@@ -597,13 +829,19 @@ def test_bamboo_flower_data_correct(tile=BambooFlower()):
     assert tile.name == "bamboo_flower"
     assert tile.rank == "bamboo"
     assert tile.suit == "flower"
+    assert tile.value == 3
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is True
-    assert tile.is_honour is False
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is True
+    assert tile.is_season is False
 
 
 def test_chrysanthemum_flower_data_correct(tile=ChrysanthemumFlower()):
@@ -611,13 +849,19 @@ def test_chrysanthemum_flower_data_correct(tile=ChrysanthemumFlower()):
     assert tile.name == "chrysanthemum_flower"
     assert tile.rank == "chrysanthemum"
     assert tile.suit == "flower"
+    assert tile.value == 4
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is True
-    assert tile.is_honour is False
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is True
+    assert tile.is_season is False
 
 
 def test_spring_season_data_correct(tile=SpringSeason()):
@@ -625,13 +869,19 @@ def test_spring_season_data_correct(tile=SpringSeason()):
     assert tile.name == "spring_season"
     assert tile.rank == "spring"
     assert tile.suit == "season"
+    assert tile.value == 1
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is True
-    assert tile.is_honour is False
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is True
 
 
 def test_summer_season_data_correct(tile=SummerSeason()):
@@ -639,13 +889,19 @@ def test_summer_season_data_correct(tile=SummerSeason()):
     assert tile.name == "summer_season"
     assert tile.rank == "summer"
     assert tile.suit == "season"
+    assert tile.value == 2
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is True
-    assert tile.is_honour is False
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is True
 
 
 def test_autumn_season_data_correct(tile=AutumnSeason()):
@@ -653,13 +909,19 @@ def test_autumn_season_data_correct(tile=AutumnSeason()):
     assert tile.name == "autumn_season"
     assert tile.rank == "autumn"
     assert tile.suit == "season"
+    assert tile.value == 3
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is True
-    assert tile.is_honour is False
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is True
 
 
 def test_winter_season_data_correct(tile=WinterSeason()):
@@ -667,10 +929,16 @@ def test_winter_season_data_correct(tile=WinterSeason()):
     assert tile.name == "winter_season"
     assert tile.rank == "winter"
     assert tile.suit == "season"
+    assert tile.value == 4
+
+    assert tile.is_suit is False
+    assert tile.is_simple is False
+    assert tile.is_terminal is False
+
+    assert tile.is_honour is False
     assert tile.is_dragon is False
     assert tile.is_wind is False
+
     assert tile.is_special is True
-    assert tile.is_honour is False
-    assert tile.is_suit is False
-    assert tile.is_terminal is False
-    assert tile.is_simple is False
+    assert tile.is_flower is False
+    assert tile.is_season is True
