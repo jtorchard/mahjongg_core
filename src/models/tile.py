@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pydantic import BaseModel, ConfigDict
 
 
@@ -8,13 +10,19 @@ class Tile(BaseModel):
     name: str = ""
     value: int = 0
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Tile):
+            raise NotImplementedError()
         return self.utf8 == other.utf8
 
-    def __gt__(self, other) -> int:
+    def __gt__(self, other: object) -> int:
+        if not isinstance(other, Tile):
+            raise NotImplementedError()
         return self.value > other.value
 
-    def __lt__(self, other) -> int:
+    def __lt__(self, other: object) -> int:
+        if not isinstance(other, Tile):
+            raise NotImplementedError()
         return self.value < other.value
 
     def __str__(self) -> str:
