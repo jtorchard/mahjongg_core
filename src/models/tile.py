@@ -14,6 +14,9 @@ class Tile(BaseModel):
     def __gt__(self, other) -> int:
         return self.value > other.value
 
+    def __lt__(self, other) -> int:
+        return self.value < other.value
+
     def __str__(self) -> str:
         return f"{self.name} -- {self.utf8}"
 
