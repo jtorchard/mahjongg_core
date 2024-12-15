@@ -17,5 +17,17 @@ license = {text = "MIT License"}
 [project.optional-dependencies]
 typing = ["mypy>=1.13.0"]
 
+[tool.mypy]
+platform = "linux"
+python_version = 3.13
+strict = true
+pretty = false
+
+# Warnings
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+warn_unreachable = true
+
 [tool.ruff.lint]
 extend-select = ["I"]
