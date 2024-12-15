@@ -58,7 +58,7 @@ def test_correct_seats_with_fixed_seed(game_fixed_seed):
 
     game_fixed_seed.shuffle_seats()
 
-    assert game_fixed_seed.player_1.seat == Wind.SOUTH
+    assert game_fixed_seed.player_1.seat == Wind.SOUTH  # type: ignore[comparison-overlap]
     assert game_fixed_seed.player_2.seat == Wind.WEST
     assert game_fixed_seed.player_3.seat == Wind.EAST
     assert game_fixed_seed.player_4.seat == Wind.NORTH
