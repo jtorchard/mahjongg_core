@@ -1,4 +1,8 @@
+import pytest
+
+from src.exceptions import InvalidObjectForHand
 from models.hand import Hand
+from models.tile import EastWind, GreenDragon, RedDragon
 
 
 def test_hand_has_correct_defaults():
@@ -14,3 +18,20 @@ def test_hand_has_correct_defaults():
     assert hand.pairs == 0
     assert hand.seasons == 0
     assert hand.flowers == 0
+
+
+def test_init_item_with_list_succeeds():
+    hand = Hand([EastWind(), GreenDragon()])
+    assert hand == [EastWind(), GreenDragon()]
+
+
+def test_set_item_succeeds():
+    hand = Hand([EastWind(), GreenDragon()])
+    hand[0] = RedDragon()
+    assert hand[0] == RedDragon()
+
+
+def test_set_item_with_non_tile_raises_error():
+    hand = Hand([EastWind(), GreenDragon()])
+    with pytest.raises(InvalidObjectForHand):
+        hand[0] = 1

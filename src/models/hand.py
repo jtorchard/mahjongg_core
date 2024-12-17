@@ -7,6 +7,7 @@ from functools import wraps
 
 from loguru import logger
 
+from src.exceptions import InvalidObjectForHand
 from .tile import Tile
 
 logger.remove()  # Turn off default console logger
@@ -39,7 +40,7 @@ class Hand(UserList):
 
     def __setitem__(self, i, item):
         if not isinstance(item, Tile):
-            raise NotImplementedError()
+            raise InvalidObjectForHand()
         self.data[i] = item
 
     def __delitem__(self, i):
@@ -48,7 +49,7 @@ class Hand(UserList):
     @hand_mutated
     def append(self, item):
         if not isinstance(item, Tile):
-            raise NotImplementedError()
+            raise InvalidObjectForHand()
         self.data.append(item)
 
     @hand_mutated
@@ -62,14 +63,14 @@ class Hand(UserList):
     @hand_mutated
     def insert(self, i, item):
         if not isinstance(item, Tile):
-            raise NotImplementedError()
+            raise InvalidObjectForHand()
         self.data.insert(i, item)
 
     @hand_mutated
     def extend(self, other):
         if isinstance(other, list):
             if other and not isinstance(other[0], Tile):
-                raise NotImplementedError()
+                raise InvalidObjectForHand()
         self.data.extend(other)
 
     def __str__(self):
