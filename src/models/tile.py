@@ -1,37 +1,32 @@
-from __future__ import annotations
-
-from pydantic import BaseModel, ConfigDict
+from dataclasses import dataclass
 
 
-class Tile(BaseModel):
-    model_config = ConfigDict(str_to_lower=True, frozen=True)
-
+@dataclass(frozen=True)
+class Tile:
     utf8: str = ""
     name: str = ""
     value: int = 0
 
-    def __eq__(self, other: object) -> bool:
+    def __eq__(self, other):
         if not isinstance(other, Tile):
             raise NotImplementedError()
         return self.utf8 == other.utf8
 
-    def __gt__(self, other: object) -> int:
+    def __gt__(self, other):
         if not isinstance(other, Tile):
             raise NotImplementedError()
         return self.value > other.value
 
-    def __lt__(self, other: object) -> int:
+    def __lt__(self, other):
         if not isinstance(other, Tile):
             raise NotImplementedError()
         return self.value < other.value
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f"{self.name} -- {self.utf8}"
 
-    def __repr__(self) -> str:
-        return self.__str__()
 
-
+@dataclass(frozen=True)
 class EastWind(Tile):
     utf8: str = "🀀"
     name: str = "east_wind"
@@ -52,6 +47,7 @@ class EastWind(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class SouthWind(Tile):
     utf8: str = "🀁"
     name: str = "south_wind"
@@ -72,6 +68,7 @@ class SouthWind(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class WestWind(Tile):
     utf8: str = "🀂"
     name: str = "west_wind"
@@ -92,6 +89,7 @@ class WestWind(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class NorthWind(Tile):
     utf8: str = "🀃"
     name: str = "north_wind"
@@ -112,6 +110,7 @@ class NorthWind(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class RedDragon(Tile):
     utf8: str = "🀄"
     name: str = "red_dragon"
@@ -132,6 +131,7 @@ class RedDragon(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class GreenDragon(Tile):
     utf8: str = "🀅"
     name: str = "green_dragon"
@@ -152,6 +152,7 @@ class GreenDragon(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class WhiteDragon(Tile):
     utf8: str = "🀆"
     name: str = "white_dragon"
@@ -172,6 +173,7 @@ class WhiteDragon(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class PlumFlower(Tile):
     utf8: str = "🀢"
     name: str = "plum_flower"
@@ -192,6 +194,7 @@ class PlumFlower(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class OrchidFlower(Tile):
     utf8: str = "🀣"
     name: str = "orchid_flower"
@@ -212,6 +215,7 @@ class OrchidFlower(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class BambooFlower(Tile):
     utf8: str = "🀤"
     name: str = "bamboo_flower"
@@ -232,6 +236,7 @@ class BambooFlower(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class ChrysanthemumFlower(Tile):
     utf8: str = "🀥"
     name: str = "chrysanthemum_flower"
@@ -252,6 +257,7 @@ class ChrysanthemumFlower(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class SpringSeason(Tile):
     utf8: str = "🀦"
     name: str = "spring_season"
@@ -272,6 +278,7 @@ class SpringSeason(Tile):
     is_season: bool = True
 
 
+@dataclass(frozen=True)
 class SummerSeason(Tile):
     utf8: str = "🀧"
     name: str = "summer_season"
@@ -292,6 +299,7 @@ class SummerSeason(Tile):
     is_season: bool = True
 
 
+@dataclass(frozen=True)
 class AutumnSeason(Tile):
     utf8: str = "🀨"
     name: str = "autumn_season"
@@ -312,6 +320,7 @@ class AutumnSeason(Tile):
     is_season: bool = True
 
 
+@dataclass(frozen=True)
 class WinterSeason(Tile):
     utf8: str = "🀩"
     name: str = "winter_season"
@@ -332,6 +341,7 @@ class WinterSeason(Tile):
     is_season: bool = True
 
 
+@dataclass(frozen=True)
 class OneCharacter(Tile):
     utf8: str = "🀇"
     name: str = "one_character"
@@ -352,6 +362,7 @@ class OneCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class TwoCharacter(Tile):
     utf8: str = "🀈"
     name: str = "two_character"
@@ -372,6 +383,7 @@ class TwoCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class ThreeCharacter(Tile):
     utf8: str = "🀉"
     name: str = "three_character"
@@ -392,6 +404,7 @@ class ThreeCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class FourCharacter(Tile):
     utf8: str = "🀊"
     name: str = "four_character"
@@ -412,6 +425,7 @@ class FourCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class FiveCharacter(Tile):
     utf8: str = "🀋"
     name: str = "five_character"
@@ -432,6 +446,7 @@ class FiveCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class SixCharacter(Tile):
     utf8: str = "🀌"
     name: str = "six_character"
@@ -452,6 +467,7 @@ class SixCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class SevenCharacter(Tile):
     utf8: str = "🀍"
     name: str = "seven_character"
@@ -472,6 +488,7 @@ class SevenCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class EightCharacter(Tile):
     utf8: str = "🀎"
     name: str = "eight_character"
@@ -492,6 +509,7 @@ class EightCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class NineCharacter(Tile):
     utf8: str = "🀏"
     name: str = "nine_character"
@@ -512,6 +530,7 @@ class NineCharacter(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class OneBamboo(Tile):
     utf8: str = "🀐"
     name: str = "one_bamboo"
@@ -532,6 +551,7 @@ class OneBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class TwoBamboo(Tile):
     utf8: str = "🀑"
     name: str = "two_bamboo"
@@ -552,6 +572,7 @@ class TwoBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class ThreeBamboo(Tile):
     utf8: str = "🀒"
     name: str = "three_bamboo"
@@ -572,6 +593,7 @@ class ThreeBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class FourBamboo(Tile):
     utf8: str = "🀓"
     name: str = "four_bamboo"
@@ -592,6 +614,7 @@ class FourBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class FiveBamboo(Tile):
     utf8: str = "🀔"
     name: str = "five_bamboo"
@@ -612,6 +635,7 @@ class FiveBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class SixBamboo(Tile):
     utf8: str = "🀕"
     name: str = "six_bamboo"
@@ -632,6 +656,7 @@ class SixBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class SevenBamboo(Tile):
     utf8: str = "🀖"
     name: str = "seven_bamboo"
@@ -652,6 +677,7 @@ class SevenBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class EightBamboo(Tile):
     utf8: str = "🀗"
     name: str = "eight_bamboo"
@@ -672,6 +698,7 @@ class EightBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class NineBamboo(Tile):
     utf8: str = "🀘"
     name: str = "nine_bamboo"
@@ -692,6 +719,7 @@ class NineBamboo(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class OneCircle(Tile):
     utf8: str = "🀙"
     name: str = "one_circle"
@@ -712,6 +740,7 @@ class OneCircle(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class TwoCircle(Tile):
     utf8: str = "🀚"
     name: str = "two_circle"
@@ -732,6 +761,7 @@ class TwoCircle(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class ThreeCircle(Tile):
     utf8: str = "🀛"
     name: str = "three_circle"
@@ -752,6 +782,7 @@ class ThreeCircle(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class FourCircle(Tile):
     utf8: str = "🀜"
     name: str = "four_circle"
@@ -772,6 +803,7 @@ class FourCircle(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class FiveCircle(Tile):
     utf8: str = "🀝"
     name: str = "five_circle"
@@ -792,6 +824,7 @@ class FiveCircle(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class SixCircle(Tile):
     utf8: str = "🀞"
     name: str = "six_circle"
@@ -812,6 +845,7 @@ class SixCircle(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class SevenCircle(Tile):
     utf8: str = "🀟"
     name: str = "seven_circle"
@@ -832,6 +866,7 @@ class SevenCircle(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class EightCircle(Tile):
     utf8: str = "🀠"
     name: str = "eight_circle"
@@ -852,6 +887,7 @@ class EightCircle(Tile):
     is_season: bool = False
 
 
+@dataclass(frozen=True)
 class NineCircle(Tile):
     utf8: str = "🀡"
     name: str = "nine_circle"

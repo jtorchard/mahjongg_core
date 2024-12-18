@@ -1,3 +1,9 @@
+from copy import deepcopy
+from dataclasses import FrozenInstanceError
+
+import pytest
+
+from src.models.tile import tiles, Tile
 from src.models.tile import (
     AutumnSeason,
     BambooFlower,
@@ -44,8 +50,32 @@ from src.models.tile import (
 )
 
 
-def test_two_identical_tiles_compare_equal():
-    assert EastWind() == EastWind()
+def tile_pairs():
+    all_tiles = deepcopy(tiles)
+    for _ in range(len(tiles) // 2):
+        yield all_tiles.pop(), all_tiles.pop()
+
+
+@pytest.mark.parametrize("tile", tiles)
+def test_tiles_are_instance_of_tile(tile):
+    assert isinstance(tile(), Tile)
+
+
+@pytest.mark.parametrize("tile", tiles)
+def test_two_identical_tiles_compare_equal(tile):
+    assert tile() == tile()
+
+
+@pytest.mark.parametrize("tile_a, tile_b", tile_pairs())
+def test_two_different_tiles_compare_unequal_all(tile_a, tile_b):
+    assert tile_a != tile_b
+
+
+def test_attempting_to_modify_tile_raise_error():
+    tile = RedDragon()
+    with pytest.raises(FrozenInstanceError):
+        # noinspection PyDataclass
+        tile.name = "Betty de Boop"
 
 
 def test_two_character_gt_one_character():
@@ -61,7 +91,10 @@ def test_string_representation():
 
 
 def test_repr_representation():
-    assert repr(SixBamboo()) == "six_bamboo -- 🀕"
+    assert (repr(SixBamboo()) == (
+        "SixBamboo(utf8='🀕', name='six_bamboo', value=6, suit='bamboo', rank='six', "
+        "is_suit=True, is_simple=True, is_terminal=False, is_honour=False, "
+        "is_dragon=False, is_wind=False, is_special=False, is_flower=False, is_season=False)"))
 
 
 def test_extract_name_from_unicode_dragon_is_correct(tile=RedDragon()):
