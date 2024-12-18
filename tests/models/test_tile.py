@@ -1,4 +1,3 @@
-from copy import deepcopy
 from dataclasses import FrozenInstanceError
 
 import pytest
@@ -50,12 +49,6 @@ from src.models.tile import (
 )
 
 
-def tile_pairs():
-    all_tiles = deepcopy(tiles)
-    for _ in range(len(tiles) // 2):
-        yield all_tiles.pop(), all_tiles.pop()
-
-
 @pytest.mark.parametrize("tile", tiles)
 def test_tiles_are_instance_of_tile(tile):
     assert isinstance(tile(), Tile)
@@ -66,7 +59,7 @@ def test_two_identical_tiles_compare_equal(tile):
     assert tile() == tile()
 
 
-@pytest.mark.parametrize("tile_a, tile_b", tile_pairs())
+@pytest.mark.parametrize("tile_a, tile_b", ((tiles.pop(), tiles.pop()) for _ in range(len(tiles) // 2) ))
 def test_two_different_tiles_compare_unequal_all(tile_a, tile_b):
     assert tile_a != tile_b
 
