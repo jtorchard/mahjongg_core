@@ -4,3 +4,7 @@ class MahjongException(Exception):
 
 class InvalidObjectForHand(MahjongException, ValueError):
     message = "Mahjong hand can only contain Tiles."
+
+
+class InvalidPlayerNumber(MahjongException):
+    pass

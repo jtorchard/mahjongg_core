@@ -1,6 +1,6 @@
 import pytest
-from pydantic import ValidationError
 
+from src.exceptions import InvalidPlayerNumber
 from src.models.player import Player
 from src.models.tile import EastWind
 from src.models.wind import Wind
@@ -34,6 +34,7 @@ def test_hand_looses_tile_after_removing(player=Player(seat=Wind.EAST, number=1)
     assert player.hand == []
 
 
-def test_player_with_invalid_id_raises_error():
-    with pytest.raises(ValidationError):
-        Player(seat=Wind.EAST, number=42)
+@pytest.mark.parametrize("number", [42, 5, 0, -1])
+def test_player_with_invalid_numbers_raises_error(number):
+    with pytest.raises(InvalidPlayerNumber):
+        Player(seat=Wind.EAST, number=number)
