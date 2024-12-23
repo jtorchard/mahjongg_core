@@ -50,6 +50,12 @@ from src.models.tile import (
 
 
 @pytest.mark.parametrize("tile", tiles)
+def test_tiles_compared_to_non_tiles_are_not_equal(tile):
+    with pytest.raises(ValueError):
+        assert tile() != 3
+
+
+@pytest.mark.parametrize("tile", tiles)
 def test_tiles_are_instance_of_tile(tile):
     assert isinstance(tile(), Tile)
 
@@ -59,16 +65,9 @@ def test_two_identical_tiles_compare_equal(tile):
     assert tile() == tile()
 
 
-@pytest.mark.parametrize("tile_a, tile_b", ((tiles.pop(), tiles.pop()) for _ in range(len(tiles) // 2) ))
+@pytest.mark.parametrize("tile_a, tile_b", ((tiles.pop(), tiles.pop()) for _ in range(len(tiles) // 2)))
 def test_two_different_tiles_compare_unequal_all(tile_a, tile_b):
     assert tile_a != tile_b
-
-
-def test_attempting_to_modify_tile_raise_error():
-    tile = RedDragon()
-    with pytest.raises(FrozenInstanceError):
-        # noinspection PyDataclass
-        tile.name = "Betty de Boop"
 
 
 def test_two_character_gt_one_character():
@@ -84,10 +83,7 @@ def test_string_representation():
 
 
 def test_repr_representation():
-    assert (repr(SixBamboo()) == (
-        "SixBamboo(utf8='🀕', name='six_bamboo', value=6, suit='bamboo', rank='six', "
-        "is_suit=True, is_simple=True, is_terminal=False, is_honour=False, "
-        "is_dragon=False, is_wind=False, is_special=False, is_flower=False, is_season=False)"))
+    assert repr(SixBamboo()) == "six_bamboo -- 🀕"
 
 
 def test_extract_name_from_unicode_dragon_is_correct(tile=RedDragon()):

@@ -8,7 +8,7 @@ from functools import wraps
 from loguru import logger
 
 from src.exceptions import InvalidObjectForHand
-from .tile import Tile
+from src.models.tile import Tile
 
 logger.remove()  # Turn off default console logger
 logger.add("mahjong.log", colorize=True, level="INFO")

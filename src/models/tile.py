@@ -1,911 +1,973 @@
-from dataclasses import dataclass
-
-
-@dataclass(frozen=True)
 class Tile:
-    utf8: str = ""
-    name: str = ""
-    value: int = 0
+
+    def __init__(self):
+        self.utf8 = None
+        self.name = None
+        self.value = None
 
     def __eq__(self, other):
         if not isinstance(other, Tile):
-            raise NotImplementedError()
+            raise ValueError()
         return self.utf8 == other.utf8
 
     def __gt__(self, other):
         if not isinstance(other, Tile):
-            raise NotImplementedError()
+            raise ValueError()
         return self.value > other.value
 
     def __lt__(self, other):
         if not isinstance(other, Tile):
-            raise NotImplementedError()
+            raise ValueError()
         return self.value < other.value
 
     def __str__(self):
         return f"{self.name} -- {self.utf8}"
 
+    def __repr__(self):
+        return self.__str__()
 
-@dataclass(frozen=True)
+    def __hash__(self):
+        return hash(self.utf8)
+
+
 class EastWind(Tile):
-    utf8: str = "🀀"
-    name: str = "east_wind"
-    suit: str = "wind"
-    rank: str = "east"
-    value: int = 1
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀀"
+        self.name: str = "east_wind"
+        self.suit: str = "wind"
+        self.rank: str = "east"
+        self.value: int = 1
 
-    is_honour: bool = True
-    is_dragon: bool = False
-    is_wind: bool = True
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = True
+        self.is_dragon: bool = False
+        self.is_wind: bool = True
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class SouthWind(Tile):
-    utf8: str = "🀁"
-    name: str = "south_wind"
-    suit: str = "wind"
-    rank: str = "south"
-    value: int = 2
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀁"
+        self.name: str = "south_wind"
+        self.suit: str = "wind"
+        self.rank: str = "south"
+        self.value: int = 2
 
-    is_honour: bool = True
-    is_dragon: bool = False
-    is_wind: bool = True
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = True
+        self.is_dragon: bool = False
+        self.is_wind: bool = True
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class WestWind(Tile):
-    utf8: str = "🀂"
-    name: str = "west_wind"
-    suit: str = "wind"
-    rank: str = "west"
-    value: int = 3
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀂"
+        self.name: str = "west_wind"
+        self.suit: str = "wind"
+        self.rank: str = "west"
+        self.value: int = 3
 
-    is_honour: bool = True
-    is_dragon: bool = False
-    is_wind: bool = True
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = True
+        self.is_dragon: bool = False
+        self.is_wind: bool = True
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class NorthWind(Tile):
-    utf8: str = "🀃"
-    name: str = "north_wind"
-    suit: str = "wind"
-    rank: str = "north"
-    value: int = 4
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀃"
+        self.name: str = "north_wind"
+        self.suit: str = "wind"
+        self.rank: str = "north"
+        self.value: int = 4
 
-    is_honour: bool = True
-    is_dragon: bool = False
-    is_wind: bool = True
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = True
+        self.is_dragon: bool = False
+        self.is_wind: bool = True
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class RedDragon(Tile):
-    utf8: str = "🀄"
-    name: str = "red_dragon"
-    suit: str = "dragon"
-    rank: str = "red"
-    value: int = 1
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀄"
+        self.name: str = "red_dragon"
+        self.suit: str = "dragon"
+        self.rank: str = "red"
+        self.value: int = 1
 
-    is_honour: bool = True
-    is_dragon: bool = True
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = True
+        self.is_dragon: bool = True
+        self.is_wind: bool = False
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class GreenDragon(Tile):
-    utf8: str = "🀅"
-    name: str = "green_dragon"
-    suit: str = "dragon"
-    rank: str = "green"
-    value: int = 2
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀅"
+        self.name: str = "green_dragon"
+        self.suit: str = "dragon"
+        self.rank: str = "green"
+        self.value: int = 2
 
-    is_honour: bool = True
-    is_dragon: bool = True
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = True
+        self.is_dragon: bool = True
+        self.is_wind: bool = False
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class WhiteDragon(Tile):
-    utf8: str = "🀆"
-    name: str = "white_dragon"
-    suit: str = "dragon"
-    rank: str = "white"
-    value: int = 3
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀆"
+        self.name: str = "white_dragon"
+        self.suit: str = "dragon"
+        self.rank: str = "white"
+        self.value: int = 3
 
-    is_honour: bool = True
-    is_dragon: bool = True
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = True
+        self.is_dragon: bool = True
+        self.is_wind: bool = False
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class PlumFlower(Tile):
-    utf8: str = "🀢"
-    name: str = "plum_flower"
-    suit: str = "flower"
-    rank: str = "plum"
-    value: int = 1
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀢"
+        self.name: str = "plum_flower"
+        self.suit: str = "flower"
+        self.rank: str = "plum"
+        self.value: int = 1
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = True
-    is_flower: bool = True
-    is_season: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = True
+        self.is_flower: bool = True
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class OrchidFlower(Tile):
-    utf8: str = "🀣"
-    name: str = "orchid_flower"
-    suit: str = "flower"
-    rank: str = "orchid"
-    value: int = 2
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀣"
+        self.name: str = "orchid_flower"
+        self.suit: str = "flower"
+        self.rank: str = "orchid"
+        self.value: int = 2
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = True
-    is_flower: bool = True
-    is_season: bool = False
+        self.is_special: bool = True
+        self.is_flower: bool = True
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class BambooFlower(Tile):
-    utf8: str = "🀤"
-    name: str = "bamboo_flower"
-    suit: str = "flower"
-    rank: str = "bamboo"
-    value: int = 3
+    def __init__(self):
+        super().__init__()
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+        self.utf8: str = "🀤"
+        self.name: str = "bamboo_flower"
+        self.suit: str = "flower"
+        self.rank: str = "bamboo"
+        self.value: int = 3
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = True
-    is_flower: bool = True
-    is_season: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = True
+        self.is_flower: bool = True
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class ChrysanthemumFlower(Tile):
-    utf8: str = "🀥"
-    name: str = "chrysanthemum_flower"
-    suit: str = "flower"
-    rank: str = "chrysanthemum"
-    value: int = 4
+    def __init__(self):
+        super().__init__()
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+        self.utf8: str = "🀥"
+        self.name: str = "chrysanthemum_flower"
+        self.suit: str = "flower"
+        self.rank: str = "chrysanthemum"
+        self.value: int = 4
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = True
-    is_flower: bool = True
-    is_season: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = True
+        self.is_flower: bool = True
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class SpringSeason(Tile):
-    utf8: str = "🀦"
-    name: str = "spring_season"
-    suit: str = "season"
-    rank: str = "spring"
-    value: int = 1
+    def __init__(self):
+        super().__init__()
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+        self.utf8: str = "🀦"
+        self.name: str = "spring_season"
+        self.suit: str = "season"
+        self.rank: str = "spring"
+        self.value: int = 1
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = True
-    is_flower: bool = False
-    is_season: bool = True
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = True
+        self.is_flower: bool = False
+        self.is_season: bool = True
 
 
-@dataclass(frozen=True)
 class SummerSeason(Tile):
-    utf8: str = "🀧"
-    name: str = "summer_season"
-    suit: str = "season"
-    rank: str = "summer"
-    value: int = 2
+    def __init__(self):
+        super().__init__()
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+        self.utf8: str = "🀧"
+        self.name: str = "summer_season"
+        self.suit: str = "season"
+        self.rank: str = "summer"
+        self.value: int = 2
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = True
-    is_flower: bool = False
-    is_season: bool = True
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = True
+        self.is_flower: bool = False
+        self.is_season: bool = True
 
 
-@dataclass(frozen=True)
 class AutumnSeason(Tile):
-    utf8: str = "🀨"
-    name: str = "autumn_season"
-    suit: str = "season"
-    rank: str = "autumn"
-    value: int = 3
+    def __init__(self):
+        super().__init__()
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+        self.utf8: str = "🀨"
+        self.name: str = "autumn_season"
+        self.suit: str = "season"
+        self.rank: str = "autumn"
+        self.value: int = 3
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = True
-    is_flower: bool = False
-    is_season: bool = True
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = True
+        self.is_flower: bool = False
+        self.is_season: bool = True
 
 
-@dataclass(frozen=True)
 class WinterSeason(Tile):
-    utf8: str = "🀩"
-    name: str = "winter_season"
-    suit: str = "season"
-    rank: str = "winter"
-    value: int = 4
+    def __init__(self):
+        super().__init__()
 
-    is_suit: bool = False
-    is_simple: bool = False
-    is_terminal: bool = False
+        self.utf8: str = "🀩"
+        self.name: str = "winter_season"
+        self.suit: str = "season"
+        self.rank: str = "winter"
+        self.value: int = 4
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = False
+        self.is_simple: bool = False
+        self.is_terminal: bool = False
 
-    is_special: bool = True
-    is_flower: bool = False
-    is_season: bool = True
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = True
+        self.is_flower: bool = False
+        self.is_season: bool = True
 
 
-@dataclass(frozen=True)
 class OneCharacter(Tile):
-    utf8: str = "🀇"
-    name: str = "one_character"
-    suit: str = "character"
-    rank: str = "one"
-    value: int = 1
+    def __init__(self):
+        super().__init__()
 
-    is_suit: bool = True
-    is_simple: bool = False
-    is_terminal: bool = True
+        self.utf8: str = "🀇"
+        self.name: str = "one_character"
+        self.suit: str = "character"
+        self.rank: str = "one"
+        self.value: int = 1
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = False
+        self.is_terminal: bool = True
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class TwoCharacter(Tile):
-    utf8: str = "🀈"
-    name: str = "two_character"
-    suit: str = "character"
-    rank: str = "two"
-    value: int = 2
+    def __init__(self):
+        super().__init__()
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.utf8: str = "🀈"
+        self.name: str = "two_character"
+        self.suit: str = "character"
+        self.rank: str = "two"
+        self.value: int = 2
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
+
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class ThreeCharacter(Tile):
-    utf8: str = "🀉"
-    name: str = "three_character"
-    suit: str = "character"
-    rank: str = "three"
-    value: int = 3
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀉"
+        self.name: str = "three_character"
+        self.suit: str = "character"
+        self.rank: str = "three"
+        self.value: int = 3
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class FourCharacter(Tile):
-    utf8: str = "🀊"
-    name: str = "four_character"
-    suit: str = "character"
-    rank: str = "four"
-    value: int = 4
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀊"
+        self.name: str = "four_character"
+        self.suit: str = "character"
+        self.rank: str = "four"
+        self.value: int = 4
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class FiveCharacter(Tile):
-    utf8: str = "🀋"
-    name: str = "five_character"
-    suit: str = "character"
-    rank: str = "five"
-    value: int = 5
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀋"
+        self.name: str = "five_character"
+        self.suit: str = "character"
+        self.rank: str = "five"
+        self.value: int = 5
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class SixCharacter(Tile):
-    utf8: str = "🀌"
-    name: str = "six_character"
-    suit: str = "character"
-    rank: str = "six"
-    value: int = 6
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀌"
+        self.name: str = "six_character"
+        self.suit: str = "character"
+        self.rank: str = "six"
+        self.value: int = 6
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class SevenCharacter(Tile):
-    utf8: str = "🀍"
-    name: str = "seven_character"
-    suit: str = "character"
-    rank: str = "seven"
-    value: int = 7
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀍"
+        self.name: str = "seven_character"
+        self.suit: str = "character"
+        self.rank: str = "seven"
+        self.value: int = 7
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class EightCharacter(Tile):
-    utf8: str = "🀎"
-    name: str = "eight_character"
-    suit: str = "character"
-    rank: str = "eight"
-    value: int = 8
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀎"
+        self.name: str = "eight_character"
+        self.suit: str = "character"
+        self.rank: str = "eight"
+        self.value: int = 8
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class NineCharacter(Tile):
-    utf8: str = "🀏"
-    name: str = "nine_character"
-    suit: str = "character"
-    rank: str = "nine"
-    value: int = 9
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀏"
+        self.name: str = "nine_character"
+        self.suit: str = "character"
+        self.rank: str = "nine"
+        self.value: int = 9
 
-    is_suit: bool = True
-    is_simple: bool = False
-    is_terminal: bool = True
+        self.is_suit: bool = True
+        self.is_simple: bool = False
+        self.is_terminal: bool = True
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class OneBamboo(Tile):
-    utf8: str = "🀐"
-    name: str = "one_bamboo"
-    suit: str = "bamboo"
-    rank: str = "one"
-    value: int = 1
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀐"
+        self.name: str = "one_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "one"
+        self.value: int = 1
 
-    is_suit: bool = True
-    is_simple: bool = False
-    is_terminal: bool = True
+        self.is_suit: bool = True
+        self.is_simple: bool = False
+        self.is_terminal: bool = True
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class TwoBamboo(Tile):
-    utf8: str = "🀑"
-    name: str = "two_bamboo"
-    suit: str = "bamboo"
-    rank: str = "two"
-    value: int = 2
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀑"
+        self.name: str = "two_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "two"
+        self.value: int = 2
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class ThreeBamboo(Tile):
-    utf8: str = "🀒"
-    name: str = "three_bamboo"
-    suit: str = "bamboo"
-    rank: str = "three"
-    value: int = 3
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀒"
+        self.name: str = "three_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "three"
+        self.value: int = 3
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class FourBamboo(Tile):
-    utf8: str = "🀓"
-    name: str = "four_bamboo"
-    suit: str = "bamboo"
-    rank: str = "four"
-    value: int = 4
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀓"
+        self.name: str = "four_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "four"
+        self.value: int = 4
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class FiveBamboo(Tile):
-    utf8: str = "🀔"
-    name: str = "five_bamboo"
-    suit: str = "bamboo"
-    rank: str = "five"
-    value: int = 5
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀔"
+        self.name: str = "five_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "five"
+        self.value: int = 5
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class SixBamboo(Tile):
-    utf8: str = "🀕"
-    name: str = "six_bamboo"
-    suit: str = "bamboo"
-    rank: str = "six"
-    value: int = 6
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀕"
+        self.name: str = "six_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "six"
+        self.value: int = 6
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class SevenBamboo(Tile):
-    utf8: str = "🀖"
-    name: str = "seven_bamboo"
-    suit: str = "bamboo"
-    rank: str = "seven"
-    value: int = 7
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀖"
+        self.name: str = "seven_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "seven"
+        self.value: int = 7
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class EightBamboo(Tile):
-    utf8: str = "🀗"
-    name: str = "eight_bamboo"
-    suit: str = "bamboo"
-    rank: str = "eight"
-    value: int = 8
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀗"
+        self.name: str = "eight_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "eight"
+        self.value: int = 8
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class NineBamboo(Tile):
-    utf8: str = "🀘"
-    name: str = "nine_bamboo"
-    suit: str = "bamboo"
-    rank: str = "nine"
-    value: int = 9
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀘"
+        self.name: str = "nine_bamboo"
+        self.suit: str = "bamboo"
+        self.rank: str = "nine"
+        self.value: int = 9
 
-    is_suit: bool = True
-    is_simple: bool = False
-    is_terminal: bool = True
+        self.is_suit: bool = True
+        self.is_simple: bool = False
+        self.is_terminal: bool = True
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class OneCircle(Tile):
-    utf8: str = "🀙"
-    name: str = "one_circle"
-    suit: str = "circle"
-    rank: str = "one"
-    value: int = 1
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀙"
+        self.name: str = "one_circle"
+        self.suit: str = "circle"
+        self.rank: str = "one"
+        self.value: int = 1
 
-    is_suit: bool = True
-    is_simple: bool = False
-    is_terminal: bool = True
+        self.is_suit: bool = True
+        self.is_simple: bool = False
+        self.is_terminal: bool = True
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class TwoCircle(Tile):
-    utf8: str = "🀚"
-    name: str = "two_circle"
-    suit: str = "circle"
-    rank: str = "two"
-    value: int = 2
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀚"
+        self.name: str = "two_circle"
+        self.suit: str = "circle"
+        self.rank: str = "two"
+        self.value: int = 2
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class ThreeCircle(Tile):
-    utf8: str = "🀛"
-    name: str = "three_circle"
-    suit: str = "circle"
-    rank: str = "three"
-    value: int = 3
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀛"
+        self.name: str = "three_circle"
+        self.suit: str = "circle"
+        self.rank: str = "three"
+        self.value: int = 3
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class FourCircle(Tile):
-    utf8: str = "🀜"
-    name: str = "four_circle"
-    suit: str = "circle"
-    rank: str = "four"
-    value: int = 4
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀜"
+        self.name: str = "four_circle"
+        self.suit: str = "circle"
+        self.rank: str = "four"
+        self.value: int = 4
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class FiveCircle(Tile):
-    utf8: str = "🀝"
-    name: str = "five_circle"
-    suit: str = "circle"
-    rank: str = "five"
-    value: int = 5
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀝"
+        self.name: str = "five_circle"
+        self.suit: str = "circle"
+        self.rank: str = "five"
+        self.value: int = 5
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class SixCircle(Tile):
-    utf8: str = "🀞"
-    name: str = "six_circle"
-    suit: str = "circle"
-    rank: str = "six"
-    value: int = 6
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀞"
+        self.name: str = "six_circle"
+        self.suit: str = "circle"
+        self.rank: str = "six"
+        self.value: int = 6
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class SevenCircle(Tile):
-    utf8: str = "🀟"
-    name: str = "seven_circle"
-    suit: str = "circle"
-    rank: str = "seven"
-    value: int = 7
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀟"
+        self.name: str = "seven_circle"
+        self.suit: str = "circle"
+        self.rank: str = "seven"
+        self.value: int = 7
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class EightCircle(Tile):
-    utf8: str = "🀠"
-    name: str = "eight_circle"
-    suit: str = "circle"
-    rank: str = "eight"
-    value: int = 8
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀠"
+        self.name: str = "eight_circle"
+        self.suit: str = "circle"
+        self.rank: str = "eight"
+        self.value: int = 8
 
-    is_suit: bool = True
-    is_simple: bool = True
-    is_terminal: bool = False
+        self.is_suit: bool = True
+        self.is_simple: bool = True
+        self.is_terminal: bool = False
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
-@dataclass(frozen=True)
 class NineCircle(Tile):
-    utf8: str = "🀡"
-    name: str = "nine_circle"
-    suit: str = "circle"
-    rank: str = "nine"
-    value: int = 9
+    def __init__(self):
+        super().__init__()
+        self.utf8: str = "🀡"
+        self.name: str = "nine_circle"
+        self.suit: str = "circle"
+        self.rank: str = "nine"
+        self.value: int = 9
 
-    is_suit: bool = True
-    is_simple: bool = False
-    is_terminal: bool = True
+        self.is_suit: bool = True
+        self.is_simple: bool = False
+        self.is_terminal: bool = True
 
-    is_honour: bool = False
-    is_dragon: bool = False
-    is_wind: bool = False
+        self.is_honour: bool = False
+        self.is_dragon: bool = False
+        self.is_wind: bool = False
 
-    is_special: bool = False
-    is_flower: bool = False
-    is_season: bool = False
+        self.is_special: bool = False
+        self.is_flower: bool = False
+        self.is_season: bool = False
 
 
 winds = [EastWind, SouthWind, WestWind, NorthWind]
