@@ -79,7 +79,12 @@ class Game:
         logger.info("Shuffling seats...")
         _winds = list(Wind)
         shuffle(_winds)
-        self.player_1.seat, self.player_2.seat, self.player_3.seat, self.player_4.seat, = _winds
+        (
+            self.player_1.seat,
+            self.player_2.seat,
+            self.player_3.seat,
+            self.player_4.seat,
+        ) = _winds
         logger.info("Seats shuffled")
 
     def change_seats(self):
@@ -90,7 +95,9 @@ class Game:
             player.seat = player.seat.next()
 
         for p in self.players:
-            logger.info(f"Seat changed for Player {p.number}: {player_seats[p.number]} -> {p.seat}")
+            logger.info(
+                f"Seat changed for Player {p.number}: {player_seats[p.number]} -> {p.seat}"
+            )
 
     def deal(self):
         logger.info("Dealing tiles...")

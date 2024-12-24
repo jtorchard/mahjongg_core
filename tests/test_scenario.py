@@ -1,6 +1,7 @@
 """
-    Tests general play-through scenarios.
+Tests general play-through scenarios.
 """
+
 import pytest
 
 from src.game import Game

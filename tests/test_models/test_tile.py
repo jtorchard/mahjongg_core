@@ -64,7 +64,9 @@ def test_two_identical_tiles_compare_equal(tile):
     assert tile() == tile()
 
 
-@pytest.mark.parametrize("tile_a, tile_b", ((tiles.pop(), tiles.pop()) for _ in range(len(tiles) // 2)))
+@pytest.mark.parametrize(
+    "tile_a, tile_b", ((tiles.pop(), tiles.pop()) for _ in range(len(tiles) // 2))
+)
 def test_two_different_tiles_compare_unequal_all(tile_a, tile_b):
     assert tile_a != tile_b
 

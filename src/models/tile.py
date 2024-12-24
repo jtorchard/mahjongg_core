@@ -1,5 +1,4 @@
 class Tile:
-
     def __init__(self):
         self.utf8 = None
         self.name = None
@@ -31,7 +30,6 @@ class Tile:
 
 
 class EastWind(Tile):
-
     def __init__(self):
         super().__init__()
         self.utf8: str = "🀀"
@@ -54,7 +52,6 @@ class EastWind(Tile):
 
 
 class SouthWind(Tile):
-
     def __init__(self):
         super().__init__()
         self.utf8: str = "🀁"
@@ -77,7 +74,6 @@ class SouthWind(Tile):
 
 
 class WestWind(Tile):
-
     def __init__(self):
         super().__init__()
         self.utf8: str = "🀂"
@@ -100,7 +96,6 @@ class WestWind(Tile):
 
 
 class NorthWind(Tile):
-
     def __init__(self):
         super().__init__()
         self.utf8: str = "🀃"
@@ -123,7 +118,6 @@ class NorthWind(Tile):
 
 
 class RedDragon(Tile):
-
     def __init__(self):
         super().__init__()
         self.utf8: str = "🀄"
@@ -146,7 +140,6 @@ class RedDragon(Tile):
 
 
 class GreenDragon(Tile):
-
     def __init__(self):
         super().__init__()
         self.utf8: str = "🀅"
@@ -169,7 +162,6 @@ class GreenDragon(Tile):
 
 
 class WhiteDragon(Tile):
-
     def __init__(self):
         super().__init__()
         self.utf8: str = "🀆"
@@ -192,7 +184,6 @@ class WhiteDragon(Tile):
 
 
 class PlumFlower(Tile):
-
     def __init__(self):
         super().__init__()
         self.utf8: str = "🀢"

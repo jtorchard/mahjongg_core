@@ -1,7 +1,8 @@
 """
-    Handles the tiles in a player's hand.
-    Ordering, sorting, determining special cases etc.
+Handles the tiles in a player's hand.
+Ordering, sorting, determining special cases etc.
 """
+
 from collections import Counter, UserList
 from functools import wraps
 
