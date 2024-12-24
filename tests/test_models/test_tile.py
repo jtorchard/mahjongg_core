@@ -1,6 +1,5 @@
 import pytest
 
-from src.models.tile import tiles, Tile
 from src.models.tile import (
     AutumnSeason,
     BambooFlower,
@@ -38,12 +37,14 @@ from src.models.tile import (
     ThreeBamboo,
     ThreeCharacter,
     ThreeCircle,
+    Tile,
     TwoBamboo,
     TwoCharacter,
     TwoCircle,
     WestWind,
     WhiteDragon,
     WinterSeason,
+    tiles,
 )
 
 

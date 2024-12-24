@@ -2,7 +2,14 @@ import pytest
 
 from src.exceptions import InvalidObjectForHand
 from src.models.hand import Hand
-from src.models.tile import EastWind, GreenDragon, RedDragon, NorthWind, OneCharacter, WhiteDragon
+from src.models.tile import (
+    EastWind,
+    GreenDragon,
+    NorthWind,
+    OneCharacter,
+    RedDragon,
+    WhiteDragon,
+)
 
 
 def test_hand_has_correct_defaults():
