@@ -1,6 +1,6 @@
 import pytest
 
-from game import Game
+from src.game import Game
 from src.models.tile import EastWind
 from src.models.wind import Wind
 

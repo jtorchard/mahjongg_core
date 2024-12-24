@@ -1,10 +1,9 @@
 """
     Tests general play-through scenarios.
 """
-
 import pytest
 
-from game import Game
+from src.game import Game
 
 
 @pytest.fixture
