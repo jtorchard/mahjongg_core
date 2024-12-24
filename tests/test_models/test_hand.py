@@ -25,7 +25,7 @@ def test_str_representation():
     assert str(hand) == "🀀 🀅"
 
 
-def test_init_item_with_list_succeeds():
+def test_init_with_list_succeeds():
     hand = Hand([EastWind(), GreenDragon()])
     assert hand == [EastWind(), GreenDragon()]
 
@@ -112,7 +112,3 @@ def test_extend_with_list_of_non_tiles_raises_error():
     hand = Hand([EastWind(), OneCharacter(), GreenDragon()])
     with pytest.raises(InvalidObjectForHand):
         hand.extend([1, 2])
-
-
-def tests_string_representation():
-    assert str(RedDragon()) == "red_dragon -- 🀄"

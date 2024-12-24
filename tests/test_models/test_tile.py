@@ -1,5 +1,3 @@
-from dataclasses import FrozenInstanceError
-
 import pytest
 
 from src.models.tile import tiles, Tile
