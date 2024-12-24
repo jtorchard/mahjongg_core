@@ -38,11 +38,13 @@ class Hand(UserList):
         self.seasons = 0
         self.flowers = 0
 
+    @hand_mutated
     def __setitem__(self, i, item):
         if not isinstance(item, Tile):
             raise InvalidObjectForHand()
         self.data[i] = item
 
+    @hand_mutated
     def __delitem__(self, i):
         del self.data[i]
 
