@@ -1,3 +1,17 @@
+"""
+    Wind class represents the four winds.
+    Maintains the correct ordering which is used to determine
+    seating, seat changes, wind of round changes, and play order.
+    Wind order and numeric assignments with corresponding flowers
+    and seasons:
+
+         1        2        3       4
+        East -> South -> West -> North
+
+        Plum -> Orchid -> Chrysanthemum -> Bamboo
+
+        Spring -> Summer -> Autumn -> Winter
+"""
 from enum import IntEnum
 
 

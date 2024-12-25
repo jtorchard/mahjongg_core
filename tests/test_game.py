@@ -1,3 +1,7 @@
+"""
+    Tests Game class.
+"""
+
 import pytest
 
 from src.game import Game

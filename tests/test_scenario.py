@@ -1,5 +1,6 @@
 """
-Tests general play-through scenarios.
+    Tests general play-through scenarios.
+    Simulated play-through of a full game, etc.
 """
 
 import pytest

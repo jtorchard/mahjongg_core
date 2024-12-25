@@ -1,3 +1,7 @@
+"""
+    Tests for tile classes which represent all in-game tiles.
+"""
+
 import pytest
 
 from src.models.tile import (

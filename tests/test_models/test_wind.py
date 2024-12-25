@@ -1,3 +1,7 @@
+"""
+    Tests for wind class enum which represents the four winds.
+"""
+
 from src.models.wind import Wind
 
 

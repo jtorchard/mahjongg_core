@@ -1,3 +1,7 @@
+"""
+    Tests for player class.
+"""
+
 import pytest
 
 from src.exceptions import InvalidPlayerNumber

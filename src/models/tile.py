@@ -1,3 +1,8 @@
+"""
+    Tile classes to represent all tiles in the game.
+"""
+
+
 class Tile:
     def __init__(self):
         self.utf8 = None

@@ -1,3 +1,7 @@
+"""
+    Game class holds all state for a game.
+"""
+
 import random
 from itertools import chain
 from random import shuffle

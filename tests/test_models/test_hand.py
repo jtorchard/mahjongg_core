@@ -1,3 +1,7 @@
+"""
+    Tests for hand class.
+"""
+
 import pytest
 
 from src.exceptions import InvalidObjectForHand

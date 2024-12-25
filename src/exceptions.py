@@ -1,3 +1,8 @@
+"""
+    Custom exception classes specific to Mahjong.
+"""
+
+
 class MahjongException(Exception):
     pass
 
