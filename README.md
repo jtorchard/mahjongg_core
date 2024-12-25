@@ -1,3 +1,12 @@
+Core engine for the Chinese game of Mahjong using Chinese Classical rules.
+
+References used:
+Great Mahjong Book: History, Lore, and Play by Jelte Rep
+Complete Book Of Mah Jongg by A. D. Millington
+Four Winds Mahjong Knowledgebase: https://www.4windsmj.com/kb/kb.htm
+
+
+TODO:
 Create all game actions as Commands.
 Keep full history of commands to allow undoing and also replaying games. Can also be used for saving and loading.
 Can also be used for testing, and generating random games, etc.
@@ -11,9 +20,6 @@ Four phases: setup, play, scoring, settling.
 mahjong write down all rules, organise.
 maybe add all mutable state to one object and just have many small methods to modify it?
 lebowski tiles!
-
-Flowers: Plum (East), Orchid (South), Chrysanthemum (West) and Bamboo (North).
-Seasons: Spring (East), Summer (South), Autumn (West) and Winter (North).
 
 implement extra draws if drawing a bonus tile
 
