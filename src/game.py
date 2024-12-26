@@ -1,14 +1,17 @@
 """
-    Game class holds all state for a game.
+    Game class holds all current_state for a game.
 """
 
 import random
+from collections import defaultdict
+from functools import wraps
 from itertools import chain
 from random import shuffle
 
+from deepdiff import Delta, DeepDiff
+from faker import Faker
 from loguru import logger
 
-from src.models.player import Player
 from src.models.tile import (
     bamboos,
     characters,
@@ -28,37 +31,96 @@ NUM_OF_TILES_HONOUR = 4
 SIZE_OF_DEAD_WALL = 16
 
 
+def state_mutated(func):
+    @wraps(func)
+    def inner(self, *args, **kwargs):
+        func(self, *args, **kwargs)
+        self.create_delta(
+            self.deltas[self.current_state["hand"]],
+            self.deltas[self.current_state["hand"]][-1],
+            self.current_state,
+        )
+
+    return inner
+
+
 class Game:
     def __init__(self, seed=None):
-        logger.info(f"Initialising game with seed: {seed}")
-        self.seed = seed
-        self.hand = 1
-        self.seating_counter = 1
-        self.east_out_counter = 0
-        self.round = Wind.EAST
-        self.turn = Wind.EAST
-        self.player_1 = Player(seat=Wind.EAST, number=1)
-        self.player_2 = Player(seat=Wind.SOUTH, number=2)
-        self.player_3 = Player(seat=Wind.WEST, number=3)
-        self.player_4 = Player(seat=Wind.NORTH, number=4)
-        self.live_wall = []
-        self.dead_wall = []
-        self.discards = []
-        self.loose_tiles = []
-        self.players = (self.player_1, self.player_2, self.player_3, self.player_4)
+        self.deltas = defaultdict(list)
+        self.current_state = {
+            "seed": seed,
+            "hand": 1,
+            "seating_counter": 1,
+            "east_out_counter": 0,
+            "round": Wind.EAST,
+            "turn": Wind.EAST,
+            "players": [
+                {
+                    "seat": Wind.EAST,
+                    "name": f"{Faker().word().title()} {Faker().word().title()}",
+                    "number": 1,
+                    "hand": [],
+                    "score": 2000,
+                },
+                {
+                    "seat": Wind.SOUTH,
+                    "name": f"{Faker().word().title()} {Faker().word().title()}",
+                    "number": 2,
+                    "hand": [],
+                    "score": 2000,
+                },
+                {
+                    "seat": Wind.WEST,
+                    "name": f"{Faker().word().title()} {Faker().word().title()}",
+                    "number": 3,
+                    "hand": [],
+                    "score": 2000,
+                },
+                {
+                    "seat": Wind.NORTH,
+                    "name": f"{Faker().word().title()} {Faker().word().title()}",
+                    "number": 4,
+                    "hand": [],
+                    "score": 2000,
+                },
+            ],
+            "live_wall": [],
+            "dead_wall": [],
+            "discards": [],
+            "loose_tiles": [],
+        }
+        logger.info(f"Saving initial state delta...")
+        self.create_delta(self.deltas[self.current_state["hand"]], {}, self.current_state)
 
-        random.seed(self.seed)
+        logger.info(f"Initialising game with seed: {seed}")
+        random.seed(self.current_state["seed"])
         self.build_wall()
-        shuffle(self.live_wall)
+        self.shuffle_wall()
         self.break_wall()
         self.shuffle_seats()
 
-    def player_by_wind(self, wind):
-        return {p.seat: p for p in self.players}[wind]
+    @staticmethod
+    def create_delta(delta_list, old_state, new_state):
+        delta_list.append(Delta(DeepDiff(old_state, new_state)))
 
+    @staticmethod
+    def recreate_current_state(deltas):
+        state = {}
+        for delta in deltas:
+            state += delta
+        return state
+
+    def player_by_wind(self, wind):
+        return {p.get("seat"): p for p in self.current_state["players"]}[wind]
+
+    @state_mutated
+    def shuffle_wall(self):
+        shuffle(self.current_state["live_wall"])
+
+    @state_mutated
     def build_wall(self):
         logger.info("Building wall...")
-        self.live_wall = [
+        self.current_state["live_wall"] = [
             tile()
             for tile in chain(
                 characters * NUM_OF_TILES_SUIT,
@@ -70,52 +132,61 @@ class Game:
                 seasons,
             )
         ]
-        logger.info(f"Wall built with {len(self.live_wall)} tiles")
+        logger.info(f"Wall built with {len(self.current_state["live_wall"])} tiles")
 
+    @state_mutated
     def break_wall(self):
         logger.info("Breaking wall...")
-        self.dead_wall = self.live_wall[:SIZE_OF_DEAD_WALL]
-        self.live_wall = self.live_wall[SIZE_OF_DEAD_WALL:]
-        self.loose_tiles = [self.dead_wall.pop(), self.dead_wall.pop()]
+        self.current_state["dead_wall"] = self.current_state["live_wall"][:SIZE_OF_DEAD_WALL]
+        self.current_state["live_wall"] = self.current_state["live_wall"][SIZE_OF_DEAD_WALL:]
+        self.current_state["loose_tiles"] = [
+            self.current_state["dead_wall"].pop(),
+            self.current_state["dead_wall"].pop(),
+        ]
+
         logger.info("Wall broken")
 
+    @state_mutated
     def shuffle_seats(self):
         logger.info("Shuffling seats...")
         _winds = list(Wind)
         shuffle(_winds)
         (
-            self.player_1.seat,
-            self.player_2.seat,
-            self.player_3.seat,
-            self.player_4.seat,
+            self.current_state["players"][0]["seat"],
+            self.current_state["players"][1]["seat"],
+            self.current_state["players"][2]["seat"],
+            self.current_state["players"][3]["seat"],
         ) = _winds
         logger.info("Seats shuffled")
 
+    @state_mutated
     def change_seats(self):
-        player_seats = {p.number: p.seat for p in self.players}
+        player_seats = {p.get("number"): p.get("seat") for p in self.current_state["players"]}
         logger.info("Changing seats...")
 
-        for player in self.players:
-            player.seat = player.seat.next()
+        for player in self.current_state["players"]:
+            player["seat"] = player.get("seat").next()
 
-        for p in self.players:
+        for p in self.current_state["players"]:
             logger.info(
-                f"Seat changed for Player {p.number}: {player_seats[p.number]} -> {p.seat}"
+                f"Seat changed for Player {p.get("number")}: {player_seats[p.get("number")]} -> {p.get("seat")}"
             )
 
+    @state_mutated
     def deal(self):
         logger.info("Dealing tiles...")
         # Take twelve tiles each
-        players_by_wind = sorted(self.players, key=lambda p: p.seat)
+        players_by_wind = sorted(self.current_state["players"], key=lambda p: p.get("seat"))
         for _ in range(3):
             for player in players_by_wind:
                 for _ in range(4):
-                    player.hand.append(self.live_wall.pop())
+                    player.get("hand").append(self.current_state["live_wall"].pop())
 
         # Each player takes a thirteenth tile
         for player in players_by_wind:
-            player.hand.append(self.live_wall.pop())
+            player.get("hand").append(self.current_state["live_wall"].pop())
 
         # East takes a fourteenth tile
-        self.player_by_wind(Wind.EAST).hand.append(self.live_wall.pop())
+        self.player_by_wind(Wind.EAST).get("hand").append(self.current_state["live_wall"].pop())
+
         logger.info("Tiles dealt")
