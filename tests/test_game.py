@@ -42,8 +42,24 @@ def test_recreate_game_state(game_random_seed):
     assert game_random_seed.current_state == original_state
 
 
+def test_adding_tile_to_hand(game_random_seed):
+    player = game_random_seed.current_state["players"][0]
+    tile = EastWind()
+    game_random_seed.add_tile_to_hand(player, tile)
+    assert player["hand"]["tiles"] == [EastWind()]
+
+
+def test_removing_tile_to_hand(game_random_seed):
+    player = game_random_seed.current_state["players"][0]
+    tile = EastWind()
+    game_random_seed.add_tile_to_hand(player, tile)
+    game_random_seed.remove_tile_from_hand(player, tile)
+    assert player["hand"]["tiles"] == []
+
+
 def test_adding_discard(game_random_seed):
-    game_random_seed.current_state["discards"].append(EastWind())
+    wall = game_random_seed.current_state["discards"]
+    game_random_seed.add_tile_to_wall(wall, EastWind())
     assert game_random_seed.current_state["discards"] == [EastWind()]
 
 
