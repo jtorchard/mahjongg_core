@@ -22,14 +22,14 @@ def game_fixed_seed():
 
 def test_create_delta(game_random_seed):
     hand = game_random_seed.current_state["hand"]
-    assert len(game_random_seed.deltas[hand]) == 5
+    assert len(game_random_seed.deltas[hand]) == 7
     game_random_seed.shuffle_seats()
     game_random_seed.create_delta(
         game_random_seed.deltas[hand],
         game_random_seed.deltas[hand][-1],
         game_random_seed.current_state,
     )
-    assert len(game_random_seed.deltas[hand]) == 7
+    assert len(game_random_seed.deltas[hand]) == 9
 
 
 def test_recreate_game_state(game_random_seed):
@@ -94,7 +94,7 @@ def test_correct_seats_with_fixed_seed(game_fixed_seed):
 def test_deal_gives_players_correct_tiles(game_random_seed):
     game_random_seed.deal()
     for player in game_random_seed.current_state["players"]:
-        number_of_tiles = len(player.get("hand"))
+        number_of_tiles = len(player.get("hand").get("tiles"))
         if player.get("seat") == Wind.EAST:
             assert number_of_tiles == 14
         else:
