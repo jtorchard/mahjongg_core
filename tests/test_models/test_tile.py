@@ -83,6 +83,16 @@ def test_eight_character_lt_nine_character():
     assert EightCharacter() < NineCharacter()
 
 
+def test_two_character_gt_non_character_raises_error():
+    with pytest.raises(ValueError):
+        assert TwoCharacter() > 420
+
+
+def test_eight_character_lt_non_character_raises_error():
+    with pytest.raises(ValueError):
+        assert EightCharacter() < 69
+
+
 def test_string_representation():
     assert str(SixBamboo()) == "six_bamboo -- 🀕"
 
