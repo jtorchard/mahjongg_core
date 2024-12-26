@@ -90,7 +90,10 @@ class Game:
             "loose_tiles": [],
         }
         logger.info("Saving initial state delta...")
-        self.create_delta(self.deltas[self.current_state["hand"]], {}, self.current_state)
+        self.create_delta(
+            self.deltas[self.current_state["hand"]],
+            {}, self.current_state,
+        )
 
         logger.info(f"Initialising game with seed: {seed}")
         random.seed(self.current_state["seed"])
