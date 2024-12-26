@@ -106,12 +106,11 @@ class Game:
     def create_delta(delta_list, old_state, new_state):
         delta_list.append(Delta(DeepDiff(old_state, new_state)))
 
-    @staticmethod
-    def recreate_game_state(deltas):
+    def recreate_game_state(self, deltas):
         state = {}
         for delta in deltas:
             state += delta
-        return state
+        self.current_state = state
 
     def player_by_wind(self, wind):
         return {p.get("seat"): p for p in self.current_state["players"]}[wind]
