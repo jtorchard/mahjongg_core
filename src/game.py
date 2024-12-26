@@ -107,7 +107,7 @@ class Game:
         delta_list.append(Delta(DeepDiff(old_state, new_state)))
 
     @staticmethod
-    def recreate_current_state(deltas):
+    def recreate_game_state(deltas):
         state = {}
         for delta in deltas:
             state += delta
