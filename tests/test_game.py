@@ -1,6 +1,7 @@
 """
     Tests Game class.
 """
+from copy import deepcopy
 
 import pytest
 
@@ -17,6 +18,28 @@ def game_random_seed():
 @pytest.fixture
 def game_fixed_seed():
     return Game(seed=69)
+
+
+def test_create_delta(game_random_seed):
+    hand = game_random_seed.current_state["hand"]
+    assert len(game_random_seed.deltas[hand]) == 5
+    game_random_seed.shuffle_seats()
+    game_random_seed.create_delta(
+        game_random_seed.deltas[hand],
+        game_random_seed.deltas[hand][-1],
+        game_random_seed.current_state,
+    )
+    assert len(game_random_seed.deltas[hand]) == 7
+
+
+def test_recreate_game_state(game_random_seed):
+    hand = game_random_seed.current_state["hand"]
+    game_random_seed.shuffle_seats()
+    original_state = deepcopy(game_random_seed.current_state)
+    game_random_seed.current_state = {}
+    assert game_random_seed.current_state == {}
+    game_random_seed.recreate_game_state(game_random_seed.deltas[hand])
+    assert game_random_seed.current_state == original_state
 
 
 def test_adding_discard(game_random_seed):
