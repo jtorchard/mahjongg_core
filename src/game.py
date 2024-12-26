@@ -34,13 +34,14 @@ SIZE_OF_DEAD_WALL = 16
 def state_mutated(func):
     @wraps(func)
     def inner(self, *args, **kwargs):
-        func(self, *args, **kwargs)
+        result = func(self, *args, **kwargs)
         hand = self.current_state["hand"]
         self.create_delta(
             self.deltas[hand],
             self.deltas[hand][-1],
             self.current_state,
         )
+        return result
 
     return inner
 
