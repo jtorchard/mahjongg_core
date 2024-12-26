@@ -246,6 +246,10 @@ class Game:
     def draw_tile_from_wall(self, wall):
         return wall.pop()
 
+    @staticmethod
+    def hand_as_str(hand):
+        return " ".join([t.utf8 for t in hand])
+
     @state_mutated
     def deal(self):
         logger.info("Dealing tiles...")
