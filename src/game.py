@@ -8,7 +8,7 @@ from functools import wraps
 from itertools import chain
 from random import shuffle
 
-from deepdiff import Delta, DeepDiff
+from deepdiff import DeepDiff, Delta
 from faker import Faker
 from loguru import logger
 
@@ -89,7 +89,7 @@ class Game:
             "discards": [],
             "loose_tiles": [],
         }
-        logger.info(f"Saving initial state delta...")
+        logger.info("Saving initial state delta...")
         self.create_delta(self.deltas[self.current_state["hand"]], {}, self.current_state)
 
         logger.info(f"Initialising game with seed: {seed}")
