@@ -6,7 +6,7 @@ from copy import deepcopy
 import pytest
 
 from src.game import Game
-from src.models.tile import EastWind
+from src.models.tile import EastWind, Tile
 from src.models.wind import Wind
 
 
@@ -18,6 +18,11 @@ def game_random_seed():
 @pytest.fixture
 def game_fixed_seed():
     return Game(seed=69)
+
+
+def test_loose_tiles_are_tile_instances(game_random_seed):
+    for tile in game_random_seed.current_state["loose_tiles"]:
+        assert isinstance(tile, Tile)
 
 
 def test_create_delta(game_random_seed):
