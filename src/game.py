@@ -158,7 +158,8 @@ class Game:
 
     @staticmethod
     def create_delta(delta_list, old_state, new_state):
-        delta_list.append(Delta(DeepDiff(old_state, new_state)))
+        delta_list.append(Delta(DeepDiff(old_state, new_state),
+                                mutate=True))
 
     def recreate_game_state(self, deltas):
         state = {}
