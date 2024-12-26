@@ -35,9 +35,10 @@ def state_mutated(func):
     @wraps(func)
     def inner(self, *args, **kwargs):
         func(self, *args, **kwargs)
+        hand = self.current_state["hand"]
         self.create_delta(
-            self.deltas[self.current_state["hand"]],
-            self.deltas[self.current_state["hand"]][-1],
+            self.deltas[hand],
+            self.deltas[hand][-1],
             self.current_state,
         )
 
@@ -139,11 +140,12 @@ class Game:
     @state_mutated
     def break_wall(self):
         logger.info("Breaking wall...")
+        state = self.current_state
         self.current_state["dead_wall"] = self.current_state["live_wall"][:SIZE_OF_DEAD_WALL]
         self.current_state["live_wall"] = self.current_state["live_wall"][SIZE_OF_DEAD_WALL:]
         self.current_state["loose_tiles"] = [
-            self.current_state["dead_wall"].pop(),
-            self.current_state["dead_wall"].pop(),
+            self.draw_tile_from_wall(self.current_state["dead_wall"])
+            for _ in range(2)
         ]
 
         logger.info("Wall broken")
@@ -151,13 +153,14 @@ class Game:
     @state_mutated
     def shuffle_seats(self):
         logger.info("Shuffling seats...")
+        players = self.current_state["players"]
         _winds = list(Wind)
         shuffle(_winds)
         (
-            self.current_state["players"][0]["seat"],
-            self.current_state["players"][1]["seat"],
-            self.current_state["players"][2]["seat"],
-            self.current_state["players"][3]["seat"],
+            players[0]["seat"],
+            players[1]["seat"],
+            players[2]["seat"],
+            players[3]["seat"],
         ) = _winds
         logger.info("Seats shuffled")
 
@@ -175,20 +178,40 @@ class Game:
             )
 
     @state_mutated
+    def add_tile_to_hand(self, player, tile):
+        player.get("hand").get("tiles").append(tile)
+
+    @state_mutated
+    def remove_tile_from_hand(self, player, tile):
+        player.get("hand").get("tiles").remove(tile)
+
+    @state_mutated
+    def add_tile_to_wall(self, wall, tile):
+        wall.append(tile)
+
+    @state_mutated
+    def draw_tile_from_wall(self, wall):
+        return wall.pop()
+
+    @state_mutated
     def deal(self):
         logger.info("Dealing tiles...")
+        live_wall = self.current_state["live_wall"]
         # Take twelve tiles each
         players_by_wind = sorted(self.current_state["players"], key=lambda p: p.get("seat"))
         for _ in range(3):
             for player in players_by_wind:
                 for _ in range(4):
-                    player.get("hand").append(self.current_state["live_wall"].pop())
+                    tile = self.draw_tile_from_wall(live_wall)
+                    self.add_tile_to_hand(player, tile)
 
         # Each player takes a thirteenth tile
         for player in players_by_wind:
-            player.get("hand").append(self.current_state["live_wall"].pop())
+            tile = self.draw_tile_from_wall(live_wall)
+            self.add_tile_to_hand(player, tile)
 
         # East takes a fourteenth tile
-        self.player_by_wind(Wind.EAST).get("hand").append(self.current_state["live_wall"].pop())
+        tile = self.draw_tile_from_wall(live_wall)
+        self.add_tile_to_hand(self.player_by_wind(Wind.EAST), tile)
 
         logger.info("Tiles dealt")
