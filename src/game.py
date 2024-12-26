@@ -192,7 +192,6 @@ class Game:
     @state_mutated
     def break_wall(self):
         logger.info("Breaking wall...")
-        state = self.current_state
         self.current_state["dead_wall"] = self.current_state["live_wall"][:SIZE_OF_DEAD_WALL]
         self.current_state["live_wall"] = self.current_state["live_wall"][SIZE_OF_DEAD_WALL:]
         self.current_state["loose_tiles"] = [
