@@ -12,7 +12,7 @@ from deepdiff import DeepDiff, Delta
 from faker import Faker
 from loguru import logger
 
-from src.models.tile import (
+from .models.tile import (
     bamboos,
     characters,
     circles,
@@ -21,7 +21,7 @@ from src.models.tile import (
     seasons,
     winds,
 )
-from src.models.wind import Wind
+from .models.wind import Wind
 
 logger.remove()  # Turn off default console logger
 logger.add("mahjong.log", colorize=True, level="INFO")
