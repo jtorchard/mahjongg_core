@@ -33,8 +33,6 @@ class PlaceholderApp(App):
         self.action_update_players()
 
     def compose(self) -> ComposeResult:
-        yield Header(id="header")
-
         yield Vertical(
             Container(
                 Horizontal(
