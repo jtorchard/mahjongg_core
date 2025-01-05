@@ -8,10 +8,17 @@ from src.tui.player_info import PlayerInfo
 
 class PlaceholderApp(App):
     CSS_PATH = "src/tui/tcss/app_tui_grid.tcss"
+    BINDINGS = [
+        ("u", "update_players", "Update Player"),
+        ("r", "randomise_seats", "Randomise Player Seats"),
+    ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.g = Game(seed=69)
+
+    def action_randomise_seats(self):
+        self.g.randomise_seats()
 
     def action_update_players(self):
         players = self.g.current_state["players"]
