@@ -1,6 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical
-from textual.widgets import Placeholder, Header, Footer
+from textual.widgets import Placeholder, Footer
 
 from src.game import Game
 from src.tui.player_info import PlayerInfo
