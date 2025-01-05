@@ -5,7 +5,7 @@
 import random
 from collections import defaultdict
 from functools import wraps
-from itertools import chain
+from itertools import chain, cycle
 from random import shuffle
 
 from deepdiff import DeepDiff, Delta
@@ -154,7 +154,7 @@ class Game:
         self.build_wall()
         self.shuffle_wall()
         self.break_wall()
-        self.shuffle_seats()
+        self.randomise_seats()
 
     @staticmethod
     def create_delta(delta_list, old_state, new_state):
@@ -169,6 +169,11 @@ class Game:
 
     def player_by_wind(self, wind):
         return {p.get("seat"): p for p in self.current_state["players"]}[wind]
+
+    @staticmethod
+    def cycle_list(list_cycler, list_length):
+        next(list_cycler)
+        return [next(list_cycler) for _ in range(list_length)]
 
     @state_mutated
     def shuffle_wall(self):
@@ -204,18 +209,23 @@ class Game:
         logger.info("Wall broken")
 
     @state_mutated
-    def shuffle_seats(self):
-        logger.info("Shuffling seats...")
+    def randomise_seats(self):
+        logger.info("Randomise seats...")
         players = self.current_state["players"]
         _winds = list(Wind)
-        shuffle(_winds)
+
+        wind_cycler = cycle(_winds)
+        for _ in range(random.randint(1, 4)):
+            _winds = self.cycle_list(wind_cycler, len(_winds))
+
         (
             players[0]["seat"],
             players[1]["seat"],
             players[2]["seat"],
             players[3]["seat"],
         ) = _winds
-        logger.info("Seats shuffled")
+
+        logger.info("Seats randomised")
 
     @state_mutated
     def change_seats(self):

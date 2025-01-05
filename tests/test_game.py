@@ -28,7 +28,7 @@ def test_loose_tiles_are_tile_instances(game_random_seed):
 def test_create_delta(game_random_seed):
     hand = game_random_seed.current_state["hand"]
     assert len(game_random_seed.deltas[hand]) == 7
-    game_random_seed.shuffle_seats()
+    game_random_seed.randomise_seats()
     game_random_seed.create_delta(
         game_random_seed.deltas[hand],
         game_random_seed.deltas[hand][-1],
@@ -39,7 +39,7 @@ def test_create_delta(game_random_seed):
 
 def test_recreate_game_state(game_random_seed):
     hand = game_random_seed.current_state["hand"]
-    game_random_seed.shuffle_seats()
+    game_random_seed.randomise_seats()
     original_state = deepcopy(game_random_seed.current_state)
     game_random_seed.current_state = {}
     assert game_random_seed.current_state == {}
@@ -104,12 +104,12 @@ def test_correct_seats_with_fixed_seed(game_fixed_seed):
     assert game_fixed_seed.current_state["players"][2]["seat"] == Wind.WEST
     assert game_fixed_seed.current_state["players"][3]["seat"] == Wind.NORTH
 
-    game_fixed_seed.shuffle_seats()
+    game_fixed_seed.randomise_seats()
 
-    assert game_fixed_seed.current_state["players"][0]["seat"] == Wind.SOUTH
-    assert game_fixed_seed.current_state["players"][1]["seat"] == Wind.WEST
-    assert game_fixed_seed.current_state["players"][2]["seat"] == Wind.EAST
-    assert game_fixed_seed.current_state["players"][3]["seat"] == Wind.NORTH
+    assert game_fixed_seed.current_state["players"][0]["seat"] == Wind.NORTH
+    assert game_fixed_seed.current_state["players"][1]["seat"] == Wind.EAST
+    assert game_fixed_seed.current_state["players"][2]["seat"] == Wind.SOUTH
+    assert game_fixed_seed.current_state["players"][3]["seat"] == Wind.WEST
 
 
 def test_deal_gives_players_correct_tiles(game_random_seed):
