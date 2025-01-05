@@ -14,11 +14,11 @@ class MyApp(App):
 
     def action_update_players(self):
         players = self.g.current_state["players"]
-        for i, pi in enumerate(self.query(PlayerInfo)):
+        for pi in self.query(PlayerInfo):
             pi.update_info({
-                "name": players[i]["name"],
-                "score": str(players[i]["score"]),
-                "seat": str(players[i]["seat"]),
+                "name": players[pi.player_number-1]["name"],
+                "score": str(players[pi.player_number-1]["score"]),
+                "seat": str(players[pi.player_number-1]["seat"]),
             })
 
     def on_ready(self):
