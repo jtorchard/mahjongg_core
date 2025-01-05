@@ -1,0 +1,47 @@
+.player_info {
+    width: 25;
+    height: 10;
+}
+
+#wall_and_discards {
+    width: 80%;
+    height: 10;
+    background: #29adda;
+}
+
+#pi_top {
+    background: #29adda;
+}
+
+#pi_middle_left {
+    background: #29adda;
+    dock: left;
+}
+
+
+#pi_middle_center {
+    background: #29adda;
+}
+
+
+#pi_middle_right {
+    dock: right;
+    background: crimson;
+}
+
+#pi_bottom {
+    /*dock: bottom;*/
+    background: crimson;
+}
+
+#tiles {
+    background: crimson;
+    height: 5;
+    width: auto;
+}
+
+#logger {
+    dock: bottom;
+    background: crimson;
+    width: auto;
+}
