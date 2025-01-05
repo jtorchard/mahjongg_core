@@ -53,3 +53,40 @@ Placeholder {
 #game_info {
     width: 2fr;
 }
+
+/* PlayerInfo */
+PlayerInfo {
+    padding: 1;
+    width: 25;
+    height: auto;
+    border: heavy #ffc400;
+}
+
+#player_number {
+    width: auto;
+    text-style: underline;
+    color: #ffc400;
+}
+
+#player_name {
+    width: auto;
+    color: #ffc400;
+}
+
+#decoration {
+    width: auto;
+    padding: 0;
+    margin: 0;
+    color: #ffc400;
+}
+
+#score {
+    width: auto;
+    color: #dc0000;
+    text-style: bold;
+}
+
+#seat {
+    width: auto;
+    color: #ffc400;
+}
