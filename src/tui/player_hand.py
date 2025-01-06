@@ -63,7 +63,8 @@ class PlayerHand(Widget):
         widget.update(self.tiles)
 
     def update_hand(self, tiles):
-        self.tiles_utf8 = " || ".join([t for t in tiles])
+        tiles.sort()
+        self.tiles_utf8 = "  ".join([t for t in tiles])
         self.tiles = " || ".join([self.UTF8_TO_TEXT[t] for t in tiles])
 
     def compose(self) -> ComposeResult:
