@@ -1,0 +1,12 @@
+PlayerHand {
+    padding: 1;
+    width: 25;
+    height: auto;
+    border: heavy #ffc400;
+}
+
+#player_tiles {
+    width: auto;
+    text-style: underline;
+    color: #black;
+}

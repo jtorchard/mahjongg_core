@@ -2,12 +2,15 @@ Placeholder {
     height: 100%;
 }
 
-.blank {
-    visibility: hidden;
+PlayerInfo {
+    padding: 1;
     width: 1fr;
+    height: auto;
+    border: heavy #ffc400;
 }
 
-.player_info {
+.blank {
+    visibility: hidden;
     width: 1fr;
 }
 
@@ -38,28 +41,37 @@ Placeholder {
     width: 100%;
     layout: grid;
     grid-size: 8 8;
+    align: center middle;
 }
 
-#tiles {
-    row-span: 4;
-    column-span: 8;
+#left_tiles {
+    row-span: 5;
+    column-span: 2;
+}
+
+#right_tiles {
+    row-span: 5;
+    column-span: 2;
+}
+
+PlayerHand {
+    row-span: 5;
+    column-span: 4;
+    color: #ffc116;
+    text-style: bold;
+    margin: 0;
+    padding: 0;
+    align: center middle;
+    /*border: blank #ffc400;*/
 }
 
 #log {
-    row-span: 4;
+    row-span: 3;
     column-span: 8;
 }
 
 #game_info {
     width: 2fr;
-}
-
-/* PlayerInfo */
-PlayerInfo {
-    padding: 1;
-    width: 25;
-    height: auto;
-    border: heavy #ffc400;
 }
 
 #player_number {

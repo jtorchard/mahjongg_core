@@ -4,6 +4,7 @@ from textual.widgets import Placeholder, Footer
 
 from src.game import Game
 from src.tui.player_info import PlayerInfo
+from src.tui.player_hand import PlayerHand
 
 
 class PlaceholderApp(App):
@@ -11,6 +12,7 @@ class PlaceholderApp(App):
     BINDINGS = [
         ("u", "update_players", "Update Player"),
         ("r", "randomise_seats", "Randomise Player Seats"),
+        ("d", "deal", "Deal tiles"),
     ]
 
     def __init__(self, *args, **kwargs):
@@ -19,10 +21,20 @@ class PlaceholderApp(App):
 
     def action_randomise_seats(self):
         self.g.randomise_seats()
+        self.action_update_players()
+
+    def action_deal(self):
+        self.g.deal()
+        self.action_update_players()
 
     def action_update_players(self):
         players = self.g.current_state["players"]
         for pi in self.query(PlayerInfo):
+            if pi.player_number == 1:
+                ph = self.query_one("#player_hand")
+                tiles = players[pi.player_number - 1]["hand"]["tiles"]
+                ph.update_hand([t.utf8 for t in tiles])
+
             pi.update_info({
                 "name": players[pi.player_number-1]["name"],
                 "score": str(players[pi.player_number-1]["score"]),
@@ -30,6 +42,7 @@ class PlaceholderApp(App):
             })
 
     def on_ready(self):
+        self.g.deal()
         self.action_update_players()
 
     def compose(self) -> ComposeResult:
@@ -56,7 +69,9 @@ class PlaceholderApp(App):
                 id="player_info_and_wall",
             ),
             Container(
-                Placeholder(variant="text", id="tiles"),
+                Placeholder(id="left_tiles", classes="blank"),
+                PlayerHand(id="player_hand"),
+                Placeholder(id="right_tiles", classes="blank"),
                 Placeholder(variant="text", id="log"),
                 id="tiles_and_log",
             ),
