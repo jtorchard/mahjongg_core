@@ -92,29 +92,38 @@ PlayerHand {
 
 #game_info {
     border: double #ffc400;
-    width: 2fr;
+    width: 30%;
+    height: 60%;
 }
 
 #wall_tiles {
+    color: white;
+    /*text-align: center;*/
     /*background: coral;*/
-    /*width: auto;*/
+    width: 50%;
     /*height: 2fr;*/
+}
+
+#discards {
+    color: orangered;
+    /*width: auto;*/
+    /*height: 1fr;*/
 }
 
 #round {
     /*background: coral;*/
     /*width: auto;*/
-    height: 2fr;
+    /*height: 1fr;*/
 }
 
 #total_hands {
-    /*background: coral;*/
+    color: orangered;
     width: auto;
     height: 1fr;
 }
 
 #round_progress {
-    /*background: coral;*/
+    color: orangered;
     width: auto;
     height: 1fr;
 }

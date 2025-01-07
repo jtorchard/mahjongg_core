@@ -54,6 +54,7 @@ class PlaceholderApp(App):
             "round": str(self.g.current_state["round"]),
             "round_progress": str(self.g.current_state["seating_counter"]),
             "wall_tiles": len(self.g.current_state["live_wall"]),
+            "discards": "".join([t.utf8 for t in self.g.current_state["discards"]]),
         })
 
     def on_ready(self):

@@ -19,7 +19,7 @@ from .models.tile import (
     dragons,
     flowers,
     seasons,
-    winds,
+    winds, EastWind, NorthWind,
 )
 from .models.wind import Wind
 
@@ -140,7 +140,7 @@ class Game:
             ],
             "live_wall": [],
             "dead_wall": [],
-            "discards": [],
+            "discards": [EastWind(), NorthWind()],
             "loose_tiles": [],
         }
         logger.info("Saving initial state delta...")
