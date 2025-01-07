@@ -48,10 +48,19 @@ class PlaceholderApp(App):
                 "seat": str(players[pi.player_number-1]["seat"]),
             })
 
+    def update_game_info(self):
+        self.query_one(GameInfo).update({
+            "hand": str(self.g.current_state["hand"]),
+            "round": str(self.g.current_state["round"]),
+            "round_progress": str(self.g.current_state["seating_counter"]),
+            "wall_tiles": len(self.g.current_state["live_wall"]),
+        })
+
     def on_ready(self):
         self.g.deal()
         self.update_players()
         self.update_hand()
+        self.update_game_info()
 
     def compose(self) -> ComposeResult:
         yield Vertical(

@@ -86,13 +86,37 @@ PlayerHand {
     column-span: 8;
 }
 
-.p {
+.game_info {
     height: 1fr;
 }
 
 #game_info {
     border: double #ffc400;
     width: 2fr;
+}
+
+#wall_tiles {
+    /*background: coral;*/
+    /*width: auto;*/
+    /*height: 2fr;*/
+}
+
+#round {
+    /*background: coral;*/
+    /*width: auto;*/
+    height: 2fr;
+}
+
+#total_hands {
+    /*background: coral;*/
+    width: auto;
+    height: 1fr;
+}
+
+#round_progress {
+    /*background: coral;*/
+    width: auto;
+    height: 1fr;
 }
 
 #hand_round {
