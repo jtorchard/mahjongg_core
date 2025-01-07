@@ -9,9 +9,25 @@ PlayerInfo {
     border: heavy #ffc400;
 }
 
+Tile {
+    color: darkorange;
+    width: 7;
+    height: 5;
+    border: double #ffc400;
+    margin: 0;
+    padding: 0;
+    min-width: 7;
+    text-align: center;
+}
+
 .blank {
     visibility: hidden;
     width: 1fr;
+}
+
+.clicked {
+    color: red;
+    border: double #a10101;
 }
 
 #player_info_and_wall {
@@ -55,8 +71,8 @@ PlayerInfo {
 }
 
 PlayerHand {
-    row-span: 5;
-    column-span: 4;
+    row-span: 8;
+    column-span: 6;
     color: #ffc116;
     text-style: bold;
     margin: 0;
@@ -70,8 +86,23 @@ PlayerHand {
     column-span: 8;
 }
 
+.p {
+    height: 1fr;
+}
+
 #game_info {
+    border: double #ffc400;
     width: 2fr;
+}
+
+#hand_round {
+    height: 1fr;
+    width: 1fr;
+}
+
+#wall_discards {
+    height: 1fr;
+    width: 4fr;
 }
 
 #player_number {

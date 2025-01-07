@@ -5,36 +5,43 @@ from textual.widgets import Placeholder, Footer
 from src.game import Game
 from src.tui.player_info import PlayerInfo
 from src.tui.player_hand import PlayerHand
+from src.tui.game_info import GameInfo
 
 
 class PlaceholderApp(App):
     CSS_PATH = "src/tui/tcss/app_tui_grid.tcss"
     BINDINGS = [
-        ("u", "update_players", "Update Player"),
         ("r", "randomise_seats", "Randomise Player Seats"),
         ("d", "deal", "Deal tiles"),
+        ("t", "discard_tile", "Discard Tile"),
     ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.g = Game(seed=69)
+        self.g = Game(seed=None)
 
     def action_randomise_seats(self):
         self.g.randomise_seats()
-        self.action_update_players()
+        self.update_players()
+
+    def action_discard_tile(self):
+        ph = self.query_one("#player_hand")
+        self.g.current_state["players"][0]["hand"]["tiles"].pop()
+        self.update_hand()
 
     def action_deal(self):
         self.g.deal()
-        self.action_update_players()
+        self.update_players()
 
-    def action_update_players(self):
+    def update_hand(self):
+        players = self.g.current_state["players"]
+        tiles = players[0]["hand"]["tiles"]
+        ph = self.query_one("#player_hand")
+        ph.update_tiles([t.utf8 for t in tiles])
+
+    def update_players(self):
         players = self.g.current_state["players"]
         for pi in self.query(PlayerInfo):
-            if pi.player_number == 1:
-                ph = self.query_one("#player_hand")
-                tiles = players[pi.player_number - 1]["hand"]["tiles"]
-                ph.update_hand([t.utf8 for t in tiles])
-
             pi.update_info({
                 "name": players[pi.player_number-1]["name"],
                 "score": str(players[pi.player_number-1]["score"]),
@@ -43,7 +50,8 @@ class PlaceholderApp(App):
 
     def on_ready(self):
         self.g.deal()
-        self.action_update_players()
+        self.update_players()
+        self.update_hand()
 
     def compose(self) -> ComposeResult:
         yield Vertical(
@@ -56,7 +64,7 @@ class PlaceholderApp(App):
                 ),
                 Horizontal(
                     PlayerInfo(player_number=4, id="player_info_left", classes="player_info"),
-                    Placeholder(variant="text", id="game_info"),
+                    GameInfo(id="game_info"),
                     PlayerInfo(player_number=2, id="player_info_right", classes="player_info"),
                     id="c2",
                 ),
