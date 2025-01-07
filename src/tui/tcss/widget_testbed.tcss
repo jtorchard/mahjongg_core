@@ -2,11 +2,26 @@ Screen {
     align: center middle;
 }
 
-PlayerHand {
+Button {
     color: darkorange;
+    width: 7;
+    height: 5;
+    border: double #ffc400;
+    margin: 0;
+    padding: 0;
+    min-width: 7;
+    text-align: center;
+}
+
+.tile_text {
     width: auto;
     height: auto;
-    border: heavy #ffc400;
+    /*text-align: center;*/
+    color: darkorange;
+    /*width: 7;*/
+    /*height: 5;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
 }
 
 /*#player_tiles {*/
