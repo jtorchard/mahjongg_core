@@ -1,7 +1,10 @@
 from textual.app import ComposeResult
+from textual.containers import Horizontal
 from textual.reactive import reactive
 from textual.widget import Widget
-from textual.widgets import Label
+from textual.widgets import Button
+
+from .tile import Tile
 
 
 class PlayerHand(Widget):
@@ -9,6 +12,7 @@ class PlayerHand(Widget):
 
     tiles_utf8 = reactive("xxxxx")
     tiles = reactive("xxxxx")
+    tile_list = []
     UTF8_TO_TEXT = {
         '🀀': 'e',
         '🀁': 's',
@@ -54,19 +58,23 @@ class PlayerHand(Widget):
         '🀏': '9c',
     }
 
-    def watch_tiles_utf8(self):
-        widget = self.query_one("#player_tiles_uft8")
-        widget.update(self.tiles_utf8)
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        """Event handler called when a button is pressed."""
+        event.button.add_class("clicked")
 
-    def watch_tiles(self):
-        widget = self.query_one("#player_tiles")
-        widget.update(self.tiles)
-
-    def update_hand(self, tiles):
+    def update_tiles(self, tiles):
         tiles.sort()
-        self.tiles_utf8 = "  ".join([t for t in tiles])
-        self.tiles = " || ".join([self.UTF8_TO_TEXT[t] for t in tiles])
+        while len(self.query("Tile")) < len(tiles):
+            self.query_one("#tile_container").mount(Tile())
+
+        button_count = len(self.query("Tile"))
+        tile_count = len(tiles)
+        if button_count != tile_count:
+            for _ in range(button_count - tile_count):
+                self.query("Tile").last().remove()
+
+        for button, tile in zip(self.query("Tile"), tiles):
+            button.label = f"{self.UTF8_TO_TEXT[tile]}  {tile}"
 
     def compose(self) -> ComposeResult:
-        yield Label("XXXXX", id="player_tiles_uft8")
-        yield Label("XXXXX", id="player_tiles")
+        yield Horizontal(id="tile_container")
