@@ -7,12 +7,13 @@ Four Winds Mahjong Knowledgebase: https://www.4windsmj.com/kb/kb.htm
 
 
 TODO:
+try labels instead of buttons
+moving short name mapping into tiles
+
 Create all game actions as Commands.
 Keep full history of commands to allow undoing and also replaying games. Can also be used for saving and loading.
 Can also be used for testing, and generating random games, etc.
 
-add tests for hand class
-add hand class to player
 Add docstrings
 
 Four phases: setup, play, scoring, settling.
