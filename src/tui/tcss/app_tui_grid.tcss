@@ -98,22 +98,16 @@ PlayerHand {
 
 #wall_tiles {
     color: white;
-    /*text-align: center;*/
-    /*background: coral;*/
     width: 50%;
-    /*height: 2fr;*/
 }
 
 #discards {
     color: orangered;
-    /*width: auto;*/
-    /*height: 1fr;*/
+
 }
 
 #round {
-    /*background: coral;*/
-    /*width: auto;*/
-    /*height: 1fr;*/
+    color: orangered;
 }
 
 #total_hands {
