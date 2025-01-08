@@ -59,7 +59,7 @@ class Game:
             "players": [
                 {
                     "seat": Wind.EAST,
-                    "name": f"{Faker().word().title()} {Faker().word().title()}",
+                    "name": f"XXXXX",
                     "number": 1,
                     "hand": {
                         "tiles": [],
@@ -79,7 +79,7 @@ class Game:
                 },
                 {
                     "seat": Wind.SOUTH,
-                    "name": f"{Faker().word().title()} {Faker().word().title()}",
+                    "name": f"XXXXX",
                     "number": 2,
                     "hand": {
                         "tiles": [],
@@ -99,7 +99,7 @@ class Game:
                 },
                 {
                     "seat": Wind.WEST,
-                    "name": f"{Faker().word().title()} {Faker().word().title()}",
+                    "name": f"XXXXX",
                     "number": 3,
                     "hand": {
                         "tiles": [],
@@ -119,7 +119,7 @@ class Game:
                 },
                 {
                     "seat": Wind.NORTH,
-                    "name": f"{Faker().word().title()} {Faker().word().title()}",
+                    "name": f"XXXXX",
                     "number": 4,
                     "hand": {
                         "tiles": [],
@@ -140,26 +140,46 @@ class Game:
             ],
             "live_wall": [],
             "dead_wall": [],
-            "discards": [EastWind(), NorthWind()],
+            "discards": [],
             "loose_tiles": [],
         }
-        logger.info("Saving initial state delta...")
-        self.create_delta(
-            self.deltas[self.current_state["hand"]],
-            {}, self.current_state,
-        )
 
-        logger.info(f"Initialising game with seed: {seed}")
+        self.create_initial_delta()
+
+    def new_game(self):
+        logger.info(f"Starting new game...")
+        logger.info(f"Initialising game with seed: {self.current_state['seed']}")
         random.seed(self.current_state["seed"])
+        self.reset_game_state()
+        self.deltas = defaultdict(list)
+        self.create_initial_delta()
+        self.assign_player_names()
         self.build_wall()
         self.shuffle_wall()
         self.break_wall()
         self.randomise_seats()
+        self.deal()
+
+    def assign_player_names(self):
+        logger.info(f"Assigning player names...")
+        for player in self.current_state["players"]:
+            player["name"] = f"{Faker().word().title()} {Faker().word().title()}"
+
+    def create_initial_delta(self):
+        logger.info("Saving initial state delta...")
+        self.create_delta(
+            self.deltas[1],
+            {}, self.current_state,
+        )
 
     @staticmethod
     def create_delta(delta_list, old_state, new_state):
         delta_list.append(Delta(DeepDiff(old_state, new_state),
                                 mutate=True))
+
+    def reset_game_state(self):
+        logger.info("Resetting game state...")
+        self.recreate_game_state(self.deltas[1][:1])
 
     def recreate_game_state(self, deltas):
         state = {}

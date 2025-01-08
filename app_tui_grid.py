@@ -11,27 +11,24 @@ from src.tui.game_info import GameInfo
 class PlaceholderApp(App):
     CSS_PATH = "src/tui/tcss/app_tui_grid.tcss"
     BINDINGS = [
-        ("r", "randomise_seats", "Randomise Player Seats"),
-        ("d", "deal", "Deal tiles"),
-        ("t", "discard_tile", "Discard Tile"),
+        ("d", "discard_tile", "Discard Tile"),
+        ("n", "new_game", "New Game"),
     ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.g = Game(seed=None)
 
-    def action_randomise_seats(self):
-        self.g.randomise_seats()
+    def action_new_game(self):
+        self.g.new_game()
         self.update_players()
+        self.update_hand()
+        self.update_game_info()
 
     def action_discard_tile(self):
         ph = self.query_one("#player_hand")
         self.g.current_state["players"][0]["hand"]["tiles"].pop()
         self.update_hand()
-
-    def action_deal(self):
-        self.g.deal()
-        self.update_players()
 
     def update_hand(self):
         players = self.g.current_state["players"]
@@ -58,7 +55,6 @@ class PlaceholderApp(App):
         })
 
     def on_ready(self):
-        self.g.deal()
         self.update_players()
         self.update_hand()
         self.update_game_info()
