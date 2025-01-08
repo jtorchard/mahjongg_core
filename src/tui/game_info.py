@@ -1,11 +1,10 @@
 from textual.app import ComposeResult
-from textual.containers import Vertical, Horizontal
+from textual.containers import Horizontal, Vertical
 from textual.widget import Widget
 from textual.widgets import Label
 
 
 class GameInfo(Widget):
-
     def update(self, data):
         self.query_one("#total_hands").update(data["hand"])
         self.query_one("#round").update(data["round"])
