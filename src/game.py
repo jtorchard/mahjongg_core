@@ -19,7 +19,7 @@ from .models.tile import (
     dragons,
     flowers,
     seasons,
-    winds, EastWind, NorthWind,
+    winds
 )
 from .models.wind import Wind
 
@@ -59,7 +59,7 @@ class Game:
             "players": [
                 {
                     "seat": Wind.EAST,
-                    "name": f"XXXXX",
+                    "name": "XXXXX",
                     "number": 1,
                     "hand": {
                         "tiles": [],
@@ -79,7 +79,7 @@ class Game:
                 },
                 {
                     "seat": Wind.SOUTH,
-                    "name": f"XXXXX",
+                    "name": "XXXXX",
                     "number": 2,
                     "hand": {
                         "tiles": [],
@@ -99,7 +99,7 @@ class Game:
                 },
                 {
                     "seat": Wind.WEST,
-                    "name": f"XXXXX",
+                    "name": "XXXXX",
                     "number": 3,
                     "hand": {
                         "tiles": [],
@@ -119,7 +119,7 @@ class Game:
                 },
                 {
                     "seat": Wind.NORTH,
-                    "name": f"XXXXX",
+                    "name": "XXXXX",
                     "number": 4,
                     "hand": {
                         "tiles": [],
@@ -147,7 +147,7 @@ class Game:
         self.create_initial_delta()
 
     def new_game(self):
-        logger.info(f"Starting new game...")
+        logger.info("Starting new game...")
         logger.info(f"Initialising game with seed: {self.current_state['seed']}")
         random.seed(self.current_state["seed"])
         self.reset_game_state()
@@ -161,7 +161,7 @@ class Game:
         self.deal()
 
     def assign_player_names(self):
-        logger.info(f"Assigning player names...")
+        logger.info("Assigning player names...")
         for player in self.current_state["players"]:
             player["name"] = f"{Faker().word().title()} {Faker().word().title()}"
 
