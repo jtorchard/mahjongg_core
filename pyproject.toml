@@ -1,17 +1,14 @@
 [project]
+name = "Mahjongg-Core"
 requires-python = ">= 3.13"
-loguru = ">=0.7.3"
-faker = ">=33.1.0"
 
-authors = [
-  {name = "John Orchard", email = "jtorchard@protonmail.com"},
-]
+authors = [{ name = "John Orchard", email = "jtorchard@protonmail.com" }]
 
 description = "Core implementation of Mahjong"
 
 readme = "README.md"
 
-license = {text = "MIT License"}
+license = {file = "LICENSE"}
 
 [tool.ruff.lint]
 extend-select = ["I"]
