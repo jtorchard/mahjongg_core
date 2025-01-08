@@ -98,12 +98,18 @@ PlayerHand {
 
 #wall_tiles {
     color: white;
-    width: 50%;
+    width: 70%;
+    height: 80%;
+}
+
+#wall_tiles_count {
+    color: white;
+    width: 1fr;
+    height: 1fr;
 }
 
 #discards {
     color: orangered;
-
 }
 
 #round {

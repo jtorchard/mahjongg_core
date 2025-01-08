@@ -11,6 +11,7 @@ class GameInfo(Widget):
         self.query_one("#round").update(data["round"])
         self.query_one("#round_progress").update(f"{data["round_progress"]}/4")
         self.query_one("#wall_tiles").update("🀆" * data["wall_tiles"])
+        self.query_one("#wall_tiles_count").update(str(data["wall_tiles"]))
         self.query_one("#discards").update(data["discards"])
 
     def compose(self) -> ComposeResult:
@@ -23,7 +24,8 @@ class GameInfo(Widget):
             ),
             Vertical(
                 Label("XXXXX", classes="game_info", id="wall_tiles"),
+                Label("XXXXX", classes="game_info", id="wall_tiles_count"),
                 Label("XXXXX", classes="game_info", id="discards"),
                 id="wall_discards",
-            )
+            ),
         )
