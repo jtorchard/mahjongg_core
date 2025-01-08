@@ -6,14 +6,14 @@ PlayerInfo {
     padding: 1;
     width: 1fr;
     height: auto;
-    border: heavy #ffc400;
+    border: #a28202;
 }
 
 Tile {
     color: darkorange;
     width: 7;
     height: 5;
-    border: double #ffc400;
+    border: double #a28202;
     margin: 0;
     padding: 0;
     min-width: 7;
@@ -43,12 +43,16 @@ Tile {
     height: 100%;
 }
 
-#player_info_top, #player_info_bottom {
+.active_player {
+    border: double #fcc45f;
+}
+
+#player_info_player_3, #player_info_player_1 {
     margin: 2;
     width: 25%;
 }
 
-#player_info_left, #player_info_right {
+#player_info_player_4, #player_info_player_2 {
     margin: 2;
 }
 
@@ -91,7 +95,7 @@ PlayerHand {
 }
 
 #game_info {
-    border: double #ffc400;
+    border: #a28202;
     width: 30%;
     height: 60%;
 }
@@ -103,7 +107,7 @@ PlayerHand {
 }
 
 #wall_tiles_count {
-    color: white;
+    color: #989898;
     width: 1fr;
     height: 1fr;
 }
@@ -158,7 +162,7 @@ PlayerHand {
 
 #score {
     width: auto;
-    color: #dc0000;
+    color: orangered;
     text-style: bold;
 }
 

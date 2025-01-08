@@ -45,6 +45,13 @@ class PlaceholderApp(App):
             })
 
     def update_game_info(self):
+        for pi in self.query("PlayerInfo"):
+            pi.remove_class("active_player")
+        turn = self.g.current_state["turn"]
+        current_player = self.g.player_by_wind(turn)
+        cp = self.query_one(f"#player_info_player_{current_player["number"]}")
+        cp.add_class("active_player")
+
         self.query_one(GameInfo).update({
             "hand": str(self.g.current_state["hand"]),
             "round": str(self.g.current_state["round"]),
@@ -63,19 +70,19 @@ class PlaceholderApp(App):
             Container(
                 Horizontal(
                     Placeholder(variant="size", id="blank_1", classes="blank"),
-                    PlayerInfo(player_number=3, id="player_info_top", classes="player_info"),
+                    PlayerInfo(player_number=3, id="player_info_player_3", classes="player_info"),
                     Placeholder(variant="size", id="blank_2", classes="blank"),
                     id="c1",
                 ),
                 Horizontal(
-                    PlayerInfo(player_number=4, id="player_info_left", classes="player_info"),
+                    PlayerInfo(player_number=4, id="player_info_player_4", classes="player_info"),
                     GameInfo(id="game_info"),
-                    PlayerInfo(player_number=2, id="player_info_right", classes="player_info"),
+                    PlayerInfo(player_number=2, id="player_info_player_2", classes="player_info"),
                     id="c2",
                 ),
                 Horizontal(
                     Placeholder(variant="size", id="blank_3", classes="blank"),
-                    PlayerInfo(player_number=1, id="player_info_bottom", classes="player_info"),
+                    PlayerInfo(player_number=1, id="player_info_player_1", classes="player_info"),
                     Placeholder(variant="size", id="blank_4", classes="blank"),
                     id="c3",
                 ),
