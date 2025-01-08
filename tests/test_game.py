@@ -27,14 +27,14 @@ def test_loose_tiles_are_tile_instances(game_random_seed):
 
 def test_create_delta(game_random_seed):
     hand = game_random_seed.current_state["hand"]
-    assert len(game_random_seed.deltas[hand]) == 7
+    assert len(game_random_seed.deltas[hand]) == 1
     game_random_seed.randomise_seats()
     game_random_seed.create_delta(
         game_random_seed.deltas[hand],
         game_random_seed.deltas[hand][-1],
         game_random_seed.current_state,
     )
-    assert len(game_random_seed.deltas[hand]) == 9
+    assert len(game_random_seed.deltas[hand]) == 3
 
 
 def test_recreate_game_state(game_random_seed):
@@ -85,6 +85,7 @@ def test_players_list_has_four_entries(game_random_seed):
 
 
 def test_wall_is_initialised(game_random_seed):
+    game_random_seed.build_wall()
     tile_count = len(
         game_random_seed.current_state.get("live_wall")
         + game_random_seed.current_state.get("dead_wall")
@@ -94,6 +95,7 @@ def test_wall_is_initialised(game_random_seed):
 
 
 def test_correct_seats_with_fixed_seed(game_fixed_seed):
+    game_fixed_seed.new_game()
     game_fixed_seed.current_state["players"][0]["seat"] = Wind.EAST
     game_fixed_seed.current_state["players"][1]["seat"] = Wind.SOUTH
     game_fixed_seed.current_state["players"][2]["seat"] = Wind.WEST
@@ -113,7 +115,7 @@ def test_correct_seats_with_fixed_seed(game_fixed_seed):
 
 
 def test_deal_gives_players_correct_tiles(game_random_seed):
-    game_random_seed.deal()
+    game_random_seed.new_game()
     for player in game_random_seed.current_state["players"]:
         number_of_tiles = len(player.get("hand").get("tiles"))
         if player.get("seat") == Wind.EAST:
@@ -150,27 +152,28 @@ def test_change_seats_moves_to_correct_seats(game_fixed_seed):
     assert player_4.get("seat") == Wind.NORTH
 
 
-def test_wall_has_correct_number_of_tiles(game_fixed_seed):
-    assert len(game_fixed_seed.current_state["live_wall"]) == 128
+def test_wall_has_correct_number_of_tiles_after_deal(game_fixed_seed):
+    game_fixed_seed.new_game()
+    assert len(game_fixed_seed.current_state["live_wall"]) == 75
 
 
-def test_dead_wall_is_16_tiles(game_fixed_seed):
+def test_dead_wall_is_14_tiles_after_break_and_loose_tiles(game_fixed_seed):
+    game_fixed_seed.new_game()
     assert len(game_fixed_seed.current_state["dead_wall"]) == 14
 
 
-def test_alive_wall_is_152_tiles_after_break(game_fixed_seed):
-    assert len(game_fixed_seed.current_state["live_wall"]) == (144 - 16)
-
-
-def test_alive_wall_is_151_tiles_after_taking(game_fixed_seed):
+def test_alive_wall_is_74_tiles_after_taking(game_fixed_seed):
+    game_fixed_seed.new_game()
     game_fixed_seed.current_state["live_wall"].pop()
-    assert len(game_fixed_seed.current_state["live_wall"]) == 127
+    assert len(game_fixed_seed.current_state["live_wall"]) == 74
 
 
-def test_dead_wall_is_15_tiles_after_taking(game_fixed_seed):
+def test_dead_wall_is_13_tiles_after_taking(game_fixed_seed):
+    game_fixed_seed.new_game()
     game_fixed_seed.current_state["dead_wall"].pop()
     assert len(game_fixed_seed.current_state["dead_wall"]) == 13
 
 
 def test_2_loose_tiles(game_fixed_seed):
+    game_fixed_seed.new_game()
     assert len(game_fixed_seed.current_state["loose_tiles"]) == 2

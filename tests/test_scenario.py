@@ -14,4 +14,4 @@ def game_fixed_seed():
 
 
 def test_game_scenario(game_fixed_seed):
-    game_fixed_seed.deal()
+    game_fixed_seed.new_game()
