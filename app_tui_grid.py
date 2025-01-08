@@ -26,7 +26,6 @@ class PlaceholderApp(App):
         self.update_game_info()
 
     def action_discard_tile(self):
-        ph = self.query_one("#player_hand")
         self.g.current_state["players"][0]["hand"]["tiles"].pop()
         self.update_hand()
 
