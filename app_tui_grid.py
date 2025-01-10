@@ -1,3 +1,4 @@
+from textual import events
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical
 from textual.widgets import Placeholder, Footer
@@ -19,6 +20,9 @@ class PlaceholderApp(App):
         super().__init__(*args, **kwargs)
         self.g = Game(seed=None)
 
+    def _on_enter(self, event: events.Enter) -> None:
+        event.node.add_class("tile_hover")
+
     def action_new_game(self):
         self.g.new_game()
         self.update_players()
@@ -26,14 +30,16 @@ class PlaceholderApp(App):
         self.update_game_info()
 
     def action_discard_tile(self):
-        self.g.current_state["players"][0]["hand"]["tiles"].pop()
-        self.update_hand()
+        current_player = self.g.current_player()
+        if current_player["number"] == 1 and len(current_player["hand"]["tiles"]) == 14:
+            self.g.remove_tile_from_hand(current_player, self.query_one(PlayerHand).query_one(".selected").game_tile)
+            self.update_hand()
 
     def update_hand(self):
         players = self.g.current_state["players"]
         tiles = players[0]["hand"]["tiles"]
         ph = self.query_one("#player_hand")
-        ph.update_tiles([t.utf8 for t in tiles])
+        ph.update_tiles(tiles)
 
     def update_players(self):
         players = self.g.current_state["players"]

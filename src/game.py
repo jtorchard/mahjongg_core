@@ -187,6 +187,9 @@ class Game:
             state += delta
         self.current_state = state
 
+    def current_player(self):
+        return self.player_by_wind(self.current_state["turn"])
+
     def player_by_wind(self, wind):
         return {p.get("seat"): p for p in self.current_state["players"]}[wind]
 

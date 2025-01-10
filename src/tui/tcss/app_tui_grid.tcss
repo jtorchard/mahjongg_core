@@ -20,14 +20,18 @@ Tile {
     text-align: center;
 }
 
+.tile_hover {
+    color: cornflowerblue;
+}
+
 .blank {
     visibility: hidden;
     width: 1fr;
 }
 
-.clicked {
-    color: red;
-    border: double #a10101;
+.selected {
+    color: darkorange;
+    border: double darkorange;
 }
 
 #player_info_and_wall {
@@ -103,10 +107,16 @@ PlayerHand {
 #wall_tiles {
     color: white;
     width: 70%;
-    height: 80%;
+    height: 60%;
 }
 
 #wall_tiles_count {
+    color: #989898;
+    width: 1fr;
+    height: 1fr;
+}
+
+#dead_wall {
     color: #989898;
     width: 1fr;
     height: 1fr;
