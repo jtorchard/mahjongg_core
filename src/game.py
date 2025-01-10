@@ -58,6 +58,7 @@ class Game:
             "turn": Wind.EAST,
             "players": [
                 {
+                    "ai": False,
                     "seat": Wind.EAST,
                     "name": "XXXXX",
                     "number": 1,
@@ -78,6 +79,7 @@ class Game:
                     "score": 2000,
                 },
                 {
+                    "ai": True,
                     "seat": Wind.SOUTH,
                     "name": "XXXXX",
                     "number": 2,
@@ -98,6 +100,7 @@ class Game:
                     "score": 2000,
                 },
                 {
+                    "ai": True,
                     "seat": Wind.WEST,
                     "name": "XXXXX",
                     "number": 3,
@@ -118,6 +121,7 @@ class Game:
                     "score": 2000,
                 },
                 {
+                    "ai": True,
                     "seat": Wind.NORTH,
                     "name": "XXXXX",
                     "number": 4,
