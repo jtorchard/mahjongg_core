@@ -164,6 +164,31 @@ class Game:
         self.randomise_seats()
         self.deal()
 
+    def remaining_tiles(self):
+        return len(self.current_state["live_wall"])
+
+    @state_mutated
+    def ai_take_turn(self):
+        p = self.current_player()
+        logger.info(f"Taking turn for player: {p["number"]} - {p["seat"]}")
+
+        draw_tile = True
+        if p["seat"] == Wind.EAST and self.remaining_tiles() == 75:
+            draw_tile = False
+
+        if draw_tile:
+            tile = self.draw_tile_from_wall(self.current_state["live_wall"])
+            self.add_tile_to_hand(p, tile)
+
+        self.remove_tile_from_hand(p, random.choice(p["hand"]["tiles"]))
+        self.end_turn()
+
+    @state_mutated
+    def end_turn(self):
+        p = self.current_player()
+        logger.info(f"Ending turn for player: {p["number"]} - {p["seat"]}")
+        self.current_state["turn"] = self.current_state["turn"].next()
+
     def assign_player_names(self):
         logger.info("Assigning player names...")
         for player in self.current_state["players"]:

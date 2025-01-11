@@ -21,7 +21,8 @@ Tile {
 }
 
 .tile_hover {
-    color: cornflowerblue;
+    color: darkorange;
+    border: double darkorange;
 }
 
 .blank {

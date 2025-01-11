@@ -1,12 +1,14 @@
 from textual import events
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical
+from textual.message import Message
 from textual.widgets import Placeholder, Footer
 
 from src.game import Game
 from src.tui.player_info import PlayerInfo
 from src.tui.player_hand import PlayerHand
 from src.tui.game_info import GameInfo
+from src.tui.tile import Tile
 
 
 class PlaceholderApp(App):
@@ -14,20 +16,32 @@ class PlaceholderApp(App):
     BINDINGS = [
         ("d", "discard_tile", "Discard Tile"),
         ("n", "new_game", "New Game"),
+        ("e", "end_turn", "End Turn"),
     ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.g = Game(seed=None)
 
+    class ProcessAiTurns(Message):
+        """."""
+
+        def __init__(self) -> None:
+            super().__init__()
+
     def _on_enter(self, event: events.Enter) -> None:
-        event.node.add_class("tile_hover")
+        if isinstance(event.node, Tile):
+            event.node.add_class("tile_hover")
 
     def action_new_game(self):
         self.g.new_game()
-        self.update_players()
-        self.update_hand()
-        self.update_game_info()
+        self.post_message(self.ProcessAiTurns())
+
+    def action_end_turn(self):
+        current_player = self.g.current_player()
+        if current_player["number"] == 1 and len(current_player["hand"]["tiles"]) == 13:
+            self.g.end_turn()
+            self.post_message(self.ProcessAiTurns())
 
     def action_discard_tile(self):
         current_player = self.g.current_player()
@@ -66,10 +80,22 @@ class PlaceholderApp(App):
             "discards": "".join([t.utf8 for t in self.g.current_state["discards"]]),
         })
 
-    def on_ready(self):
+    def ai_take_turn(self):
+        self.g.ai_take_turn()
+        self.post_message(self.ProcessAiTurns())
+
+    def on_placeholder_app_process_ai_turns(self):
+        self.update_gui()
+        if self.g.current_player()["ai"]:
+            self.set_timer(2, self.ai_take_turn)
+
+    def update_gui(self):
         self.update_players()
         self.update_hand()
         self.update_game_info()
+
+    def on_ready(self):
+        self.update_gui()
 
     def compose(self) -> ComposeResult:
         yield Vertical(
