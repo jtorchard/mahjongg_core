@@ -56,6 +56,8 @@ class Game:
             "east_out_counter": 0,
             "round": Wind.EAST,
             "turn": Wind.EAST,
+            "tile_drawn": False,
+            "tile_discarded": False,
             "players": [
                 {
                     "ai": False,
@@ -167,26 +169,46 @@ class Game:
     def remaining_tiles(self):
         return len(self.current_state["live_wall"])
 
+    def first_discard(self):
+        p = self.current_player()
+        return p["seat"] == Wind.EAST and self.remaining_tiles() == 75
+
     @state_mutated
     def ai_take_turn(self):
         p = self.current_player()
         logger.info(f"Taking turn for player: {p["number"]} - {p["seat"]}")
 
-        draw_tile = True
-        if p["seat"] == Wind.EAST and self.remaining_tiles() == 75:
-            draw_tile = False
+        if self.first_discard():  # East going first; no need to draw tile
+            self.current_state["tile_drawn"] = True
 
-        if draw_tile:
-            tile = self.draw_tile_from_wall(self.current_state["live_wall"])
-            self.add_tile_to_hand(p, tile)
+        if self.current_state["tile_drawn"] is False:
+            self.draw_tile()
 
-        self.remove_tile_from_hand(p, random.choice(p["hand"]["tiles"]))
+        self.discard_tile(random.choice(p["hand"]["tiles"]))
         self.end_turn()
 
     @state_mutated
+    def draw_tile(self):
+        player = self.current_player()
+        tile = self.draw_tile_from_wall(self.current_state["live_wall"])
+        logger.info(f"Draw tile: {player["number"]} - {player["seat"]} - {tile.name}")
+        self.add_tile_to_hand(player, tile)
+        self.current_state["tile_drawn"] = True
+
+    @state_mutated
+    def discard_tile(self, tile):
+        player = self.current_player()
+        logger.info(f"Ending turn for player: {player["number"]} - {player["seat"]}")
+        self.remove_tile_from_hand(player, tile)
+        self.add_tile_to_wall(self.current_state["discards"], tile)
+        self.current_state["tile_discarded"] = True
+
+    @state_mutated
     def end_turn(self):
-        p = self.current_player()
-        logger.info(f"Ending turn for player: {p["number"]} - {p["seat"]}")
+        self.current_state["tile_drawn"] = False
+        self.current_state["tile_discarded"] = False
+        player = self.current_player()
+        logger.info(f"Ending turn for player: {player["number"]} - {player["seat"]}")
         self.current_state["turn"] = self.current_state["turn"].next()
 
     def assign_player_names(self):
@@ -207,10 +229,11 @@ class Game:
                                 mutate=True))
 
     def reset_game_state(self):
-        logger.info("Resetting game state...")
+        logger.info("Resetting game to starting state")
         self.recreate_game_state(self.deltas[1][:1])
 
     def recreate_game_state(self, deltas):
+        logger.info("Recreating game state")
         state = {}
         for delta in deltas:
             state += delta
@@ -229,6 +252,7 @@ class Game:
 
     @state_mutated
     def shuffle_wall(self):
+        logger.info("Shuffling wall")
         shuffle(self.current_state["live_wall"])
 
     @state_mutated

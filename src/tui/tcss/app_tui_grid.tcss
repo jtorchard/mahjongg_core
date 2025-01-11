@@ -102,13 +102,13 @@ PlayerHand {
 #game_info {
     border: #a28202;
     width: 30%;
-    height: 60%;
+    height: 95%;
 }
 
 #wall_tiles {
     color: white;
     width: 70%;
-    height: 60%;
+    height: 50%;
 }
 
 #wall_tiles_count {
@@ -124,7 +124,8 @@ PlayerHand {
 }
 
 #discards {
-    color: orangered;
+    color: #f6f2f1;
+    height: auto;
 }
 
 #round {

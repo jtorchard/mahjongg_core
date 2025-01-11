@@ -15,6 +15,7 @@ class PlaceholderApp(App):
     CSS_PATH = "src/tui/tcss/app_tui_grid.tcss"
     BINDINGS = [
         ("d", "discard_tile", "Discard Tile"),
+        ("r", "draw_tile", "Draw Tile"),
         ("n", "new_game", "New Game"),
         ("e", "end_turn", "End Turn"),
     ]
@@ -22,6 +23,7 @@ class PlaceholderApp(App):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.g = Game(seed=None)
+        self.ai_timer = None
 
     class ProcessAiTurns(Message):
         """."""
@@ -35,19 +37,33 @@ class PlaceholderApp(App):
 
     def action_new_game(self):
         self.g.new_game()
+        self.ai_timer = None
         self.post_message(self.ProcessAiTurns())
 
     def action_end_turn(self):
         current_player = self.g.current_player()
-        if current_player["number"] == 1 and len(current_player["hand"]["tiles"]) == 13:
-            self.g.end_turn()
-            self.post_message(self.ProcessAiTurns())
+        if current_player["number"] == 1:
+            if self.g.current_state["tile_drawn"] and self.g.current_state["tile_discarded"]:
+                self.g.end_turn()
+                self.post_message(self.ProcessAiTurns())
+
+    def action_draw_tile(self):
+        if self.g.first_discard():
+            self.g.current_state["tile_drawn"] = True
+
+        if not self.g.current_state["tile_drawn"]:
+            self.g.draw_tile()
+            self.update_gui()
 
     def action_discard_tile(self):
         current_player = self.g.current_player()
-        if current_player["number"] == 1 and len(current_player["hand"]["tiles"]) == 14:
-            self.g.remove_tile_from_hand(current_player, self.query_one(PlayerHand).query_one(".selected").game_tile)
-            self.update_hand()
+        if self.g.first_discard():
+            self.g.current_state["tile_drawn"] = True
+
+        if current_player["number"] == 1:
+            if self.g.current_state["tile_discarded"] is False and self.g.current_state["tile_drawn"] is True:
+                self.g.discard_tile(self.query_one(PlayerHand).query_one(".selected").game_tile)
+                self.update_gui()
 
     def update_hand(self):
         players = self.g.current_state["players"]
@@ -87,7 +103,7 @@ class PlaceholderApp(App):
     def on_placeholder_app_process_ai_turns(self):
         self.update_gui()
         if self.g.current_player()["ai"]:
-            self.set_timer(2, self.ai_take_turn)
+            self.ai_timer = self.set_timer(2, self.ai_take_turn)
 
     def update_gui(self):
         self.update_players()
